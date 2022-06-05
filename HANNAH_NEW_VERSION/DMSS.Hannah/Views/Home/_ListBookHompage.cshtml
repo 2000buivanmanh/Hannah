@@ -1,0 +1,211 @@
+﻿@model IEnumerable<DMSS.ViewModals.HomePage.ListBookViewModal>
+@using PagedList.Mvc;
+
+<style>
+    .hidden {
+        display: none !important;
+    }
+
+    .fancybox-overlay {
+        display: none !important;
+    }
+
+    .fancybox-margin {
+        margin-right: auto !important;
+    }
+
+    .fancybox-lock {
+        overflow: auto !important;
+        width: auto !important;
+    }
+
+    div#book-name {
+        height: 66px !important;
+    }
+
+    @@media screen and (max-width: 980px) {
+        .summary.entry-summary {
+            margin-bottom: auto;
+            margin-left: auto;
+        }
+    }
+</style>
+
+<div id="content" role="main">
+    <div class="woo_panel">
+        <p class="woocommerce-result-count">
+            Showing 1&ndash;12 of 23 results
+        </p>
+        <form class="woocommerce-ordering" method="get">
+            <select name="orderby" class="orderby">
+                <option value="menu_order" selected='selected'>Default sorting</option>
+                <option value="popularity">Sort by popularity</option>
+                <option value="rating">Sort by average rating</option>
+                <option value="date">Sort by newness</option>
+                <option value="price">Sort by price: low to high</option>
+                <option value="price-desc">Sort by price: high to low</option>
+            </select>
+        </form>
+        <nav class="gridlist-toggle">
+            <a href="#" id="grid" title="Grid view" class="active">
+                <span class="dashicons dashicons-grid-view"></span> <em>Grid view</em>
+            </a><a href="#" id="list" title="List view">
+                <span class="dashicons dashicons-exerpt-view"></span> <em>List view</em>
+            </a>
+        </nav>
+    </div>
+    <ul class="products grid">
+        <!-- product 01 -->
+        @foreach (var item in Model)
+        {
+        
+            <li class="first post-70 product type-product status-publish has-post-thumbnail product_cat-posters sale shipping-taxable purchasable product-type-simple product-cat-posters instock">
+                <div class="sale-wrapper">
+                   
+                    @if (item.IsNew)
+                    {
+                        <span class="onsale">New!</span>
+                    }
+                </div>
+                <div class="media_part">
+                    <div class="">
+                        <a href="/Book/BookDetail/@item.Sach.MaSach">
+                            <input type="hidden" value="@item.Sach.ThongTinAnhSach" id="thongTinAnhSach" />
+                            <img src="@item.Sach.ThongTinAnhSach" data-at2x="@item.Sach.ThongTinAnhSach" style="width:260px; height:280px;" alt="">
+                        </a>
+                        <div class="pic">
+                            <div class="links_popup animate">
+                                <div class="link_cont">
+                                    <div class="link" style="transform: rotate(90deg);">
+                                        <a class="fancy" onclick="ShowDeTail(@item.Sach.MaNhanDienSach)" style="transform: translate3d(0px, 0px, 0px);"><i class="fa fa-eye" style="transform: rotate(-90deg);"></i></a>
+                                        <div class="link-item-bounce" style="transform: translate3d(0px, 0px, 0px); transform-origin: 50% 50% 0px;"></div>
+                                    </div>
+                                    <div class="link" style="transform: rotate(270deg);">
+                                        <a href="/BookDetail/@item.Sach.MaNhanDienSach" style="transform: translate3d(0px, 0px, 0px);"><i class="fa fa-share" style="transform: rotate(-270deg);"></i></a>
+                                        <div class="link-item-bounce" style="transform: translate3d(0px, 0px, 0px); transform-origin: 50% 50% 0px;"></div>
+                                    </div>
+                                </div>
+                                <div class="link-toggle-button">
+                                    <i class="fa fa-plus link-toggle-icon" style="transform: translate3d(0px, 0px, 0px);"></i>
+                                </div>
+                            </div>
+                            <div class="hover-effect"></div>
+                        </div>
+
+                    </div>
+                    <div class="rating_cont">
+                        <div class="star-rating" title="Rated 5 out of 5"><span style="width:100%"><strong class="rating">5</strong> out of 5</span></div>
+                        <div class="button-shadow"></div>
+                    </div>
+                </div>
+                <div class="summary entry-summary">
+                    <a href="/Book/BookDetail/@item.Sach.MaSach">
+                        <div class="book-name">
+                            <h3 id="book-name">@item.Sach.TenSach</h3>
+                        </div>
+                    </a>
+                    <span class="price" id="gia">
+                        <ins><span class="amount"> @((int?)item.Sach.Gia) <i class="erudite_poin"></i> </span></ins>
+                    </span>
+                    <div class="prop-description">
+                        <i class="fa fa-user"></i> Publisher: @item.Sach.NhaXuatBan.TenNhaXuatBan
+                        @if (@item.Sach.NgayXuatBan != null)
+                        {<b>- @item.Sach.NgayXuatBan.Value.ToString("yyyy")</b>}
+
+
+                        <div class="book-name">
+                            <i class="fa fa-user"></i> Author: @item.Sach.TacGia.TenTacGia
+                        </div>
+                        <div class="book-name">
+                            @if (item.Sach.TinhTrangMuonSach == true)
+                            {
+                                <i class="fa fa-check-square"> Available</i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-ban"> Not Available</i>
+                            }
+                        </div>
+                        <div class="book-name">
+                            <h3>Description </h3>
+                            <a class="button pull-right" id="transtale-@item.Sach.MaNhanDienSach" onclick="Translate(@item.Sach.MaNhanDienSach)" value="EN"><i id="Langue-tran-@item.Sach.MaNhanDienSach"> Translate description to Vietnamese</i></a>
+                            <a id="des-en-@item.Sach.MaNhanDienSach">@Html.Raw(item.Sach.MoTaSachEn)</a>
+                            <a id="des-vi-@item.Sach.MaNhanDienSach" class="hidden">
+                                @Html.Raw(item.Sach.MoTaSachVi)
+                            </a>
+                        </div>
+                    </div>
+                    <div class="gridlist-buttonwrap">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                if (item.AllowAdd)
+                                {
+                                    <a onclick="AddIntoBookCase(@item.Sach.MaSach)" class="cws_button alt small"><span class="cws_button_inner" data-bg_hover_color="" data-bg_color="" data-text_color="">Add To Book Basket</span></a>
+
+                                }
+
+                            }
+                            else
+                            {
+                                <a href="/Users/Login" class="cws_button alt small"><span class="cws_button_inner" data-bg_hover_color="" data-bg_color="" data-text_color="">Login to ...</span></a>
+                            }
+
+
+                    </div>
+                </div>
+
+                <hr>
+            </li>
+            @*@Html.Action("_BookPreview", "Books", new { id = item.MaNhanDienSach })*@
+        }
+    </ul>
+    <nav class="woocommerce-pagination">
+        <div class='button_section'><a href='#' class='cws_button xlarge'>View more <div class='button-shadow'></div></a></div>
+    </nav>
+</div>
+
+@foreach (var item in Model)
+{
+    <script>
+        document.getElementById("transtale-" + @item.Sach.MaNhanDienSach).value = "EN";
+    </script>
+}
+
+<script type="text/javascript">
+
+    function Translate(id) {
+
+        var CurrentLangue = document.getElementById("transtale-" + id).value;
+
+        if (CurrentLangue == "EN") {
+            document.getElementById("des-en-" + id).classList.add('hidden');
+            document.getElementById("des-vi-" + id).classList.remove('hidden');
+            document.getElementById("transtale-" + id).value = 'VI';
+            document.getElementById("Langue-tran-" + id).innerHTML = 'Translate description to English ';
+        } else {
+            document.getElementById("des-en-" + id).classList.remove('hidden');
+            document.getElementById("des-vi-" + id).classList.add('hidden');
+            document.getElementById("transtale-" + id).value = 'EN';
+            document.getElementById("Langue-tran-" + id).innerHTML = 'Translate description to Vietnamese ';
+        }
+    }
+
+    var modal;
+
+    function ShowDeTail(id) {
+        modal = document.getElementById("myModal-" + id);
+        modal.style.display = "block";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    function CloseModal(id) {
+        modal = document.getElementById("myModal-" + id);
+        modal.style.display = "none";
+    }
+</script>

@@ -1,0 +1,276 @@
+﻿@model DATA.Models.CaiDat
+@{
+    ViewBag.Title = "ThongTinCaiDat";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<h1 class="card-title">
+    Site information settings
+</h1>
+<form action="#">
+    <div class="form-body" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:black">Store address</label>
+                    <input type="text" class="form-control" value="@Model.DiaChiCuaHang" id="diaChi">
+                    <input type="hidden" value="@Model.MaCaiDat" id="maCaiDat" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label style="color:black">Contact phone number</label>
+                    <input type="text" class="form-control" value="@Model.SDTLienHe" id="sdt">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label style="color:black">Store email</label>
+                    <input type="text" class="form-control" value="@Model.EmailCuaHang" id="emailCuaHang">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label style="color:black">Facebook</label>
+                    <input type="text" class="form-control" value="@Model.FaceBook" id="facebook">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label style="color:black">Youtube</label>
+                    <input type="text" class="form-control" value="@Model.Youtube" id="youtube">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label style="color:black">Zalo</label>
+                    <input type="text" class="form-control" value="@Model.Zalo" id="zalo">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label style="color:black">Twitter</label>
+                    <input type="text" class="form-control" value="@Model.Twitter" id="twitter">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:black">Slogan</label>
+                    <input type="text" class="form-control" value="@Model.Slogan" id="slogan">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label style="color:black">Email send mail</label>
+                    <input type="text" class="form-control" value="@Model.EmailGoiMail" id="emailGoiMail">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label style="color:black">Password</label>
+                    <input type="text" class="form-control" value="@Model.MatKhauEmail" id="matKhauEmail">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:black">Logo</label>
+                    <input type="text" class="form-control" value="@Model.Logo" id="logo">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label style="color:black">Map</label>
+                    <input type="text" class="form-control" value="@Model.BanDo" id="linkMap">
+                    <button type="button" class="btn btn-secondary" onclick="loadMap()">
+                        <i class="icon-refresh"></i>
+                        Load map
+                    </button>
+                    <span class="map" src="@Model.BanDo"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:black">Web title</label>
+                    <input type="text" class="form-control" value="@Model.TieuDeWebSite" id="tieuDeWebsite">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:black">Short description</label>
+                    <textarea type="text" class="form-control editor" id="moTaNgan">@Html.Raw(Model.MoTaNgan)</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:black">WebSite about</label>
+                    <textarea type="text" class="form-control editor" id="gioiThieuWebsite">@Html.Raw(Model.GioiThieuWebSite)</textarea>
+                </div>
+            </div>
+        </div>
+        @*<div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label style="color:black">WebSite footer</label>
+                        <input type="hidden" class="form-control" value="@Model.ChanWebSite" id="txtchanWebsite">
+                    </div>
+                    <button type="button" class="btn btn-secondary" id="chanWebsite">
+                        <i class="icon-cloud-upload"></i>
+                        Upload image
+                    </button>
+                    <div id="showchanWebsite" class="col-xl">
+                        <img src="@Model.ChanWebSite" width="300" height="100" />
+                    </div>
+                </div>
+            </div>*@
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:black">WebSite image introduction</label>
+                    <input type="hidden" class="form-control" value="@Model.GioiThieuHinhAnhWebsite" id="txthinhAnhWebsite">
+                    <button type="button" class="btn btn-secondary" id="hinhAnhWebsite">
+                        <i class="icon-cloud-upload"></i>
+                        Upload image
+                    </button>
+                    <div class="col-xl">
+                        <img src="@Model.GioiThieuHinhAnhWebsite" id="showhinhAnhWebsite" width="250" height="250" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label style="color:black">Defaul Erudite Poin</label>
+                    <input type="number" class="form-control" value="@Model.DiemMacDinh" id="diemMacDinh">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label style="color:black"> Precent Erudite Earn Each Book (/100%) </label>
+                    <input type="number" class="form-control" value="@Model.DiemTichLuy" id="diemTichLuy">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label style="color:black"> Erudite Earn Each Review </label>
+                    <input type="number" class="form-control" value="@Model.DiemDanhGia" id="diemDanhGia">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:black">WebSite rules</label>
+                    <textarea type="text" class="form-control editor" id="dieuKhoan">@Html.Raw(Model.DieuKhoan)</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:black">Content SEO</label>
+                    <input type="text" class="form-control" value="@Model.NoiDungSeo" id="noiDugSeo">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:black">Keyword SEO</label>
+                    <input type="text" class="form-control" value="@Model.TuKhoaSeo" id="tuKhoaSeo">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:black">Title SEO</label>
+                    <input type="text" class="form-control" value="@Model.TieuDeSeo" id="tieuDeSeo">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:black">Link SEO</label>
+                    <input type="text" class="form-control" value="@Model.DuongDanSeo" id="duongDanSeo">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label style="color:black">Số lần gửi mã</label>
+                    <input type="text" class="form-control" value="@Model.SoLanGuiMa" id="soLanGuiMa">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label style="color:black">Số lần xác nhận mã sai</label>
+                    <input type="text" class="form-control" value="@Model.SoLanXacNhanSai" id="soLanXacNhanSai">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label style="color:black">Thời gian mã xác nhận</label>
+                    <input type="text" class="form-control" value="@Model.ThoiHanMaXacNhan" id="thoiHanMaXacNhan">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label style="color:black">Thời gian hết hạn tài khoản</label>
+                    <input type="text" class="form-control" value="@Model.ThoiGianHetHanTaiKhoan" id="thoiGianHetHanTaiKhoan">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label style="color:black">Website icon</label>
+                    <input type="hidden" class="form-control" value="@Model.IconWebSite" id="txtIcon">
+                    <button type="button" class="btn btn-secondary" id="iconWebSite">
+                        <i class="icon-cloud-upload"></i>
+                        Upload image
+                    </button>
+                </div>
+                <div class="col-xl">
+                    <img id="showIcon" src="@Model.IconWebSite" width="100" height="100" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-actions">
+        <div class="text-right">
+            <button type="button" class="btn btn-info" onclick="CapNhatThongTinWeb()">Submit</button>
+            <button type="reset" class="btn btn-dark">Reset</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+
+    <script src="~/Areas/Admin/Content/AdminJs/CaiDatWeb.js"></script>
+}

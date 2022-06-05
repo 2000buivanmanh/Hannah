@@ -1,0 +1,99 @@
+﻿
+@model IEnumerable<DATA.Models.NguoiDung>
+
+<table id="tableLoad" class="table table-striped table-bordered no-wrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="checkall" value="false" onclick="SelectAll()"><span class="checkbox-material"><span class="check "></span></span>
+                    </label>
+                </div>
+            </th>
+            <th>@Html.DisplayNameFor(model => model.TenDangNhap)</th>
+            <th>@Html.DisplayNameFor(model => model.HoTen)</th>
+            <th>@Html.DisplayNameFor(model => model.EmailNguoiDung)</th>
+            <th>@Html.DisplayNameFor(model => model.AnhDaiDien)</th>
+            <th>@Html.DisplayNameFor(model => model.TinhTrangNguoiDung)</th>
+            <th>@Html.DisplayNameFor(model => model.VaiTro)</th>
+            <th>@Html.DisplayNameFor(model => model.TrangThai)</th>
+            <th>Edit</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" data-id="@item.MaNguoiDung" class="check-field" value="false" id="check-@item.MaNguoiDung" onclick="Check(@item.MaNguoiDung)"><span class="checkbox-material"><span class="check"></span></span>
+                    </label>
+                </div>
+
+            </td>
+            <td>
+                @item.TenDangNhap
+            </td>
+            <td>
+                @item.HoTen
+            </td>
+            <td>
+                @item.EmailNguoiDung
+            </td>
+            <td>
+                <div class="text-center">
+                    <img class="img-icon-ul " src="@item.AnhDaiDien" />
+                </div>
+
+
+            </td>
+
+            <td>
+                <input type="checkbox" class="check-toggle" data-style="ios" data-on="Public" @(item.TinhTrangNguoiDung == DATA.Constant.Constant.TinhTrangNguoiDung.DangHoatDong ? "checked" : "" )
+                       onchange="CheckTrangThai(@item.MaNguoiDung ,'/Admin/QLNguoiDung/CapNhatTinhTrang')"
+                       data-off="Block" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-size="sm">
+
+            </td>
+            <td>
+                <p> <i class="@(item.VaiTro == DATA.Constant.Constant.PhanQuyen.Admin ? "text-success fa fa-circle" : "text-danger fa fa-circle")"></i> @(item.VaiTro == DATA.Constant.Constant.PhanQuyen.Admin ? "Admin" : "Reader")</p>
+            </td>
+            <td>
+                @if (item.TrangThai == DATA.Constant.Constant.TrangThaiTaiKhoan.ChuaXacNhanMail)
+                {
+                    <p>
+                        <i class="text-danger fa fa-circle"></i>
+                        Email not confirmed
+                    </p>
+                }
+                @if (item.TrangThai == DATA.Constant.Constant.TrangThaiTaiKhoan.DaXacNhanMail)
+                {
+                    <p>
+                        <i class="text-warning fa fa-circle">
+                            @*<input onchange="DuyetTrangThai(@item.MaNguoiDung ,'/Admin/QLNguoiDung/DuyetTrangThai')" class="" type="radio" name="radioNoLabel" id="radioNoLabel1" value="" aria-label="...">*@
+                        </i>
+                        Waiting for approval <br />
+                        <label class="btn btn-outline-warning " onclick="DuyetTrangThai(@item.MaNguoiDung ,'/Admin/QLNguoiDung/DuyetTrangThai')" type="radio" name="radioNoLabel" id="radioNoLabel1" for="btn-check-outlined">Accept</label><br>
+                    </p>
+                }
+                @if (item.TrangThai == DATA.Constant.Constant.TrangThaiTaiKhoan.DaDuyet)
+                {
+                    <p>
+                        <i class="text-success fa fa-circle"></i>
+                        Account Approved
+                    </p>
+                }
+
+            </td>
+            <td>
+                <div class="" id='@item.MaNguoiDung' type="submit" data-toggle="modal" onclick="ModalThemSua('/Admin/QLNguoiDung/_ChiTietNguoiDung',@item.MaNguoiDung)">
+                    <i class="fas fa-edit text-center"></i>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

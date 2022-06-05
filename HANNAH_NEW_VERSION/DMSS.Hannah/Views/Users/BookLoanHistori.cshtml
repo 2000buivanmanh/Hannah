@@ -1,0 +1,102 @@
+﻿@model IEnumerable<DATA.Models.DatSach>
+@{
+    ViewBag.Title = "BookLoanHistori";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>BookLoanHistori</h2>
+
+<div id="main" class="site-main">
+    <div class="page_content">
+        <!-- pattern container / -->
+        <div class="left-pattern pattern pattern-2" style="width: 69.5px;"></div>
+        <div class="container">
+            <main>
+                <div class="grid_row clearfix">
+                    <div class="grid_col grid_col_12">
+                        <div class="ce clearfix">
+                            <div>
+                                <div class="woocommerce">
+                                    <div class="grid_row clearfix">
+                                        <div class="cart_totals ">
+
+                                            <h2>Your Book Loan Histori</h2>
+                                            <br /><br />
+                                            <form action="#" method="post">
+                                                <!-- product cart table -->
+                                                <table class="shop_table cart">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="product-name">Book Loan Code</th>
+                                                            <th class="product-name">Date Receive</th>
+                                                            <th class="product-name">Receive Address</th>
+                                                            <th class="product-name">Date Return</th>
+                                                            <th class="product-name">Return Address</th>
+                                                            <th class="product-name">Note</th>
+                                                            <th class="product-name">Status</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr class="cart_item">
+                                                                <td class="product-name product-thumbnail">
+                                                                    @item.MaHoaDonSach
+                                                                </td>
+                                                                <td class="product-price">
+                                                                    @item.NgayDat
+                                                                </td>
+                                                                <td class="product-price">
+                                                                   @item.DiaChiNhan
+                                                                </td>
+                                                                <td class="product-price">
+                                                                    @item.NgayTra
+                                                                </td>
+                                                                <td class="product-price">
+                                                                    @item.DiaChiTra
+                                                                </td>
+                                                                <td class="product-price">
+                                                                    @item.GhiChu
+                                                                </td>
+                                                                <td class="product-price">
+                                                                    <div class="cws_msg_box warning-box">
+                                                                        Canceled (User canceled)
+                                                                    </div>
+                                                                </td>
+                                                                <td class="product-price">
+                                                                    <a href="/Book/BookDetail/@item.MaDonSach">View Detail</a>
+                                                                </td>
+                                                            </tr>
+
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                                <!-- / product cart table -->
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <!-- pattern container /  -->
+        <div class="right-pattern pattern pattern-2" style="width: 69.5px;"></div>
+        <!-- footer image container / -->
+        <div class="footer_image"></div>
+    </div>
+    <!-- svg filter -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" style="display:none;">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"></feGaussianBlur>
+                <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
+                <feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite>
+            </filter>
+        </defs>
+    </svg>
+    <!-- / svg filter -->
+</div>

@@ -1,0 +1,29 @@
+﻿@model  DATA.Models.NguoiDung
+<div class="lang_bar">
+    <div>
+        <ul>
+            <li>
+                <img src="@Model.AnhDaiDien" class="avatar" style="width:30px; height:30px; " />
+                <a href="#" class="lang_sel_sel icl-en" style="padding-top:12px;">
+                    Hi @Model.HoTen
+                </a>
+                @Model.DiemTichLuy
+                <i class="erudite_poin" title="You have @Model.DiemTichLuy Erudite Poins"></i>
+                <ul>
+                    <li class="icl-fr">
+                        <a href="/Users/BookLoanHistori"><i class="fa fa-list"></i> &nbsp;Book Loan Histori</a>
+                    </li>
+                    <li class="icl-fr">
+                        <a href="/Account/ListReview"><i class="fa fa-list"></i> &nbsp;Your Reviews</a>
+                    </li>
+                    <li class="icl-fr">
+                        <a href="/Users/Profile"><i class="fa fa-cogs"></i> &nbsp;Edit Profile</a>
+                    </li>
+                    <li class="icl-de">
+                        <a href="/Users/DangXuat"><i class="fa fa-times"></i> &nbsp;Sign Out</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

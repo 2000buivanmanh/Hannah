@@ -1,0 +1,66 @@
+﻿
+@model IEnumerable<DATA.Models.NhomTuoi>
+
+<table id="tableLoad" class="table table-striped table-bordered no-wrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="checkall" value="false" onclick="SelectAll()"><span class="checkbox-material"><span class="check "></span></span>
+                    </label>
+                </div>
+            </th>
+            <th>@Html.DisplayNameFor(model => model.DoTuoiMin)</th>
+            <th>@Html.DisplayNameFor(model => model.DoTuoiMax)</th>
+            <th>@Html.DisplayNameFor(model => model.TrangThai)</th>
+            <th>@Html.DisplayNameFor(model => model.MoTa)</th>
+            <th>@Html.DisplayNameFor(model => model.DuongDanSeo)</th>
+            <th>@Html.DisplayNameFor(model => model.TieuDeSeo)</th>
+            <th>Edit</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" data-id="@item.MaNhomTuoi" class="check-field" value="false" id="check-@item.MaNhomTuoi" onclick="Check(@item.MaNhomTuoi)"><span class="checkbox-material"><span class="check"></span></span>
+                    </label>
+                </div>
+
+            </td>
+
+            <td>
+                @item.DoTuoiMin
+            </td>
+            <td>
+                @item.DoTuoiMax
+            </td>
+            <td>
+                <input type="checkbox" class="check-toggle" data-style="ios" data-on="Public" @(item.TrangThai == DATA.Constant.Constant.TinhTrang.Activating ? "checked" : "" )
+                       onchange="CheckTrangThai(@item.MaNhomTuoi,'/Admin/NhomTuoi/CapNhatTinhTrang')"
+                       data-off="Block" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-size="sm">
+
+            </td>
+            <td>
+                @Html.Raw(item.MoTa)
+            </td>
+            <td>
+                @item.DuongDanSeo
+            </td>
+            <td>
+                @item.TieuDeSeo
+            </td>
+            <td>
+                <div class="" id='@item.MaNhomTuoi' type="submit" data-toggle="modal" onclick="ModalThemSuaNhomTuoi('/Admin/NhomTuoi/_ThemOrSuaNhomtuoi',@item.MaNhomTuoi)">
+                    <i class="fas fa-edit text-center"></i>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

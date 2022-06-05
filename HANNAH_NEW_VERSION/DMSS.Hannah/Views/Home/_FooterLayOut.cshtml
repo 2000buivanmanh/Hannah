@@ -1,0 +1,123 @@
+﻿@model  DATA.Models.CaiDat
+<div class='footer_wrapper_copyright'>
+    <div class='half_sin_wrapper'>
+        <canvas class='half_sin' data-bg-color='23,108,129' data-line-color='23,108,129'></canvas>
+    </div>
+    <footer class='page_footer'>
+        <div class='container'>
+            <div class='footer_container'>
+                <div class="cws-widget">
+                    <div class="widget-title">Hannah Library</div>
+                    <div class="col-sm-12 col-md-12 col-xs-12 address-footer">
+                        @Model.ChanWebSite
+                    </div>
+                    @*<div class="col-sm-12 col-md-12 col-xs-12 address-footer">
+                        The purpose of being born is to help children have access to interesting and new knowledge through lessons, stories, ...
+                        thereby helping children both entertain and learn English effectively without causing trouble. boring
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-xs-12 address-footer">
+                        Hannah do not delivery to at home. Parent set up book on website of
+                        Hannah Library and get the book at the office.
+                    </div>*@
+                    <div class="col-sm-12 col-md-12 col-xs-12 address-footer" style="margin: 15px 0px;">
+                        <img src="~/Content/Kiddy-Template/img/footer/footer.png" style="width: 100%; height:100%;">
+                    </div>
+                </div>
+                <div class="cws-widget">
+                    <div class="widget-title">Contact us</div>
+                    <div class="widget-content" style="display:flex;">
+                        <img id="imgFooter" src="~/Content/Kiddy-Template/img/footer/hotline.png" />
+                        <h5><strong>Hotline:</strong> @Model.SDTLienHe</h5> <br />
+                    </div>
+                    <div class="widget-content" style="display:inline-flex;">
+                        <img id="imgFooter" src="~/Content/Kiddy-Template/img/footer/time.png" /> <br />
+                        <div class="row">
+                            <span><strong>Morning:</strong> 08:00 - 11:30 Mon to Fri </span> <br />
+                            <span><strong>Afternoon:</strong> 13:30 - 16:30 Mon to Sat </span>
+                        </div>
+                    </div>
+                    <div class="widget-content" style="display:inline-flex;">
+                        <img id="imgFooter" src="~/Content/Kiddy-Template/img/footer/message.png" /> <br />
+                        <h5><strong>Email:</strong> @Model.EmailCuaHang<br /> </h5>
+                    </div>
+                    <div class="widget-content" style="display:inline-flex;">
+                        <img id="imgFooter" src="~/Content/Kiddy-Template/img/footer/location.png" /> <br />
+                        <h5><strong>Address:</strong> @Model.DiaChiCuaHang<br /> </h5>
+                    </div>
+                    <hr style="height:20px;border-width:0;color:gray;background-color:gray" />
+                    <div class="Social">
+                        <div class="widget-title">Follow us</div>
+                        <a target="_blank" href="#" title="Facebook">
+                            <img alt="#" class="imgSocial" src="~/Content/Kiddy-Template/img/footer/facebook.png" />
+                            <a target="_blank" href="#" title="Zalo">
+                                <img alt="Youtube" class="imgSocial" src="~/Content/Kiddy-Template/img/footer/zalo.png" />
+                            </a>
+                            <a target="_blank" href="#" title="Youtube">
+                                <img alt="#" class="imgSocial" src="~/Content/Kiddy-Template/img/footer/youtube.png" />
+                            </a>
+                            <a target="_blank" href="#" title="Twitter">
+                                <img alt="#" class="imgSocial" src="~/Content/Kiddy-Template/img/footer/twitter.png" />
+                            </a>
+                            <style>
+                                .address-footer {
+                                    font-size: 12px;
+                                    margin-bottom: 5px;
+                                }
+
+                                #imgFooter {
+                                    width: 50px;
+                                    display: block !important;
+                                    padding-right: 10px;
+                                    padding-bottom: 5px;
+                                }
+
+                                .widget-title {
+                                    padding: 5px !important;
+                                }
+
+                                .imgSocial {
+                                    width: 40px;
+                                    margin-bottom: 20%;
+                                    margin-top: 10%;
+                                    padding-left: 5%;
+                                    text-align: right;
+                                    margin-left: 10px;
+                                    transition: transform .2s;
+                                }
+
+                                    .imgSocial:hover {
+                                        -ms-transform: scale(1.5);
+                                        -webkit-transform: scale(1.5);
+                                        transform: scale(1.5);
+                                    }
+                            </style>
+                        </a>
+                    </div>
+                </div>
+                <div class="cws-widget">
+                    <div class="widget-title">Address</div>
+                    <div class="map-border">
+                        <div class="google-map" style="height:350px !important">
+                            @Html.Raw(Model.BanDo)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class='copyrights_area'>
+        <div class='half_sin_wrapper'>
+            <canvas class='footer_half_sin' data-bg-color='14,64,77' data-line-color='14,64,77'></canvas>
+        </div>
+        <div class='container'>
+            <div class='copyrights_container'>
+                <span>Copyrights © @DateTime.Now.Year Hannah Library | All rights reserved </span>
+                <div class='copyrights_panel'>
+                    <div class='copyrights_panel_wrapper'>
+                        <span>Power by <a href="https://www.facebook.com/hieuka3l"> DMSSolution</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

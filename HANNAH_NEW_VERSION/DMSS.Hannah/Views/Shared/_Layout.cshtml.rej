@@ -1,0 +1,33 @@
+diff a/HANNAH_NEW_VERSION/DMSS.Hannah/Views/Shared/_Layout.cshtml b/HANNAH_NEW_VERSION/DMSS.Hannah/Views/Shared/_Layout.cshtml	(rejected hunks)
+@@ -6,23 +6,14 @@
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+     <link rel="shortcut icon" href="~/Content/Kiddy-Template/img/cropped-favicon-192x192.png" />
+     <title>Hannah - Library</title>
+-    <link rel="stylesheet" href="~/Content/Kiddy-Template/revslider/css/settings.css" type="text/css" media="all" />
+-    <link rel="stylesheet" href="~/Content/Kiddy-Template/css/font-awesome.css" type="text/css" media="all" />
+-    <link rel="stylesheet" href="~/Content/Kiddy-Template/css/jquery.fancybox.css" type="text/css" media="all" />
+-    <link rel="stylesheet" href="~/Content/Kiddy-Template/css/select2.css" type="text/css" media="all" />
+-    <link rel="stylesheet" href="~/Content/Kiddy-Template/css/animate.css" type="text/css" media="all" />
+-    <link rel="stylesheet" href="~/Content/Kiddy-Template/css/main.css" type="text/css" media="all" />
+-    <link rel="stylesheet" href="~/Content/Kiddy-Template/css/shop.css" type="text/css" media="all" />
+-    <link rel="stylesheet" href="~/Content/Kiddy-Template/tuner/style.css" type="text/css" media="all" />
+-    <link rel="stylesheet" href="~/Content/Kiddy-Template/css/layout.css" type="text/css" media="all" />
+-    <link rel="icon" href="~/Content/Kiddy-Template/img/cropped-favicon-32x32.png" sizes="32x32" />
+-    <link rel="icon" href="~/Content/Kiddy-Template/img/cropped-favicon-192x192.png" sizes="192x192" />
+-    <link rel="apple-touch-icon-precomposed" href="~/Content/Kiddy-Template/img/cropped-favicon-180x180.png">
+-    <meta name="msapplication-TileImage" content="~/Content/Kiddy-Template/img/cropped-favicon-270x270.png">
+-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+-    <link href="~/Content/Top-header/Bootstrap/bootstrap.min.css" rel="stylesheet" />
+-    <link href="~/Content/Top-header/Bootstrap/bootstrap-theme.min.css" rel="stylesheet" />
+-    <link href="~/Content/css/toast.css" rel="stylesheet" />
++    <link rel='stylesheet' href='~/Content/Kiddy-Template/revslider/css/settings.css' type='text/css' media='all' />
++    <link rel='stylesheet' href='~/Content/Kiddy-Template/css/font-awesome.css' type='text/css' media='all' />
++    <link rel='stylesheet' href='~/Content/Kiddy-Template/css/jquery.fancybox.css' type='text/css' media='all' />
++    <link rel='stylesheet' href='~/Content/Kiddy-Template/css/select2.css' type='text/css' media='all' />
++    <link rel='stylesheet' href='~/Content/Kiddy-Template/css/animate.css' type='text/css' media='all' />
++    <link rel='stylesheet' href='~/Content/Kiddy-Template/css/main.css' type='text/css' media='all' />
++    <link rel='stylesheet' href='~/Content/Kiddy-Template/css/shop.css' type='text/css' media='all' />
++    <link rel='stylesheet' href='~/Content/Kiddy-Template/tuner/style.css' type='text/css' media='all' />
+     <link href="~/Assets/LoginRegister/css/Register.css" rel="stylesheet" />
+     <link href="~/Assets/LoginRegister/css/Login.css" rel="stylesheet" />
+     <style>

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Security code form {{TenWeb}}  </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        #titleChao {
+        }
+
+        #canhBao {
+            margin-top: 0.5%;
+            color: red;
+            font-weight: bold;
+            font-size: 20px
+        }
+        #bodyNoiDung {
+            border: 2px solid #fc0101 !important;
+            border-radius: 15px;
+            padding: 10px;
+            line-height: 0.1px;
+        }
+        #bodyChan {
+            border: 2px dashed blue;
+            border-radius: 15px;
+            padding: 10px;
+            line-height: 5px;
+        }
+        #pCapcha {
+            font-size: 16px;
+            font-weight: bold
+        }
+        #capcha {
+            color: blue
+        }
+
+        #pcontact {
+            font-size: 1px;
+            font-weight: bold;
+            margin-top: 0.5%;
+            color: blue;
+        }
+        #pinfo {
+            font-weight: bold;
+            color: blue;
+        }
+        #ndung{
+            font-size:18px !important;
+        }
+    </style>
+</head>
+<body>
+    <h3 id="titleChao"> Hi, <storng id="hoten">{{HoTen}}</storng> </h3>
+    <div id="bodyNoiDung">
+        <p id="canhBao"><i class="fas fa-exclamation-triangle"></i> You or someone is accessing website Hannah Library</p> <br />
+        <p id="">To confirm, we send you security code</p><br />
+        <p id="pCapcha">Your secutiry code: <strong id="capcha">{{Capcha}}</strong></p><br />
+        <p id="">Code has value: </p><br />
+        <p id="">Love ./</p>
+    </div>
+    <p id="canhBao">Note: This is an automatic email sent, please do not restore this email</p>
+    <div id="bodyChan">
+        <p id="pcontact"><i class="far fa-bookmark"></i> Contact Hannah Libarary</p>
+        <p id="pinfo"><i class="fas fa-phone-alt"></i> Hotline: </p>
+        <p id="pinfo"><i class="fas fa-envelope"></i> Email: </p>
+    </div>
+</body>
+</html>

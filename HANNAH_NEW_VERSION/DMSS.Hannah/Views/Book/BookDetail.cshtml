@@ -1,0 +1,509 @@
+﻿@model DATA.Models.Sach
+@{
+    ViewBag.Title = "BookDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #contentSlideDetail {
+        background-color: black;
+    }
+    /* Position the "next button" to the right */
+    #owl-demo .item {
+        margin: 1px;
+    }
+
+        #owl-demo .item imgslide {
+            display: block;
+            width: 100%;
+            height: 50%;
+        }
+
+    #owl-slider .item {
+        margin: 1px;
+    }
+
+        #owl-slider .item .imgSlide {
+            display: block;
+            width: auto;
+            height: auto;
+        }
+
+    .imgSlidefooter {
+        width: auto;
+        height: auto;
+    }
+</style>
+<!-- Modal Cho Website -->
+<div class="modal fade " data-keyboard="false" tabindex="-1" data-backdrop="static" role="dialog" id="modal-DetailProduct">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="contentSlideDetail">
+            <span class="close" onclick=" CloseModal()">&times;</span>
+            <div>
+                <h1 style="text-align:center">@Model.TenSach</h1><br />
+            </div>
+            <div id="owl-slider" class="owl-carousel owl-theme">
+                @foreach (var hinhanh in Model.HinhAnhSach)
+                {
+                    <div class="item"><img class="imgSlide" src="@hinhanh.TenAnh" alt="@hinhanh.TenAnh" /></div>
+
+                }
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- \\ Modal Cho Website -->
+<!-- Hình ảnh header-->
+<input type="hidden" value="@Model.MaSach" id="maSach" />
+<div id="main" class="site-main">
+    <div class="page_content">
+        <div class="left-pattern pattern pattern-2" style="width: 154.5px;"></div>
+        <main>
+        </main>
+        <div class="right-pattern pattern pattern-2" style="width: 154.5px;"></div>
+        <div class="footer_image"></div>
+    </div>
+</div>
+<!-- \\ Hình ảnh header-->
+<div class="single single-product postid-70 woocommerce woocommerce-page wide wave-style">
+    <!-- Breadcrumb -->
+    <section class='page_title wave'>
+        <div class='container'>
+            <div class='title'>
+                <h1>Shop</h1>
+            </div>
+            <nav class="bread-crumbs"><a href="index.html">Home</a><i class="delimiter fa fa-chevron-right"></i><span typeof="v:Breadcrumb"><a href="features-shop.html">Products<i class="delimiter fa fa-chevron-right"></i></a></span><span class="current">Flying Ninja</span></nav>
+        </div>
+        <canvas class='breadcrumbs' data-bg-color='#f8f2dc' data-line-color='#f9e8b2'></canvas>
+    </section>
+    <!-- \\ Breadcrumb -->
+    <div id="main" class="site-main">
+        <div class="page_content single_sidebar">
+            <div class="left-pattern pattern pattern-2"></div>
+            <div class="container">
+                <!-- sidebar right -->
+                <aside class='sb_right'>
+                    <!-- widget search -->
+                    <div class="cws-widget">
+                        <form method="post" class="woocommerce-product-search" @*action="/Books/BookList"*@>
+                            <label class="screen-reader-text">Search for:</label>
+                            <input type="search" class="search-field" placeholder="Books title or Author name..." value=""
+                                   name="keyword" title="Search for:" />
+                            <input type="submit" value="Search" />
+                        </form>
+                    </div>
+                    <!-- \\ widget search -->
+                    <!--Top Rated Books -->
+                    @Html.Action("_TopRate", "Home")
+                    <!-- \\ Top Rated Products -->
+                    @Html.Action("_TopReader", "Home")
+                    <!-- \\ Top Reader -->
+                </aside>
+                <main>
+                    <div id="container">
+                        <div id="content" role="main">
+                            <div itemscope itemtype="http://schema.org/Product" id="product-70" class="post-70 product type-product status-publish has-post-thumbnail product_cat-posters sale shipping-taxable purchasable product-type-simple product-cat-posters instock">
+                                <span class="onsale">Sale!</span>
+                                <div class="images">
+                                    <div class="media_part">
+                                        <div class="grid images_3_of_2">
+                                            <img src='@Model.ThongTinAnhSach' style="width:290px;height:287px;" />
+                                        </div>
+                                    </div>
+                                    <!--truong-->
+                                    <div id="owl-demo">
+                                        @foreach (var hinhanh in Model.HinhAnhSach)
+                                        {
+                                            <div class="item"><img style="height:100px" src="@hinhanh.TenAnh"></div>
+                                        }
+                                    </div>
+                                    <div class="thumbnails columns-3" style="margin-left: 50px !important;">
+                                        <a onclick="ShowSlider()" class="cws_button alt small"><span class="cws_button_inner" data-bg_hover_color="" data-bg_color="" data-text_color="">View More Images</span></a>
+                                    </div>
+
+                                </div>
+
+                                <div class="summary entry-summary">
+                                    <h1 itemprop="name" class="product_title entry-title">@Model.TenSach</h1>
+                                    <div class="woocommerce-product-rating" itemprop="aggregateRating" itemscope
+                                         itemtype="http://schema.org/AggregateRating">
+                                        <div class="star-rating" title="Rated 5.00 out of 5">
+                                            <span style="width:100%">
+                                                <strong itemprop="ratingValue" class="rating">5.00</strong> out of
+                                                <span itemprop="bestRating">5</span> based on <span itemprop="ratingCount" class="rating">5</span> customer ratings
+                                            </span>
+                                        </div>
+                                        <a href="#reviews" class="woocommerce-review-link" rel="nofollow">
+                                            (<span itemprop="reviewCount" class="count">5</span> customer reviews)
+                                        </a>
+                                    </div>
+                                    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                        <p class="price">
+                                            <ins><span class="amount"> @((int?)Model.Gia) <i class="erudite_poin"></i> </span></ins>
+                                        </p>
+                                        <meta itemprop="price" content="12" />
+                                        <meta itemprop="priceCurrency" content="GBP" />
+                                        <link itemprop="availability" href="http://schema.org/InStock" />
+                                    </div>
+                                    <div class="product_meta">
+                                        <span class="posted_in">Publisher: <a href="#" rel="tag">@Model.TacGia.TenTacGia </a></span>
+                                    </div>
+                                    <div class="product_meta">
+                                        <span class="posted_in">Published:  @Model.NhaXuatBan.NgayTao.Value.Date.ToString("dd-MM-yyyy") </span>
+
+                                    </div>
+                                    <div class="product_meta">
+                                        <span class="posted_in">Published in:  @Model.NhaXuatBan.ThongTinNXB </span>
+                                    </div>
+                                    <div class="product_meta">
+                                        <span class="posted_in">First Times Published:   @Model.NhaXuatBan.LanCapNhatCuoi.Value.Date.ToString("dd-MM-yyyy") </span>
+                                    </div>
+                                    <div class="product_meta">
+                                        <span class="posted_in">Author: <a href="#" rel="tag">@Model.TacGia.TenTacGia </a></span>
+                                    </div>
+                                    <div class="product_meta">
+                                        <span class="posted_in">AgeGroup: <a href="#" rel="tag">@Model.NhomTuoi.DoTuoiMin - @Model.NhomTuoi.DoTuoiMax</a></span>
+                                    </div>
+                                    <div class="product_meta">
+                                        <span class="posted_in">Category: <a href="#" rel="tag">Medicine &amp; health</a></span>
+                                    </div>
+                                    <div class="product_meta">
+                                        <span class="posted_in">Book Type: <a href="#" rel="tag">@Model.LoaiSach.TenLoaiSach</a></span>
+                                    </div>
+                                    <div class="product_meta">
+                                        <span class="posted_in">Total Pages: @Model.SoLuongTrang</span>
+                                    </div>
+                                    <div class="product_meta">
+                                        <span class="posted_in">Book size: @Model.KichThuocSach</span>
+                                    </div>
+                                    <div class="product_meta">
+                                        <span class="posted_in">ISBN: @Model.MaNhanDienSach</span>
+                                    </div>
+                                    <form class="cart" method="post" enctype='multipart/form-data'>
+                                        <div class="quantity">
+                                            <input type="number" step="1" min="1" name="quantity" value="1"
+                                                   title="Qty" class="input-text qty text" size="4" />
+                                        </div>
+                                        <input type="hidden" name="add-to-cart" value="70" />
+                                        <button type="button" onclick="AddIntoBookCase(@Model.MaSach)" class="single_add_to_cart_button button alt">
+                                            Add to
+                                            cart
+                                        </button>
+                                    </form>
+                                    <div class="product_meta">
+                                        <span class="posted_in">
+                                            Category: <a href="features-shop.html"
+                                                         rel="tag">Posters</a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- \\ product -->
+                                <div class="woocommerce-tabs wc-tabs-wrapper cws_ce_content ce_tabs">
+                                    <div class="tabs wc-tabs">
+                                        <div class="description_tab tab active" role='tablist' tabindex="0">
+                                            <span>Description</span>
+                                        </div>
+                                        <div class="reated tab" role='tablist' tabindex="1">
+                                            <span>Reated</span>
+                                        </div>
+                                        <div class="reviews_tab tab" role='tablist' tabindex="2">
+                                            <span>Reviews</span>
+                                        </div>
+                                    </div>
+                                    <div class="tabs_items">
+                                        <!-- Product Description -->
+                                        <div class="panel entry-content wc-tab tab_item" id="tab-description" role='tabpanel' tabindex='0'>
+                                            <h2>Product Description</h2>
+                                            <input type="hidden" name="" id="defaultEn" value="En" />
+                                            <a class="button pull-right" id="transtale" onclick="TranstaleDes()"> <i id="LanguageDes"> Translate description to Vietnamese</i></a><br />
+                                            <span id="desEn">@Html.Raw(Model.MoTaSachEn)</span>
+                                            <span id="desVi" hidden>
+                                                @Html.Raw(Model.MoTaSachVi)
+                                            </span>
+                                        </div>
+                                        <!-- \\ Product Description -->
+                                        <div class="panel entry-content wc-tab tab_item" id="tab-reated"
+                                             role='tabpanel' tabindex='1' style='display:none;'>
+                                            <div id="reviews">
+                                                <div id="comments">
+
+                                                </div>
+
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                        <div class="panel entry-content wc-tab tab_item" id="tab-reviews"
+                                             role='tabpanel' tabindex='2' style='display:none;'>
+                                            @if (Model.VideoSach.Count != 0)
+                                            {
+                                                foreach (var video in Model.VideoSach)
+                                                {
+                                                    <iframe width="850" height="450" src="@video.TenVideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <h2>0 reviews for THE ASTRONOMY BOOK- BIG IDEAS SIMPLY EXPLAINED </h2>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="related products">
+                                    <h2>Related Products</h2>
+                                    <ul class="products">
+                                        <li class="first post-76 product type-product status-publish has-post-thumbnail product_cat-posters shipping-taxable purchasable product-type-simple product-cat-posters instock">
+                                            <div class='media_part'>
+                                                <div class='pic'>
+                                                    <img src='/Content/Images/Userupload/images/Book/the shakespeare.jpg'
+                                                         data-at2x='/Content/Images/Userupload/images/Book/the shakespeare.jpg' alt="">
+                                                    <div class='links_popup animate'>
+                                                        <div class='link_cont'>
+                                                            <div class='link'>
+                                                                <a class='fancy'
+                                                                   href=''>
+                                                                    <i class='fa fa-camera'></i>
+                                                                </a>
+                                                                <div class='link-item-bounce'></div>
+                                                            </div>
+                                                            <div class='link'>
+                                                                <a href='shop-single-product.html'>
+                                                                    <i class='fa fa-share'></i>
+                                                                </a>
+                                                                <div class='link-item-bounce'></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class='link-toggle-button'>
+                                                            <i class='fa fa-plus link-toggle-icon'></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class='hover-effect'></div>
+                                                </div>
+                                            </div>
+                                            <a href="shop-single-product.html">
+                                                <h3>Bag</h3>
+                                            </a>
+                                            <span class="price"><span class="amount">&pound;15.00</span></span>
+                                            <a href="/shop/flying-ninja/?add-to-cart=76" rel="nofollow"
+                                               data-product_id="76" data-product_sku="" data-quantity="1"
+                                               class="button add_to_cart_button product_type_simple">
+                                                Add to
+                                                cart
+                                            </a>
+                                        </li>
+                                        <li class="post-67 product type-product status-publish has-post-thumbnail product_cat-posters shipping-taxable purchasable product-type-simple product-cat-posters instock">
+                                            <div class='media_part'>
+                                                <div class='pic'>
+                                                    <img src='/Content/Images/Userupload/images/Book/the shakespeare.jpg'
+                                                         data-at2x='/Content/Images/Userupload/images/Book/the shakespeare.jpg' alt>
+                                                    <div class='links_popup animate'>
+                                                        <div class='link_cont'>
+                                                            <div class='link'>
+                                                                <a class='fancy'
+                                                                   href=''>
+                                                                    <i class='fa fa-camera'></i>
+                                                                </a>
+                                                                <div class='link-item-bounce'></div>
+                                                            </div>
+                                                            <div class='link'>
+                                                                <a href='shop-single-product.html'>
+                                                                    <i class='fa fa-share'></i>
+                                                                </a>
+                                                                <div class='link-item-bounce'></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class='link-toggle-button'>
+                                                            <i class='fa fa-plus link-toggle-icon'></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class='hover-effect'></div>
+                                                </div>
+                                            </div>
+                                            <a href="shop-single-product.html">
+                                                <h3>Basket</h3>
+                                            </a>
+                                            <span class="price"><span class="amount">&pound;15.00</span></span>
+                                            <a href="/shop/flying-ninja/?add-to-cart=67" rel="nofollow"
+                                               data-product_id="67" data-product_sku="" data-quantity="1"
+                                               class="button add_to_cart_button product_type_simple">
+                                                Add to
+                                                cart
+                                            </a>
+                                        </li>
+                                        <li class="last post-73 product type-product status-publish has-post-thumbnail product_cat-posters sale shipping-taxable purchasable product-type-simple product-cat-posters instock">
+                                            <div class="sale-wrapper">
+                                                <span class="onsale">Sale!</span>
+                                            </div>
+                                            <div class='media_part'>
+                                                <div class='pic'>
+                                                    <img src='/Content/Images/Userupload/images/Book/the shakespeare.jpg'
+                                                         data-at2x='/Content/Images/Userupload/images/Book/the shakespeare.jpg' alt>
+                                                    <div class='links_popup animate'>
+                                                        <div class='link_cont'>
+                                                            <div class='link'>
+                                                                <a class='fancy'
+                                                                   href=''>
+                                                                    <i class='fa fa-camera'></i>
+                                                                </a>
+                                                                <div class='link-item-bounce'></div>
+                                                            </div>
+                                                            <div class='link'>
+                                                                <a href='shop-single-product.html'>
+                                                                    <i class='fa fa-share'></i>
+                                                                </a>
+                                                                <div class='link-item-bounce'></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class='link-toggle-button'>
+                                                            <i class='fa fa-plus link-toggle-icon'></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class='hover-effect'></div>
+                                                </div>
+                                                <div class='rating_cont'>
+                                                    <div class="star-rating" title="Rated 2.00 out of 5">
+                                                        <span style="width:40%">
+                                                            <strong class="rating">2.00</strong>
+                                                            out of 5
+                                                        </span>
+                                                    </div>
+                                                    <div class='button-shadow'></div>
+                                                </div>
+                                            </div>
+                                            <a href="shop-single-product.html">
+                                                <h3>Bath</h3>
+                                            </a>
+                                            <span class="price">
+                                                <del><span class="amount">&pound;15.00</span></del>
+                                                <ins><span class="amount">&pound;12.00</span></ins>
+                                            </span>
+                                            <a href="/shop/flying-ninja/?add-to-cart=73" rel="nofollow"
+                                               data-product_id="73" data-product_sku="" data-quantity="1"
+                                               class="button add_to_cart_button product_type_simple">
+                                                Add to
+                                                cart
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <meta itemprop="url" content="shop-single-product.html" />
+                            </div>
+                            <!-- #product-70 -->
+                        </div>
+                    </div>
+                </main>
+                <!-- / main content -->
+            </div>
+            <div class="right-pattern pattern pattern-2"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+    function TranstaleDes() {
+        var CurrentLangue = jQuery('#defaultEn').val();
+        if (CurrentLangue == "En") {
+            jQuery("#desEn").attr('hidden', true);
+            jQuery("#desVi").removeAttr('hidden');
+            jQuery("#defaultEn").val('Vi');
+            document.getElementById("LanguageDes").innerHTML = 'Translate description to English ';
+        } else {
+            jQuery("#desEn").removeAttr('hidden');
+            jQuery("#desVi").attr('hidden', true)
+            jQuery("#defaultEn").val('En');
+            document.getElementById("LanguageDes").innerHTML = 'Translate description to Vietnamese ';
+        }
+    }
+
+    function CloseModal() {
+        jQuery("#modal-DetailProduct").removeAttr('style');
+    }
+
+    function ShowSlider() {
+        jQuery('#modal-DetailProduct').attr('style', 'display: block;');
+    }
+
+    function LoadListReview() {
+        var maSach = jQuery('#maSach').val();
+        jQuery.get('/Book/_ListReviewBook', { id: maSach })
+            .done(function (data) {
+                jQuery('#comments').html(data);
+                jQuery("#rating").rating();
+            })
+    }
+
+    function ThemDanhGia() {
+        var noiDungDanhGia = jQuery('#comment').val();
+        var diemDanhGia = jQuery('#rating').val();
+        var maSach = jQuery('#maSach').val();
+        jQuery.post('/Book/ThemDanhGia',
+            {
+                DiemDanhGia: diemDanhGia,
+                NoiDungDanhGia: noiDungDanhGia,
+                MaSach: maSach
+            })
+            .done(function (data) {
+                if (data.status == "1") {
+                    LoadListReview();
+                    /*location.reload();*/
+                }
+
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                swal({
+                    title: "Server Error",
+                    text: errorThrown,
+                    icon: "error",
+                    button: false,
+                    timer: 1500
+                });
+            });
+    }
+
+
+    function XoaDanhGia(id) {
+
+        jQuery.post('/Book/XoaDanhGia', { id: id })
+            .done(function (data) {
+                if (data.status == "1") {
+                    LoadListReview();
+                }
+                if (data.status == "0") {
+
+                }
+            })
+
+    }
+</script>
+@section scripts {
+    <script>
+
+        jQuery(document).ready(function () {
+
+            LoadListReview();
+
+            jQuery("#owl-demo").owlCarousel({
+                autoPlay: 3000, //Set AutoPlay to 3 seconds
+                items: 2,
+                itemsDesktop: [1200, 2],
+                itemsDesktopSmall: [979, 2]
+            });
+
+
+            jQuery("#owl-slider").owlCarousel({
+
+                autoPlay: 3000, //Set AutoPlay to 3 seconds
+
+                items: 4,
+                itemsDesktop: [1199, 3],
+                itemsDesktopSmall: [979, 3]
+
+            });
+        });
+
+
+    </script>
+
+}

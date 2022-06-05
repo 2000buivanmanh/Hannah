@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DATA.Models.NguoiDung>
+
+<div class="modal-body">
+    <div class="text-center mt-2 mb-4">
+        <h2 id="tieude">
+            Insert  Admin User
+        </h2>
+    </div>
+
+    <form class="pl-5 pr-5" action="#" id="frmThemOrSua">
+
+        <div class="form-group">
+            <label for="fullname">
+                @Html.DisplayNameFor(model => model.HoTen)<span id="sao"> *</span>
+            </label>
+            <input class="form-control" type="text" id="fullname" name="fullname" >
+        </div>
+
+        <div class="form-group">
+            <label for="username">@Html.DisplayNameFor(model => model.TenDangNhap)<span id="sao"> *</span></label>
+            <input class="form-control" type="text" id="username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="Email">
+                @Html.DisplayNameFor(model => model.EmailNguoiDung)<span id="sao"> *</span>
+            </label>
+            <input class="form-control" type="text" name="email"
+                   id="email" >
+        </div>
+        <div class="form-group">
+            <label for="phone">
+                @Html.DisplayNameFor(model => model.SoDienThoai)
+            </label>
+            <input type="number" class="form-control" maxlength="10" id="phone" name="phone" >
+
+        </div>
+        <div class="form-group">
+            <label for="dob">@Html.DisplayNameFor(model => model.NgaySinh)</label>
+            <input class="form-control" type="date" id="dob" name="dob" >
+
+        </div>
+        <div class="form-group">
+            <label for="address">@Html.DisplayNameFor(model => model.DiaChi)</label>
+            <input class="form-control" type="text" id="address" name="address" >
+
+        </div>
+
+        <div class="form-group text-center">
+            <div class="btn btn-primary" id="btnsumit" onclick="CheckForm('/Admin/QLNguoiDung/_DanhSachNguoiDung')">
+                Insert
+            </div>
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "DanhSachSlide";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb ">
+                    <li class="breadcrumb-item">
+                        <a class="black-text showload" href="/Admin/Admin/Index">Home</a><i class="fas fa-angle-right mx-2"></i>
+                    </li>
+                    Slide
+                </ol>
+            </nav>
+            <div class="card-body">
+                <div class="col-md-12  waves-light text-uppercase">
+                    <h3 class="text-center display-5">
+                        Slide
+                    </h3>
+                    <hr />
+                </div>
+                <div class="table-responsive text-center">
+                    <div id="data"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer-table">
+    <div class="row">
+        <div class="col-md-3 m-4">
+            <button class="btn btn-danger btn-sm  waves-effect waves-light " id="SelectDelete" onclick="XoaData('/Admin/Slide/XoaSlide','/Admin/Slide/_DanhSachSlide')">
+                <i class="fas fa-ban"></i> DELETE
+            </button>
+            <label class="non-touch" id="selected-row">
+                <span class="checkbox-material">
+                    <span class="check-count"></span>
+                </span>Selected <span id="numberOfSelectedRows">0</span> lines
+            </label>
+        </div>
+
+        <div class="col-md-8 m-4  row">
+            <div class="col-md-8">
+               
+            </div>
+            <div class="col-md-2 ">
+                <button class="btn btn-success btn-sm  waves-effect waves-light " onclick="ModalThemSua('/Admin/Slide/_ThemOrSuaSlide')">
+                    <i class="fas fa-plus-square"></i> ADD
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script src="~/Areas/Admin/Content/AdminJs/SlideJS.js"></script>
+}

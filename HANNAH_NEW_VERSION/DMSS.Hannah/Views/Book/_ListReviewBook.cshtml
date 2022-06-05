@@ -1,0 +1,142 @@
+﻿@model List<DATA.Models.DanhGia>
+
+@{ Layout = null;
+    var checkreview = false;
+}
+@if (Model.Count != 0)
+{
+    <h2>@Model.Count reviews for Tea Set</h2>
+
+    foreach (var danhGia in Model)
+    {
+        if (danhGia.NguoiDung.TenDangNhap == User.Identity.Name)
+        {
+            checkreview = true;
+        }
+        <ol class="commentlist">
+            <!-- #comment-## -->
+            <li itemprop="review" itemscope
+                itemtype="http://schema.org/Review"
+                class="comment even thread-even depth-1"
+                id="li-comment-3">
+                <div id="comment-3" class="comment_container">
+                    <img alt='@danhGia.NguoiDung.AnhDaiDien'
+                         src='@danhGia.NguoiDung.AnhDaiDien'
+                         srcset='@danhGia.NguoiDung.AnhDaiDien'
+                         class='avatar avatar-60 photo' height='60'
+                         width='60' />
+                    <div class="comment-text">
+                        <div>
+                            @{int? Point = danhGia.DiemDanhGia * 20;}
+                            <div class="star-rating" title="Rated @danhGia.DiemDanhGia out of 5">
+                                <span style="width:@Point%"><strong class="rating">@danhGia.DiemDanhGia</strong> out of 5</span>
+                            </div>
+                        </div>
+                        <p class="meta">
+                            <strong itemprop="author">
+                                <b>@danhGia.NguoiDung.HoTen</b>
+                            </strong> &ndash;
+                            <b> @danhGia.NgayDanhGia.Value.ToString("dd/MM/yyyy")</b>
+                        </p>
+                        <div itemprop="description" class="description">
+                            <p>
+                                @danhGia.NoiDungDanhGia
+                            </p>
+                        </div>
+                    </div>
+                    @if (danhGia.NguoiDung.TenDangNhap == User.Identity.Name)
+                    {<a class="button add_to_cart_button product_type_simple pull-right" onclick="XoaDanhGia(@danhGia.MaDanhGia)">Delete</a>}
+                </div>
+
+            </li>
+            <!-- #comment-## -->
+        </ol>
+
+
+
+    }
+}
+else
+{
+    <h2>0 rated for THE SCIENCE BOOK- BIG IDEAS SIMPLY EXPLAINED</h2>
+}
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (!checkreview)
+    {
+        <div id="review_form_wrapper">
+            <div id="review_form">
+                <div id="respond" class="comment-respond">
+                    <h3 id="reply-title" class="comment-reply-title">
+                        Add a
+                        review <small>
+                            <a rel="nofollow"
+                               id="cancel-comment-reply-link"
+                               href="/shop/flying-ninja/#respond"
+                               style="display:none;">
+                                Cancel
+                                reply
+                            </a>
+                        </small>
+                    </h3>
+
+                    @*<div>
+                            <div class="comment-form-rating">
+                                <label for="rating">Your Rating</label>
+                                <input type="hidden" name="rating1" id="rating1" class="rating" />
+                            </div>
+                            <p class="comment-form-comment">
+                                <label for="comment">Your Review</label>
+                                <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
+                            </p>
+                            <p class="form-submit">
+                                <input class="button" value="Review" onclick="ThemDanhGia()">
+                            </p>
+                        </div>*@
+                    <form action="#" method="post" id="commentform"
+                          class="comment-form" novalidate>
+                        <div class="comment-form-rating">
+                            <label for="rating">Your Rating</label>
+                            <p class="stars">
+                                <span>
+                                    <a class="star-1" href="#">1</a>
+                                    <a class="star-2" href="#">2</a>
+                                    <a class="star-3" href="#">3</a>
+                                    <a class="star-4" href="#">4</a>
+                                    <a class="star-5" href="#">5</a>
+                                </span>
+                            </p>
+                            <select name="rating" id="rating"
+                                    style="display: none;">
+                                <option value="">Rate…</option>
+                                <option value="5">Perfect</option>
+                                <option value="4">Good</option>
+                                <option value="3">Average</option>
+                                <option value="2">Not that bad</option>
+                                <option value="1">Very Poor</option>
+                            </select>
+                        </div>
+                        <p class="comment-form-comment">
+                            <label for="comment">Your Review</label>
+                            <textarea id="comment" name="comment" cols="45"
+                                      rows="8" aria-required="true"></textarea>
+                        </p>
+                        <p class="form">
+                            <input class="button" value="Review" onclick="ThemDanhGia()">
+                        </p>
+                    </form>
+                </div>
+                <!-- #respond -->
+            </div>
+        </div>
+    }
+}
+else
+{
+    <h2>
+        Please <a style="font-weight:bold" class="wc-forward account" href="/Users/login">Login</a> to rate book !
+    </h2>
+}
+

@@ -1,0 +1,47 @@
+﻿
+@model IEnumerable<DATA.Models.PhanHoi>
+
+<table id="tableLoad" class="table table-striped table-bordered no-wrap" style="width:100%">
+    <thead>
+        <tr>
+
+            <th>@Html.DisplayNameFor(model => model.TenNguoiGui)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.NoiDungPhanHoi)</th>
+            <th>@Html.DisplayNameFor(model => model.NgayGui)</th>
+            <th>@Html.DisplayNameFor(model => model.TrangThai)</th>
+            <th>Detail</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.TenNguoiGui
+                </td>
+                <td>
+                    @item.Email 
+                </td>
+                <td>
+                    @item.NoiDungPhanHoi
+                </td>
+
+                <td>
+                    @item.NgayGui
+                </td>
+                <td>
+                    <p> <i class="@(item.TrangThai == DATA.Constant.Constant.TinhTrang.Activating ? "text-success fa fa-circle" : "text-danger fa fa-circle")"></i> @(item.TrangThai == DATA.Constant.Constant.TinhTrang.Activating ? "Processed" : "Unprocessed")</p>
+
+                </td>
+                <td>
+                    <div class="" id='@item.MaPhanHoi' type="submit" data-toggle="modal" onclick="ModalThemSua('/Admin/PhanHoiAdmin/_ChiTietPhanHoi',@item.MaPhanHoi)">
+                        <i class="fas fa-edit text-center"></i>
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

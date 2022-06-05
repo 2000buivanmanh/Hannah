@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{45715C67-55E3-41B1-908A-B388307F32FE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SERVICE</RootNamespace>
+    <AssemblyName>SERVICE</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.95.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.95.4\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Authentication\AuthenticationService.cs" />
+    <Compile Include="Authentication\IAuthenticationService.cs" />
+    <Compile Include="BaiVietService\BaiVietService.cs" />
+    <Compile Include="BaiVietService\IBaiVietService.cs" />
+    <Compile Include="BaseService\BaseService.cs" />
+    <Compile Include="BaseService\IBaseService.cs" />
+    <Compile Include="CaiDatService\CaiDatService.cs" />
+    <Compile Include="CaiDatService\ICaiDatService.cs" />
+    <Compile Include="ChiNhanhService\ChiNhanhService.cs" />
+    <Compile Include="ChiNhanhService\IChiNhanhService.cs" />
+    <Compile Include="ChiTietDatSachService\ChiTietDatSachService.cs" />
+    <Compile Include="ChiTietDatSachService\IChiTietDatSachService.cs" />
+    <Compile Include="DacQuyenService\DacQuyenService.cs" />
+    <Compile Include="DacQuyenService\IDacQuyenService.cs" />
+    <Compile Include="DanhGiaService\DanhGiaService.cs" />
+    <Compile Include="DanhGiaService\IDanhGiaService.cs" />
+    <Compile Include="DatSachService\DatSachService.cs" />
+    <Compile Include="DatSachService\IDatSachService.cs" />
+    <Compile Include="ExampleSerivce\ExampleService.cs" />
+    <Compile Include="ExampleSerivce\IExampleService.cs" />
+    <Compile Include="HangMucSachService\HangMucSachService.cs" />
+    <Compile Include="HangMucSachService\IHangMucSachService.cs" />
+    <Compile Include="HinhAnhSachService\HinhAnhSachService.cs" />
+    <Compile Include="HinhAnhSachService\IHinhAnhSachService.cs" />
+    <Compile Include="LoaiSachService\ILoaiSachService.cs" />
+    <Compile Include="LoaiSachService\LoaiSachService.cs" />
+    <Compile Include="NguoiDungService\INguoiDungService.cs" />
+    <Compile Include="NguoiDungService\NguoiDungService.cs" />
+    <Compile Include="NhaXuatBanService\INhaXuatBanService.cs" />
+    <Compile Include="NhaXuatBanService\NhaXuatBanService.cs" />
+    <Compile Include="NhomTuoiService\INhomTuoiService.cs" />
+    <Compile Include="NhomTuoiService\NhomTuoiService.cs" />
+    <Compile Include="PhanHoiService\IPhanHoiService.cs" />
+    <Compile Include="PhanHoiService\PhanHoiService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SachService\ISachService.cs" />
+    <Compile Include="SachService\SachService.cs" />
+    <Compile Include="SlideService\ISlideService.cs" />
+    <Compile Include="SlideService\SlideService.cs" />
+    <Compile Include="TacGiaService\ITacGiaService.cs" />
+    <Compile Include="TacGiaService\TacGiaService.cs" />
+    <Compile Include="TheLoaiSachService\ITheLoaiSachService.cs" />
+    <Compile Include="TheLoaiSachService\TheLoaiSachService.cs" />
+    <Compile Include="ThongBaoService\IThongBaoService.cs" />
+    <Compile Include="ThongBaoService\ThongBaoService.cs" />
+    <Compile Include="VideoSachService\IVideoSachService.cs" />
+    <Compile Include="VideoSachService\VideoSachService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DMSS.Data\DMSS.Data.csproj">
+      <Project>{C018E680-96D6-4A80-9B05-4F1E6C802EFE}</Project>
+      <Name>DMSS.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DMSS.ViewModals\DMSS.ViewModal.csproj">
+      <Project>{CDF2F143-DD30-468B-A106-919A4A7DBC50}</Project>
+      <Name>DMSS.ViewModal</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

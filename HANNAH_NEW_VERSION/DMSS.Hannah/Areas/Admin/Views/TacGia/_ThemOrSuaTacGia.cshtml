@@ -1,0 +1,70 @@
+﻿
+@model DATA.Models.TacGia
+
+<div class="modal-body">
+    <div class="text-center mt-2 mb-4">
+        <h2 id="tieude">
+            Edit Genre
+        </h2>
+    </div>
+
+    <form class="pl-5 pr-5" action="#" id="frmThemOrSua">
+
+        <div class="form-group">
+            <label for="authorsname">
+                @Html.DisplayNameFor(model => model.TenTacGia)
+            </label>
+            <input class="form-control" type="text" value="@Model.TenTacGia" id="name" name="authorsname" >
+        </div>
+
+        <div class="form-group" id="form-name">
+            <label for="authorsinfo">
+                @Html.DisplayNameFor(model => model.ThongTinTacGia)
+            </label>
+            <textarea class="ckeditor" type="text" name="authorsinfo"
+                      id="authorsinfo" >@Model.ThongTinTacGia</textarea>
+        </div>
+
+        <div hidden id="trangthai">
+            @Model.TrangThai
+        </div>
+        <div class="form-group" id="form-name">
+            <label for="SEOContent">
+                @Html.DisplayNameFor(model => model.NoiDungSeo)
+            </label>
+            <textarea class="ckeditor" type="text" name="seocontent"
+                      id="seocontent" >@Model.NoiDungSeo</textarea>
+        </div>
+        <div class="form-group">
+            <label for="SEOKeyWord">
+                @Html.DisplayNameFor(model => model.TuKhoaSeo)
+            </label>
+            <input class="form-control" value="@Model.TuKhoaSeo" type="text" name="seokeyword"
+                   id="seokeyword" >
+        </div>
+        <div class="form-group">
+            <label for="SEOTitle">
+                @Html.DisplayNameFor(model => model.TieuDeSeo)
+            </label>
+            <input class="form-control" type="text"
+                   id="seotitle" value="@Model.TieuDeSeo" name="seotitle" >
+
+        </div>
+        <div class="form-group">
+            <label for="seolink">
+                @Html.DisplayNameFor(model => model.DuongDanSeo)
+            </label>
+            <input class="form-control" type="text"
+                   id="seolink" value="@Model.DuongDanSeo" name="seolink" >
+
+        </div>
+
+        <div class="form-group text-center">
+            <div class="btn btn-primary" id="btnsumit" onclick="ThemOrSuaTacGia(@Model.MaTacGia , '/Admin/TacGia/_DanhSachTacGia')">
+                Update
+            </div>
+        </div>
+
+    </form>
+
+</div>

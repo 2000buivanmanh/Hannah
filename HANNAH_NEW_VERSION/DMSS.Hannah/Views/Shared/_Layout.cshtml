@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="~/Content/Kiddy-Template/img/cropped-favicon-192x192.png" />
+    <title>Hannah - Library</title>
+    <link rel='stylesheet' href='~/Content/Kiddy-Template/revslider/css/settings.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='~/Content/Kiddy-Template/css/font-awesome.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='~/Content/Kiddy-Template/css/jquery.fancybox.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='~/Content/Kiddy-Template/css/select2.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='~/Content/Kiddy-Template/css/animate.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='~/Content/Kiddy-Template/css/main.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='~/Content/Kiddy-Template/css/shop.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='~/Content/Kiddy-Template/tuner/style.css' type='text/css' media='all' />
+    <script type='text/javascript' src='~/Content/Kiddy-Template/js/jquery.js'></script>
+    <script type='text/javascript' src='~/Content/Kiddy-Template/js/jquery-migrate.min.js'></script>
+    <link href="~/Content/Kiddy-Template/css/bootstrap-rating.css" rel="stylesheet" />
+    <link rel="icon" href="~/Content/Kiddy-Template/img/cropped-favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" href="~/Content/Kiddy-Template/img/cropped-favicon-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="~/Content/Kiddy-Template/img/cropped-favicon-180x180.png">
+    <meta name="msapplication-TileImage" content="~/Content/Kiddy-Template/img/cropped-favicon-270x270.png">
+    <link href="~/Content/Login-Register/Login-Register.css" rel="stylesheet" />
+    <link href="~/Content/Modal-User/style.css" rel="stylesheet" />
+    <link href="~/Content/Kiddy-Template/css/toast.css" rel="stylesheet" />
+    <style>
+        .site_top_panel.slider {
+            z-index: 1000000 !important;
+        }
+
+        /*   span.glyphicon.glyphicon-star {
+            color: #f5b917 !important;
+            font-size: 2rem !important;
+        }
+
+        .rating-symbol-background.glyphicon.glyphicon-star-empty {
+            color: #f5b917 !important;
+            font-size: 2rem !important;
+        }
+
+        .rating-symbol {
+            display: inline-block;
+            position: relative;
+        }
+
+        .glyphicon {
+            position: relative;
+            top: 1px;
+            display: inline-block;
+            font-family: 'Glyphicons Halflings';
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .glyphicon-star:before {
+            content: "\e006";
+        }*/
+        /* Thiết Lập Modal Background */
+    </style>
+</head>
+<body class="home page wide wave-style">
+    <div id="loadding" class="loading">
+        <div id="loader"></div>
+    </div>
+    <div class="page">
+        <div class="site_top_panel wave slider active" id="topheader">
+            <div class="top_half_sin_wrapper">
+                <canvas class="top_half_sin" data-bg-color="#ffffff" data-line-color="#ffffff"></canvas>
+            </div>
+            @Html.Action("_TopHeaderLayOut", "Home")
+        </div>
+        <div class="slider_vs_menu">
+            <div class="header_cont">
+                <div class="header_mask">
+                    <div class="header_pattern"></div>
+                </div>
+                <header class="site_header logo-in-menu" data-menu-after="2">
+                    <div class="header_box">
+                        <div class="container">
+                            <div class="header_logo_part with_border" role="banner">
+                                <a class="logo" href="/"><img src="~/Content/Kiddy-Template/img/main.png" style="width:150px;height:50px" alt="" /></a>
+                            </div>
+                            @Html.Action("_MenuLayOut", "Home")
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </div>
+
+        <div id="ModalUser" class="modal fade " tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="loading" id="loading">
+                <img src="~/Content/Kiddy-Template/img/loading_hannah.gif" />
+            </div>
+            <div class="modal-dialog-register">
+                <div class="container register">
+                    <div id="ModalContent">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @RenderBody()
+        @Html.Action("_FooterLayOut", "Home")
+    </div>
+    <div class="scroll_top animated"></div>
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/jquery.tweet.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/jquery.fancybox.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/jquery.form.min.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/jquery.themepunch.revolution.min.js"></script>
+    @*<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>*@
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/tuner/tuner/js/colorpicker.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/tuner/tuner/js/scripts.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/retina_1.3.0.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/modernizr.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/owl.carousel.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/TweenMax.min.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/select2.min.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/wow.min.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/scripts.js"></script>
+    <script src="~/Content/Kiddy-Template/js/jquery.toast.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/extensions/revolution.extension.parallax.min.js"></script>
+    <script src="~/Content/Kiddy-Template/js/bootstrap-rating.min.js"></script>
+    <script src="~/Content/Login-Register/Login-Register.js"></script>
+    <script src="~/Assets/LoginRegister/js/User.js"></script>
+    <script src="~/Content/js/main.js"></script>
+    <script>
+        if (jQuery(window).width() <= 800) {
+            jQuery("#topheader").removeClass("active");
+        } else {
+            jQuery("#topheader").addClass("active");
+        }
+        jQuery('.loading').attr('style', 'display: none;');
+       
+    </script>
+    @RenderSection("scripts", false)
+</body>
+</html>

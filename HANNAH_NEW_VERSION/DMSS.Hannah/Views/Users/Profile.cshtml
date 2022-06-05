@@ -1,0 +1,250 @@
+﻿@model  DATA.Models.NguoiDung
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .form-control {
+        border: 1px solid #cfd1d8;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px;
+        font-size: .825rem;
+        background: #ffffff;
+        color: #2e323c;
+    }
+
+    /*    .profile-pic {
+        width: 300px;
+        max-height: 300px;
+        display: inline-block;
+    }*/
+    /*
+    .file-upload {
+        display: none;
+    }*/
+
+    .circle {
+        border-radius: 100% !important;
+        overflow: hidden;
+        width: 128px;
+        height: 128px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        position: absolute;
+        top: 72px;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .p-image {
+        position: absolute;
+        top: 167px;
+        right: 30px;
+        color: #666666;
+        transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    }
+
+        .p-image:hover {
+            transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+        }
+
+    .upload-button {
+        font-size: 1.2em;
+    }
+
+        .upload-button:hover {
+            transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+            color: #999;
+        }
+</style>
+<div id="main" class="site-main">
+    <div class="page_content">
+        <div class="left-pattern pattern pattern-2" style="width: 154.5px;"></div>
+        <main>
+        </main>
+        <div class="right-pattern pattern pattern-2" style="width: 154.5px;"></div>
+        <div class="footer_image"></div>
+    </div>
+</div>
+<section class='page_title wave'>
+    <div class='container'>
+        <div class='title'>
+            <h1>Two Columns</h1>
+        </div>
+        <nav class="bread-crumbs"><a href="index.html">Home</a><i class="delimiter fa fa-chevron-right"></i><span class="current">Profile</span></nav>
+    </div>
+    <canvas class='breadcrumbs' data-bg-color='#f8f2dc' data-line-color='#f9e8b2'></canvas>
+</section>
+<div id="main" class="site-main">
+    <div class="page_content single_sidebar">
+        <div class='left-pattern pattern pattern-2'></div>
+        <div class='container'>
+            <aside class='sb_right'>
+                <div class="cws-widget">
+                    <form method="get" class="search-form" action="#">
+                        <label>
+                            <span class="screen-reader-text">Search for:</span>
+                            <input type="text" class="search-field vova" value="" name="s" title="Search for:" />
+                        </label>
+                        <input type="submit" class="search-submit" value="Search" />
+                        <input type='hidden' name='lang' value='en' />
+                    </form>
+                </div>
+                <div class="cws-widget">
+                    <div class="widget-title">Recent Posts</div>
+                    <div class='post_item'>
+                        <div class='post_preview clearfix'>
+
+                            <div class='post_title'><a href=''>Morbi iaculis</a></div>
+                            <div class='post_content'>Quisque in nulla ut metus cursus commodo <a href=''>...</a></div>
+                        </div>
+                    </div>
+                    <div class='post_item'>
+                        <div class='post_preview clearfix'>
+                            <div class='post_title'><a href=''>Praesent sagittis</a></div>
+                            <div class='post_content'>Maecenas vel elit at dui condimentum lob <a href=''>...</a></div>
+                        </div>
+                    </div>
+                    <div class='post_item'>
+                        <div class='post_preview clearfix'>
+                            <div class='post_title'><a href=''>Morbi iaculis euismod</a></div>
+                            <div class='post_content'>Aenean molestie faucibus fringilla. Nam <a href=''>...</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cws-widget">
+                    <div class="widget-title">Twitter feed</div>
+                    <div class='cws_tweets tweets_carousel paginated'>
+                        <div class='twitter-carousel cws_tweet'></div>
+                    </div>
+                </div>
+            </aside>
+            <!-- main -->
+            <main>
+                <div class="grid_row">
+                    <section class="news news-pinterest">
+                        <div class="cws_wrapper">
+                            <div class="grid grid-2 isotope" id="gridProfile">
+                                <article class='item 2'>
+                                    <div class="card-header">Account Details</div>
+                                    <div class="row">
+                                        <div class="small-12 medium-2 large-2 columns">
+                                            <div class="circle">
+                                                <img id="imagePreview" class="profile-pic" src="@Model.AnhDaiDien">
+                                            </div>
+                                            <div class="p-image">
+                                                <i class="fa fa-camera upload-button"></i>
+                                                <input class="file-upload" type="file" accept="image/*" id="imageUpload" />
+                                                <label for="imageUpload"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class='item 2'>
+                                    <div class="col-xl-8">
+                                        <div class="card mb-4">
+                                            <div class="card-header">Account Details</div>
+                                            <div class="card-body">
+                                                <form id="frmProfile" method="post" enctype="multipart/form-data">
+                                                    <div class="row gx-3 mb-3">
+                                                        <div class="col-md-6">
+                                                            <label class="small mb-1">Full Name</label>
+                                                            <input class="form-control" id="fullnameUpdate" name="fullnameUpdate" value="@Model.HoTen">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="small mb-1">User Name</label>
+                                                            <input class="form-control" id="usernameUpdate" name="usernameUpdate" value="@Model.TenDangNhap" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row gx-3 mb-3">
+                                                        <div class="col-md-6">
+                                                            <label class="small mb-1">Email</label>
+                                                            <input class="form-control" type="email" id="emailUpdate" name="emailUpdate" value="@Model.EmailNguoiDung" readonly>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="small mb-1">Phone Number</label>
+                                                            <input class="form-control" maxlength="10" id="phoneUpdate" name="phoneUpdate" value="@Model.SoDienThoai" type="number">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row gx-3 mb-3">
+                                                        <div class="col-md-6">
+                                                            <label class="small mb-1">Date Of Birth</label>
+                                                            <input class="form-control" type="date" id="dobUpdate" name="dobUpdate" value="@Model.NgaySinh.Value.Date.ToString("yyyy-MM-dd")">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="small mb-1">Phone Number</label>
+                                                            <input class="form-control" maxlength="10" id="phoneUpdate" name="phoneUpdate" value="@Model.SoDienThoai" type="number">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row gx-3 mb-3">
+                                                        <div class="col-md-6">
+                                                            <label class="small mb-1">Address</label>
+                                                            <input class="form-control" type="text" id="addressUpdate" name="addressUpdate" value="@Model.DiaChi">
+                                                            <input  type="hidden" id="diemTichLuy" name="addressUpdate" value="@Model.DiemTichLuy">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row gx-3 mb-3">
+                                                        <div class="col-md-6">
+                                                            <label class="small mb-1" for="passwordUpdate">New Password</label>
+                                                            <input type="password" class="form-control" id="passwordUpdate" name="passwordUpdate">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="small mb-1" for="inputPhone">Confirm Password</label>
+                                                            <input class="form-control"  id="confirmpasswordUpdate" name="confirmpasswordUpdate">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row gx-3 mb-3">
+                                                        <div class="col-md-6">
+                                                            <label class="small mb-1" for="inputBirthday">About you</label>
+                                                            <textarea class="form-control" type="text" id="about" name="about">@Html.Raw(Model.GioiThieu)</textarea>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <input type="checkbox" name="acceptRules" class="form-check-input" id="checkbox1" checked="@Model.CongKhaiThongTin"> Public your information
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-primary" type="button" onclick="CapNhat()">Save changes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+<script>
+    jQuery("#checkbox1").on('change', function () {
+        if (jQuery(this).is(':checked')) {
+            jQuery(this).attr('value', 'true');
+        } else {
+            jQuery(this).attr('value', 'false');
+        }
+    });
+    jQuery(document).ready(function () {
+        var readURL = function (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    jQuery('.profile-pic').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        jQuery(".file-upload").on('change', function () {
+            readURL(this);
+        });
+
+        jQuery(".upload-button").on('click', function () {
+            jQuery(".file-upload").click();
+        });
+    });
+</script>

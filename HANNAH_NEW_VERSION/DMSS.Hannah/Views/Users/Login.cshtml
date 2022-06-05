@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="main" class="site-main">
+    <div class="page_content">
+        <div class="left-pattern pattern pattern-2" style="width: 154.5px;"></div>
+        <main>
+        </main>
+        <div class="right-pattern pattern pattern-2" style="width: 154.5px;"></div>
+        <div class="footer_image"></div>
+    </div>
+</div>
+<section class="page_title wave">
+    <div class="container">
+        <div class="title">
+            <h1>Login</h1>
+        </div>
+        <nav class="bread-crumbs"><a href="/Home/Index">Home</a><i class="delimiter fa fa-chevron-right"></i><span class="current">Login</span></nav>
+    </div>
+    <canvas class="breadcrumbs" data-bg-color="#f8f2dc" data-line-color="#f9e8b2" height="71" width="1366" style="height: 71px; width: 1366px;"></canvas>
+</section>
+<div class="container">
+    <div class="grid_row clearfix">
+        <div class="woocommerce">
+            <div class="col2-set" id="customer_login">
+                <div class="col-md-12">
+                    <form class="login" id="frmLogin">
+                        <p class="form-row form-row-wide">
+                            <label for="username">Username or email <span class="required">*</span></label>
+                            <input type="text" class="input-text" name="usernameEmailLogin" id="usernameEmailLogin">
+                        </p>
+                        <p class="form-row form-row-wide">
+                            <label for="password">Password <span class="required">*</span></label>
+                            <input class="input-text" type="password" name="passwordLogin" id="passwordLogin">
+                        </p>
+                        <p class="form-row">
+                            <a class="cws_button small" onclick="DangNhap()">Login</a>
+                            <a href="/register" id="lostPassword">Or Lost password ?</a>
+                            <a class="pull-right" id="btnCreateAccount">Create an acount</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

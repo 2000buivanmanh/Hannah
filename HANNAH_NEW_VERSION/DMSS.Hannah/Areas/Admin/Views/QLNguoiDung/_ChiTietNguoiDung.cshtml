@@ -1,0 +1,90 @@
+﻿
+
+@model DATA.Models.NguoiDung
+
+<div class="modal-body">
+    <div class="text-center mt-2 mb-4">
+        <h2 id="tieude">
+            Details Users
+        </h2>
+    </div>
+
+    <form class="pl-5 pr-5" action="#" id="frmThemOrSua">
+
+        <div class="form-group">
+            <label for="fullname">
+                @Html.DisplayNameFor(model => model.HoTen)<span id="sao"> *</span>
+            </label>
+            <input class="form-control" type="text" readonly id="fullname" value="@Model.HoTen" name="fullname" placeholder="Full Name">
+        </div>
+
+        <div class="form-group">
+            <label for="username">@Html.DisplayNameFor(model => model.TenDangNhap)<span id="sao"> *</span></label>
+            <input class="form-control" type="text" readonly value="@Model.TenDangNhap" id="username" name="username"
+                   placeholder="User Name">
+        </div>
+        <div class="form-group">
+            <label for="image">@Html.DisplayNameFor(model => model.AnhDaiDien)</label>
+            <div class="container">
+                <div class="preview">
+                    <img class="img-icon" readonly id="img-preview" src="@Model.AnhDaiDien" />
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="Email">
+                @Html.DisplayNameFor(model => model.EmailNguoiDung)<span id="sao"> *</span>
+            </label>
+            <input class="form-control" type="text" readonly value="@Model.EmailNguoiDung" name="email"
+                   id="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="address">@Html.DisplayNameFor(model => model.DiaChi)</label>
+            <input class="form-control" readonly type="text" id="address" name="address" value="@Model.DiaChi">
+
+        </div>
+        <div class="form-group">
+            <label for="phone">
+                @Html.DisplayNameFor(model => model.SoDienThoai)
+            </label>
+            <input type="number" readonly value="@Model.SoDienThoai" class="form-control" maxlength="10" id="phone" name="phone" placeholder="Phone Number">
+
+        </div>
+        <div class="form-group">
+            <label for="dob">@Html.DisplayNameFor(model => model.NgaySinh)</label>
+            <input class="form-control" type="date" id="dob" readonly value="@Model.NgaySinh.Value.Date.ToString("yyyy-MM-dd")" name="dob" placeholder="Date Of Birth">
+
+        </div>
+
+        <div class="form-group">
+            <label for="sname">@Html.DisplayNameFor(model => model.TenNguoiGioiThieu)</label>
+            <input type="text" class="form-control" readonly value="@Model.TenNguoiGioiThieu" id="sname" name="sname">
+        </div>
+        <div class="form-group">
+            <label for="sphone">@Html.DisplayNameFor(model => model.SDTNguoiGioiThieu)</label>
+            <input type="number" class="form-control" readonly value="@Model.SDTNguoiGioiThieu" id="sphone" name="sphone">
+        </div>
+        <div class="form-group">
+            <label for="smail">@Html.DisplayNameFor(model => model.EmailNguoiGioiThieu)</label>
+            <input type="email" class="form-control" readonly value="@Model.EmailNguoiGioiThieu" id="smail" name="smail">
+        </div>
+        <div class="form-group">
+            <label for="srelationship">@Html.DisplayNameFor(model => model.MoiQuanHe)</label>
+            <input type="text" class="form-control" id="srelationship" readonly value="@Model.MoiQuanHe" name="srelationship">
+        </div>
+        <div class="form-group">
+            <label for="eruditepoin">@Html.DisplayNameFor(model => model.DiemTichLuy)</label>
+            <input type="text" class="form-control" id="eruditepoin" value="@Model.DiemTichLuy" name="eruditepoin">
+        </div>
+        <input hidden id="idnguoidung" value="@Model.MaNguoiDung">
+
+        <div class="form-group text-center">
+            <div class="btn btn-primary" id="btnsumit" onclick="ThemOrSuaNguoiDung(@Model.MaNguoiDung, '/Admin/QLNguoiDung/_DanhSachNguoiDung')">
+                Update
+            </div>
+        </div>
+
+    </form>
+
+</div>

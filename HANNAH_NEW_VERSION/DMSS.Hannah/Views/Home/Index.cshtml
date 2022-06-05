@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Action("_Slider", "Home")
+@Html.Action("_DacQuyen", "Home")
+<div class="cloud_wrapper">
+    <canvas class="white_cloud"></canvas>
+</div>
+<div id="main" class="site-main">
+    <div class="page_content">
+        <div class='left-pattern pattern pattern-2'></div>
+        <main>
+            @Html.Action("_Sort_About", "Home")
+            <div class='grid_row clearfix'>
+                <div class='grid_col grid_col_12'>
+                    <div class='ce clearfix'>
+                        <div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- / divider -->
+            <div id="list_book">
+
+                <div class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page wide wave-style">
+                    <div id="main" class="site-main">
+                        <div class="page_content single_sidebar">
+                            <div class='left-pattern pattern pattern-2' style="width: 69.5px;"></div>
+                            <div class="container">
+                                <!-- RIGHT -->
+                                <aside class='sb_right'>
+                                    <div class="cws-widget">
+                                        <!-- search -->
+                                        <form method="get" class="woocommerce-product-search" action="#">
+                                            <label class="screen-reader-text">Search for:</label>
+                                            <input type="search" class="search-field" placeholder="Search Products&hellip;" value=""
+                                                   name="s" title="Search for:" />
+                                            <input type="submit" value="Search" />
+                                            <input type="hidden" name="post_type" value="product" />
+                                        </form>
+                                    </div> <!-- \\ search -->
+                                    <!-- Filter by price -->
+                                    @Html.Action("_TopRate", "Home")
+                                    <!-- \\ Top Rated Products -->
+                                    @Html.Action("_TopReader", "Home")
+                                </aside>
+                                <!-- MAIN PRODUCTS -->
+                                <main>
+                                    <div id="danh-sach-sach">
+
+                                    </div>
+                                </main>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- divider -->
+            <div class='grid_row clearfix'>
+                <div class='grid_col grid_col_12'>
+                    <div class='ce clearfix'>
+                        <div class='cws_callout'>
+                            <div class='content_section'>
+                                <div class='callout_title'>
+                                    <div class="bees bees-end"><span></span></div>STILL NOT CONVINCED?
+                                </div>
+                                <div class='separate'></div>
+                                <div class='callout_text'>
+                                    <p>
+                                        Want to get more information about our learning center or would like to see it inside, feel free to schedule&nbsp;a tour.
+                                        <br /> Come visit us today!
+                                    </p>
+                                </div>
+                            </div>
+                            <div class='button_section'><a href='#' class='cws_button xlarge'>Schedule a Tour Now<div class='button-shadow'></div></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div class='right-pattern pattern pattern-2'></div>
+        <div class="footer_image"></div>
+    </div>
+
+
+
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" style='display:none;'>
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+                <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+            </filter>
+        </defs>
+    </svg>
+</div>
+
+
+<script src="~/Assets/LoginRegister/js/Register.js"></script>
+<script src="~/Assets/LoginRegister/js/Login.js"></script>
+<script src="~/Assets/LoginRegister/js/User.js"></script>
+

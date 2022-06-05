@@ -1,0 +1,41 @@
+﻿@model IEnumerable<DMSS.ViewModals.ExampleViewModal.ExampleViewModal>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.KhoaChinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThuocTinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThuocTinhThem)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhoaChinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThuocTinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThuocTinhThem)
+        </td>
+      
+    </tr>
+}
+
+</table>

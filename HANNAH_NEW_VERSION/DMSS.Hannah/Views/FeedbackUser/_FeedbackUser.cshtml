@@ -1,0 +1,43 @@
+﻿<style>
+    #sao {
+        color: red;
+    }
+</style>
+<div class="col-md-3 register-left">
+    <img src="~/Content/Images/Top-header/feedback.jpg" />
+    <h3 style="font-family:Patrick Hand; font-size:35px">Welcome to <br> Hannah Libary </h3>
+    <p>We bring you pleasure in reading and discovering knowledge </p>
+</div>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span id="btnClose" aria-hidden="true">×</span></button>
+<div class="col-md-9 register-right">
+    <div class="tab-content-register">
+        <div class="row register-form frm">
+            <form id="frmfeedback" action="" method="post">
+                <div class="col-md-12">
+                    <p class="tilte-name-form">Feedback what you want to us !!! </p>
+                    <p>
+                        <label for="Name">FullName <span id="sao"> *</span></label>
+                        <input type="text" class="form-control" id="Name" name="Name">
+                    </p>
+                    <p>
+                        <label for="Email">Email<span id="sao"> *</span></label>
+                        <input type="email" class="form-control" id="Email" name="Email">
+                    </p>
+                    <p>
+                        <label for="SDT">Phone Number<span id="sao"> *</span></label>
+                        <input type="number" class="form-control" maxlength="10" id="SDT" name="SDT">
+                    </p>
+                    <p>
+                        <label for="NoiDung">Message <span id="sao"> *</span></label>
+                        <textarea class="form-control" type="text" id="NoiDung" name="NoiDung"></textarea>
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a class="btn btn-primary btn-lg active" onclick="PhanHoi()" role="button" aria-pressed="true"> <i class="fa-solid fa-floppy-disk-pen"></i>Feedback</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

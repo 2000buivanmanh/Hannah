@@ -1,0 +1,331 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Areas/Admin/Content/assets/images/favicon.png" />
+    <title>Hannah Library</title>
+    <!-- Custom CSS -->
+
+    <link href="~/Areas/Admin/Content/assets/libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/assets/extra-libs/c3/c3.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/dist/css/style.css" rel="stylesheet" />
+    @*<link href="~/Areas/Admin/Content/dist/css/select2.min.css" rel="stylesheet" />*@
+    @*<link href="~/Areas/Admin/Content/assets/libs/jquery/dist/toastr.scss" rel="stylesheet" />*@
+    <link href="~/Areas/Admin/Content/dist/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/Kiddy-Template/css/toast.css" rel="stylesheet" />
+
+    <!-- <link href="assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" /> -->
+    <!-- END //Custom CSS -->
+    <link href="~/Areas/Admin/Content/dist/css/style.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/assets/libs/bootstrap/toggle/bootstrap4-toggle.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Preloader - style find in spinners.css//style.min.css -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <div class="loading" id="loading">
+        <img src="~/Content/Kiddy-Template/img/loading_hannah.gif" />
+    </div>
+    <!-- Main wrapper - style find in pages.scss -->
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+        <!-- Topbar header - style find in pages.scss -->
+        <header class="topbar" data-navbarbg="skin6">
+            <nav class="navbar top-navbar navbar-expand-md">
+                <div class="navbar-header" data-logobg="skin6">
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="#">
+                        <i class="ti-menu ti-close"></i>
+                    </a>
+                    <!-- Logo -->
+                    <div class="navbar-brand">
+                        <!-- Logo icon -->
+                        <a href="index.html">
+                            <b class="logo-icon">
+                                <!-- Dark Logo icon -->
+                                <img src="~/Areas/Admin/Content/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                                <!-- Light Logo icon -->
+                                <img src="~/Areas/Admin/Content/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
+                            </b>
+                            <!--End Logo icon -->
+                            <!-- Logo text -->
+                            <span class="logo-text">
+                                <!-- dark Logo text -->
+                                <img src="~/Areas/Admin/Content/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                                <!-- Light Logo text -->
+                                <img src="~/Areas/Admin/Content/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                            </span>
+                        </a>
+                    </div>
+                    <!-- End Logo -->
+                    <!-- Toggle which is visible on mobile only -->
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="#" data-toggle="collapse"
+                       data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                       aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+                </div>
+                <!-- End Logo -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                    <!-- toggle and nav items -->
+                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">
+                            Have a good day!
+                        </h3>
+                    </ul>
+                    <!-- Right side toggle and nav items -->
+                    <ul class="navbar-nav float-right">
+                        <!-- Search -->
+                        <li class="nav-item d-none d-md-block">
+                            <a class="nav-link" href="#">
+                                <form>
+                                    <div class="customize-input">
+                                        <input class="form-control custom-shadow custom-radius border-0 bg-white"
+                                               type="search" placeholder="Search" aria-label="Search" />
+                                        <i class="form-control-icon" data-feather="search"></i>
+                                    </div>
+                                </form>
+                            </a>
+                        </li>
+                        @Html.Action("_ThongBaoAdmin", "ThongBao")
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.Action("_ThongTinAdmin", "QLNguoiDung")
+                        }
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- End Topbar header -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar" data-sidebarbg="skin6">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- <li class="list-divider"></li> -->
+                        <!-- <li class="nav-small-cap">
+                            <span class="hide-menu">Extra</span>
+                        </li> -->
+                        <!-- Left Sidebar // Web Setting-->
+                        <li class="sidebar-item">
+                            <a class="sidebar-link sidebar-link" href="docs/docs.html" aria-expanded="false">
+                                <i data-feather="edit-3"
+                                   class="feather-icon"></i><span class="hide-menu">
+                                    Web
+                                    Setting
+                                </span>
+                            </a>
+                        </li>
+                        <!-- Left Sidebar // Book Loan-->
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                <i data-feather="file-text"
+                                   class="feather-icon"></i><span class="hide-menu">
+                                    Book Loan
+                                </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a href="form-inputs.html" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Form Inputs
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="form-input-grid.html" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Form
+                                            Grids
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="form-checkbox-radio.html" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Checkboxes & Radios
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Left Sidebar // Manager -->
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                <i data-feather="box" class="feather-icon"></i><span class="hide-menu">Manager </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a href="ui-buttons.html" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Books
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="ui-modals.html" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Post
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="~/Admin/PhanHoiAdmin/DanhSachPhanHoi" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            FeedBack
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="~/Admin/NhomTuoi/DanhSachNhomTuoi" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Age Group
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="~/Admin/TacGia/DanhSachTacGia" class="sidebar-link">
+                                        <span class="hide-menu">Authors</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="ui-progressbar.html" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Books
+                                            Classes
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="~/Admin/LoaiSach/DanhSachLoaiSach" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Book Type
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="~/Admin/TheLoaiSach/DanhSachTheLoaiSach" class="sidebar-link">
+                                        <span class="hide-menu">Category</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="~/Admin/NhaXuatBan/DanhSachNhaXuatBan" class="sidebar-link">
+                                        <span class="hide-menu">Publishers</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="~/Admin/QLNguoiDung/DanhSachNguoiDung" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Users
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- modal content -->
+        <div id="ThemOrSuaModal" class="modal fade" tabindex="-1" role="dialog" enctype="multipart/form-data"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div id="themorsua">
+
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <!-- modal content -->
+        <div id="AddExcel" class="modal fade" tabindex="-1" role="dialog" enctype="multipart/form-data"
+             aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div id="addexcel">
+
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <!-- MAIN // BODY // Page wrapper  -->
+        <div class="page-wrapper">
+            <!-- Container fluid  -->
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+            <footer class="footer text-center text-muted">
+                All Rights Reserved by Hannh Library. Designed and Developed by
+                <a href="https://wrappixel.com">DMSSolution</a>
+            </footer>
+        </div>
+    </div>
+    <script src="~/Areas/Admin/Content/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="~/Areas/Admin/Content/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="~/Areas/Admin/Content/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- apps -->
+    <!-- apps -->
+    @*<script src="~/Areas/Admin/Content/assets/libs/jquery/dist/toastr.js"></script>*@
+    <script src="~/Areas/Admin/Content/dist/js/app-style-switcher.js"></script>
+    <script src="~/Areas/Admin/Content/dist/js/feather.min.js"></script>
+    <script src="~/Areas/Admin/Content/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/Areas/Admin/Content/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/Areas/Admin/Content/dist/js/custom.min.js"></script>
+    <!--Datatables JavaScript -->
+    <script src="~/Areas/Admin/Content/dist/js/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Admin/Content/dist/js/datatables.init.js"></script>
+    <script src="~/Areas/Admin/Content/dist/js/pages/datatable/dataTables.buttons.min.js"></script>
+    <script src="~/Areas/Admin/Content/dist/js/pages/datatable/jszip.min.js"></script>
+    <script src="~/Areas/Admin/Content/dist/js/pages/datatable/pdfmake.min.js"></script>
+    <script src="~/Areas/Admin/Content/dist/js/pages/datatable/vfs_fonts.js"></script>
+    <script src="~/Areas/Admin/Content/dist/js/pages/datatable/buttons.html5.min.js"></script>
+    <script src="~/Areas/Admin/Content/dist/js/pages/datatable/buttons.print.min.js"></script>
+    <!--This page JavaScript -->
+    <script src="~/Content/Kiddy-Template/js/jquery.toast.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/Areas/Admin/Content/assets/extra-libs/c3/d3.min.js"></script>
+    <script src="~/Areas/Admin/Content/assets/extra-libs/c3/c3.min.js"></script>
+    <script src="~/Areas/Admin/Content/assets/libs/chartist/dist/chartist.min.js"></script>
+    <script src="~/Areas/Admin/Content/assets/extra-libs/sparkline/sparkline.js"></script>
+    <script type="text/javascript" src="~/Content/Kiddy-Template/js/jquery.validate.min.js"></script>
+
+    <script src="~/Areas/Admin/Content/assets/libs/bootstrap/toggle/bootstrap4-toggle.js"></script>
+    <script src="~/Areas/Admin/Content/AdminJs/PhanHoiJs.js"></script>
+    <script src="~/Areas/Admin/Content/AdminJs/SharedAdmin.js"></script>
+
+    <script src="~/CKFinderScripts/ckfinder.js"></script>
+    <script src="~/ckeditor5/ckeditor.js"></script>
+    <!-- <script src="assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script> -->
+    <!-- <script src="assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script> -->
+    <!-- <script src="assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script> -->
+    <!-- <script src="dist/js/pages/dashboards/dashboard1.min.js"></script> -->
+
+    @RenderSection("scripts", false)
+</body>
+</html>

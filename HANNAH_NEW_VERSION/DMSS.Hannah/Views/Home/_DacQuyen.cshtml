@@ -1,0 +1,50 @@
+﻿@model IEnumerable<DATA.Models.DacQuyen>
+<div class='benefits_area wave'>
+    <div class='cloud_wrapper'>
+        <canvas class='cloud' data-bg-color='#f9e8b2' data-line-color='#ffffff' src='~/Content/Kiddy-Template/img/dots-pattern.png'></canvas>
+    </div>
+    <div class='container'>
+        <div class='benefits_container'>
+            @*@foreach (var item in Model)
+            {
+                <div class="cws-widget">
+                    <div class="widget-title">
+                        <div class='widget_title_box'>
+                            <div class='widget_title_icon_section'><img src="~/Content/Kiddy-Template/img/cropped-favicon-32x32.png" style="width:45px; height:40px" /></div>
+                            if (item.use_link == true)
+                                {
+                                    <div class='widget_title_text_section'>
+                                        <a href="@item.DuongDanSeo">
+                                            @item.TenDacQuyen
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                            <div class='widget_title_text_section'>
+                                @item.TenDacQuyen
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    <div class='cws_textwidget_content'>
+                        if (item.use_link == true)
+                            {
+                                <div class='text'>
+                                    @Html.Raw(item.NoiDungSeo.Substring(0, 100))...<a href="@item.DuongDanSeo">
+                                        Click to read more
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                        <div class='text'>
+                            @Html.Raw(item.NoiDungSeo)
+                        </div>
+                        }
+                    </div>
+                </div>
+            }*@
+        </div>
+    </div>
+</div>

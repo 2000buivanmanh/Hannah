@@ -1,0 +1,68 @@
+﻿
+
+@model IEnumerable<DATA.Models.BaiViet>
+
+<table id="tableLoad" class="table table-striped table-bordered no-wrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="checkall" value="false" onclick="SelectAll()"><span class="checkbox-material"><span class="check "></span></span>
+                    </label>
+                </div>
+            </th>
+            <th>@Html.DisplayNameFor(model => model.TenBaiViet)</th>
+            <th>@Html.DisplayNameFor(model => model.MoTaNgan)</th>
+            <th>@Html.DisplayNameFor(model => model.NoiDungBaiViet)</th>
+            <th>@Html.DisplayNameFor(model => model.TrangThai)</th>
+            <th>@Html.DisplayNameFor(model => model.DuongDanSeo)</th>
+            <th>@Html.DisplayNameFor(model => model.TieuDeSeo)</th>
+            <th>Edit</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" data-id="@item.MaBaiViet" class="check-field" value="false" id="check-@item.MaBaiViet" onclick="Check(@item.MaBaiViet)"><span class="checkbox-material"><span class="check"></span></span>
+                        </label>
+                    </div>
+
+                </td>
+                <td>
+                    @item.TenBaiViet
+                </td>
+                <td>
+                    @Html.Raw(item.MoTaNgan)
+                </td>
+                <td>
+                    @Html.Raw(item.NoiDungBaiViet)
+                </td>
+                <td>
+                    <input type="checkbox" class="check-toggle" data-style="ios" data-on="Public" @(item.TrangThai == DATA.Constant.Constant.TinhTrang.Activating ? "checked" : "" )
+                           onchange="CheckTrangThai(@item.MaBaiViet ,'/Admin/BaiViet/CapNhatTinhTrang')"
+                           data-off="Block" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-size="sm">
+
+                </td>
+                <td>
+                    @item.DuongDanSeo
+                </td>
+                <td>
+                    @item.TieuDeSeo
+                </td>
+                <td>
+                    <div class="" id='@item.MaBaiViet' type="submit" data-toggle="modal" onclick="ModalThemSua('/Admin/BaiViet/_ThemOrSuaBaiViet',@item.MaBaiViet)">
+                        <i class="fas fa-edit text-center"></i>
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+

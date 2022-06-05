@@ -1,0 +1,65 @@
+﻿@model DMSS.ViewModals.BookCase.BookCaseViewModal
+
+
+
+
+@if (Model != null)
+{
+    <h2 id="formTitle">Your Book Basket </h2>
+    <table class="shop_table cart">
+        <thead>
+            <tr>
+                <th class="product-name">Product</th>
+                <th class="product-price">Price</th>
+                <th class="product-remove">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sach in Model.DanhSachSach)
+            {
+                <tr class="cart_item">
+                    <td class="product-name product-thumbnail">
+                        <div class="media_part">
+                            <input type="hidden" id="maSach" value="@sach.MaSach" />
+                            <a href="/Book/BookDetail/@sach.MaSach"><img width="90" height="90" src="@sach.ThongTinAnhSach" class="attachment-90x90" alt="hoodie_4_front"></a>
+                        </div>
+                        <a href="/Book/BookDetail/@sach.MaSach">@sach.TenSach </a>
+                    </td>
+                    <td class="product-price">
+                        <span class="amount">@sach.Gia</span>
+                    </td>
+                    <td class="product-remove">
+                        <a onclick="RemoveBookCase(@sach.MaSach)" class="remove" title="Remove this item">×</a>
+                    </td>
+                </tr>
+            }
+            <tr class="cart_item">
+                <td class="product-remove">
+                    <span class="amount">Toltal</span>
+                </td>
+                <td class="product-subtotal">
+                    <span class="amount" id="Toltal">@Model.TongDiem</span>
+                </td>
+                <td class="product-subtotal">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <hr />
+
+
+    <p class="form-row justify-content-center">
+        <label id="lb-remember" for="Remember" class="pull-left">
+            <input id="dieuKhoan"  onchange="DieuKhoan(this)" type="checkbox" name="Remember" value="false">
+            Accept our terms and conditions?
+        </label>
+        <a class="cws_button small pull-right" onclick="DatSach()">Send book loan</a>
+    </p>
+}
+else
+{
+    <h3>Chưa Có cuốn sách nào trong giỏ hàng </h3>
+}
+

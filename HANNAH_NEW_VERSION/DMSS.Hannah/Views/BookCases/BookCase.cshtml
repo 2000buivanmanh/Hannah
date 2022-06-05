@@ -1,0 +1,207 @@
+﻿@{
+    ViewBag.Title = "BookCase";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model DMSS.ViewModals.BookCase.BookCaseViewModal
+<style>
+    .login {
+        padding-left: 2% !important;
+        padding-right: 2% !important;
+    }
+
+
+    label.error {
+        color: red !important;
+    }
+
+
+    #formTitle {
+        padding-left: 25%;
+    }
+
+    .User-info {
+        width: 45%;
+        padding: 1%;
+        margin: 1%;
+        border-style: solid !important;
+        border: 2px;
+        border-radius: 10px;
+    }
+
+    #input-text {
+    }
+
+        #input-text:hover {
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+        #input-text:focus {
+            outline: none;
+            box-shadow: 0px 0px 5px #61C5FA;
+            border-color: #5AB0DB;
+        }
+
+    .suggester {
+        position: absolute;
+        top: 38px;
+        margin-left: 46% !important;
+        width: 45%;
+        padding: 1%;
+        margin: 1%;
+        border-style: solid !important;
+        border: 2px;
+        border-radius: 10px;
+    }
+
+    @@media (max-width: 987px) {
+        .User-info {
+            width: 98%;
+        }
+
+        .suggester {
+            width: 98%;
+            margin-left: 0% !important;
+            position: inherit;
+        }
+
+        div.woocommerce form.login p.form-row, div.woocommerce p.form-row #user_login {
+            width: 97%;
+        }
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 5%;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        padding-left: 25%;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+<div id="main" class="site-main">
+    <div class="page_content">
+        <div class="left-pattern pattern pattern-2" style="width: 154.5px;"></div>
+        <main>
+        </main>
+        <div class="right-pattern pattern pattern-2" style="width: 154.5px;"></div>
+        <div class="footer_image"></div>
+    </div>
+</div>
+<section class="page_title wave">
+    <div class="container">
+        <div class="title">
+            <h1>Login</h1>
+        </div>
+        <nav class="bread-crumbs"><a href="/Home/Index">Home</a><i class="delimiter fa fa-chevron-right"></i><span class="current">Login</span></nav>
+    </div>
+    <canvas class="breadcrumbs" data-bg-color="#f8f2dc" data-line-color="#f9e8b2" height="71" width="1366" style="height: 71px; width: 1366px;"></canvas>
+</section>
+@if (Model != null)
+{
+    <div class="container">
+        <div class="grid_row clearfix">
+            <div class="woocommerce">
+                <div class="col2-set" id="customer_login">
+                    <div class="col-md-8">
+                        <form class="login" id="formDatSach">
+                            <div class="User-info">
+                                <h2 id="formTitle">Borrow Information</h2>
+                                <br />
+                                <p class="form-row form-row-wide">
+                                    <label for="basketPhone">Your PhoneNumber </label><span class="required"><b>*</b></span>
+                                    <input class="input-text" type="number" name="basketPhone" value="@Model.NguoiDung.SoDienThoai" id="basketPhone">
+                                </p>
+                                <p class="form-row form-row-wide">
+                                    <label for="basketAddress">Receive Address</label><span class="required"><b>*</b></span>
+
+                                    <select name="basketAddress" class="orderby" id="basketAddress" required>
+                                        @foreach (var item in Model.DanhSachChiNhanh)
+                                        {
+                                            <option value="@item.TenChiNhanh">@item.TenChiNhanh</option>
+                                        }
+                                    </select>
+                                </p>
+                                <p class="form-row form-row-wide">
+                                    <label for="receive-time">Receive Time </label><span class="required"><b>*</b></span>
+                                    <input type="datetime-local" class="input-text" name="receive-time" id="receive-time" placeholder="" value="@Model.ThoiGianNhan.Date.ToString("yyyy-MM-ddThh:ss")" onfocusout="checkRcT()" min="@Model.ThoiGianNhan.Date.ToString("yyyy-MM-ddThh:ss")" required>
+                                </p>
+                                <p class="form-row form-row-wide">
+                                    <label for="basketReturnAddress">Return Address</label><span class="required"><b>*</b></span>
+                                    <select name="basketReturnAddress" class="orderby" id="basketReturnAddress" required>
+                                        @foreach (var item in Model.DanhSachChiNhanh)
+                                        {
+                                            <option value="@item.TenChiNhanh">@item.TenChiNhanh</option>
+                                        }
+                                    </select>
+                                </p>
+                                <p class="form-row form-row-wide">
+                                    <label for="basketReturnTime">Return Time</label><span class="required"><b>*</b></span>
+                                    <input type="datetime-local" class="input-text" onfocusout="checkRTT()" name="return-time" id="return-time" placeholder="" value="@Model.ThoiGianTra.Date.ToString("yyyy-MM-ddThh:ss")" required>
+                                </p>
+                                <p class="form-row form-row-wide">
+                                    <label for="basketNote">Note</label>
+                                    <textarea type="text" class="input-text" name="basketNote" id="basketNote" > </textarea>
+                                </p>
+                            </div>
+                            <div class="suggester" id="load-book-cases">
+
+                            </div>
+                        </form>
+                        <div class="col-md-8">
+                            <div class="footerBoosCase" id="footerBoosCase">
+                                <!-- Trigger/Open The Modal -->
+                                <!-- The Modal -->
+                                <div id="myModal" class="modal">
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                        <span class="close" onclick="CloseDieuKhoan()">&times;</span>
+                                        <p>@Html.Raw(Model.DieuKhoan)</p>
+                                        <div>
+                                            <a class="cws_button small pull-right" id="DongY">Tôi đồng ý</a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <h1>Chưa Có cuốn sách nào trong giỏ hàng </h1>
+}

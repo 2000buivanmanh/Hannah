@@ -1,0 +1,28 @@
+﻿@model IEnumerable<DATA.Models.Sach>
+@{ 
+    List<HANNAH_NEW_VERSION.Controllers.HomeController.XepHangDanhGia> topRatings = ViewBag.TopRating as List<HANNAH_NEW_VERSION.Controllers.HomeController.XepHangDanhGia>;
+}
+<!-- widget top rated product -->
+<div class="cws-widget">
+    <div class="widget-title">Top Rated Books</div>
+    <ul class="product_list_widget">
+        @foreach (var item in topRatings)
+        {
+            foreach (var books in Model)
+            {
+                if (item.MaSach == books.MaSach)
+                {
+                    int? Poin = item.SoDiem * 20;
+                    <li>
+                        <a href="/Sach/BookDetail/@item.MaSach" title="@books.TenSach">
+                            <img src="@books.ThongTinAnhSach" style="width:58px; height: 58px;" class="attachment-shop_thumbnail " alt="cd_5_angle"> <span class="product-title">@books.TenSach</span>
+                        </a>
+                        <div class="star-rating" title="Rated @item.SoDiem out of 5"><span style="width:@Poin%"><strong class="rating">@item.SoDiem</strong> out of 5</span></div> <span class="amount">@((int?)books.Gia)  <i class="erudite_poin"></i></span>
+                    </li>
+                }
+            }
+
+        }
+
+    </ul>
+</div>

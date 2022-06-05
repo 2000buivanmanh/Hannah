@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DATA.Models.NguoiDung>
+
+<div class="cws-widget">
+    <div class="widget-title">Top Reader </div>
+    <ul class="product_list_widget pull-left">
+        @foreach (var books in Model)
+        {
+            <li>
+                <a href="@Url.Action("ReaderInfo", "Account", new { Email = books.EmailNguoiDung})" title="@books.HoTen">
+                    @if (books.AnhDaiDien == null || books.AnhDaiDien == "")
+                    {
+                        <img src="~/Content/Images/NguoiDung/Avatardefault.png" style="width:58px; height: 58px;" class="attachment-shop_thumbnail " alt="profile_img">
+                    }
+                    else
+                    {
+                        <img src="@books.AnhDaiDien" style="width:58px; height: 58px;" class="attachment-shop_thumbnail " alt="profile_img">
+                    }
+
+                    <span class="product-title">@books.HoTen</span>
+                </a>
+
+                <div class="">
+                    <span class="amount">@books.DiemTichLuy  <i class="erudite_poin"></i></span>
+                </div>
+
+
+            </li>
+        }
+
+
+
+    </ul>
+</div>
+
+

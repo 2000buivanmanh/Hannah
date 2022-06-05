@@ -1,0 +1,155 @@
+﻿
+@model DMSS.ViewModals.DsExcelViewModal.ExcelTheLoaiSach
+@{
+    var DsThatbai = ViewBag.DsThatbai;
+    var DsThanhCong = ViewBag.DsThanhCong;
+}
+
+<div class="modal-body">
+    <div class="text-center mt-2 mb-4">
+        <h2 id="tieude">
+            Import Excel
+        </h2>
+    </div>
+
+    <form class="pl-5 pr-5" action="#" id="frmThemOrSua">
+        <h3> Error List</h3>
+        <div class="table-responsive text-center">
+            <div id="dataEx">
+                <table id="dtable" class="table table-striped table-bordered no-wrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Stt)</th>
+                            <th>@Html.DisplayNameFor(model => model.TenTheLoai)</th>
+                            <th>@Html.DisplayNameFor(model => model.HangMuc)</th>
+                            <th>@Html.DisplayNameFor(model => model.Icon)</th>
+                            <th>@Html.DisplayNameFor(model => model.MaNhanDienHangMucSach)</th>
+                            <th>@Html.DisplayNameFor(model => model.MoTa)</th>
+                            <th>@Html.DisplayNameFor(model => model.DuongDanSeo)</th>
+                            <th>@Html.DisplayNameFor(model => model.TieuDeSeo)</th>
+                            <th>@Html.DisplayNameFor(model => model.ThongBao)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in DsThatbai)
+                        {
+                        <tr>
+                            <td>
+                                @item.Stt
+                            </td>
+                            <td>
+                                @item.TenTheLoai
+                            </td>
+                            <td>
+                                @item.HangMuc
+                            </td>
+                            <td>
+                                @item.Icon
+                            </td>
+                            <td>
+                                @item.MaNhanDienHangMucSach
+                            </td>
+                            <td>
+                                @item.MoTa
+                            </td>
+                            <td>
+                                @item.NoiDungSeo
+
+                            </td>
+                            <td>
+                                @item.TuKhoaSeo
+                            </td>
+                            <td>
+                                @item.TieuDeSeo
+                            </td>
+
+                            <td>
+                                @item.DuongDanSeo
+                            </td>
+                            <td>
+                                @item.ThongBao
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h3>
+            Success list
+        </h3>
+        <div class="table-responsive text-center">
+            <div id="dataEx">
+                <table id="dtable" class="table table-striped table-bordered no-wrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Stt)</th>
+                            <th>@Html.DisplayNameFor(model => model.TenTheLoai)</th>
+                            <th>@Html.DisplayNameFor(model => model.HangMuc)</th>
+                            <th>@Html.DisplayNameFor(model => model.Icon)</th>
+                            <th>@Html.DisplayNameFor(model => model.MaNhanDienHangMucSach)</th>
+                            <th>@Html.DisplayNameFor(model => model.MoTa)</th>
+                            <th>@Html.DisplayNameFor(model => model.DuongDanSeo)</th>
+                            <th>@Html.DisplayNameFor(model => model.TieuDeSeo)</th>
+                            <th>@Html.DisplayNameFor(model => model.ThongBao)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in DsThanhCong)
+                        {
+                        <tr>
+                            <td>
+                                @item.Stt
+                            </td>
+                            <td>
+                                @item.TenTheLoai
+                            </td>
+                            <td>
+                                @item.HangMuc
+                            </td>
+                            <td>
+                                @item.Icon
+                            </td>
+                            <td>
+                                @item.MaNhanDienHangMucSach
+                            </td>
+                            <td>
+                                @item.MoTa
+                            </td>
+                            <td>
+                                @item.NoiDungSeo
+
+                            </td>
+                            <td>
+                                @item.TuKhoaSeo
+                            </td>
+                            <td>
+                                @item.TieuDeSeo
+                            </td>
+
+                            <td>
+                                @item.DuongDanSeo
+                            </td>
+                            <td>
+                                @item.ThongBao
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <div class="btn btn-primary" id="btnsumit" onclick="ImportExcel('/Admin/TheLoaiSach/AddListExcel','/Admin/TheLoaiSach/DanhSachTheLoaiSach')">
+                Import Excel
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+

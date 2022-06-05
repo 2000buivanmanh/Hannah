@@ -1,0 +1,39 @@
+﻿@model DMSS.ViewModals.BookCase.BookCaseViewModal
+   
+@{ 
+    int SoQuyen = 0;
+    if(Model.DanhSachSach != null)
+    {
+        SoQuyen = Model.DanhSachSach.Count();
+    }
+}
+    <div class="mini-cart">
+        <a class="woo_icon" onclick="LoadBookCartDetails()" href="/BookCases/BookCase" title="View your shopping cart"><i class="woo_mini-count fa fa-shopping-cart"><span>@SoQuyen</span></i></a>
+        <div class="woo_mini_cart">
+            <!-- start product list -->
+            <ul class="cart_list product_list_widget">
+                @foreach (var gh in Model.DanhSachSach)
+                {
+                    <li>
+                        <a onclick="RemoveBookCase(@gh.MaSach)" class="remove" title="Remove this item">×</a>
+                        <a href="features-shop-cart.html">
+                            <img src="@gh.ThongTinAnhSach" style="width:58px !important; height:62px !important;" class="attachment-shop_thumbnail" alt="hoodie_4_front">@gh.TenSach  &nbsp;
+                        </a>
+                        <span class="amount"> @gh.Gia <i class="erudite_poin"></i></span>
+                    </li>
+                }
+            </ul>
+            <!-- end product list -->
+            <p class="total">
+                <strong>Total:</strong> <span class="amount">
+                    @Model.TongDiem <i class="erudite_poin"></i>
+                </span>
+            </p>
+            <p class="buttons">
+                <a class="button wc-forward" onclick="RemoveBookAll()">DELETE ALL ORDERS</a>
+            </p>
+            <p class="buttons">
+                <a onclick="LoadBookCartDetails()" href="/BookCases/BookCase" class="button wc-forward">View Book Basket</a>
+            </p>
+        </div>
+    </div>

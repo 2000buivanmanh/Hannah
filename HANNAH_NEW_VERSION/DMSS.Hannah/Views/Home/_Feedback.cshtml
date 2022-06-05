@@ -1,0 +1,32 @@
+﻿<div class="col-md-3 register-left">
+    <img src="~/Content/Images/Top-header/login.png" />
+</div>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span id="btnClose" aria-hidden="true">×</span></button>
+<div class="col-md-9 register-right">
+    <div class="tab-content-register">
+        <div class="row register-form-login">
+            <form id="frmLogin" action="" method="post">
+                <p class="tilte-name-form" id="tilte-name-form">Login Hannah Library</p>
+                <div class="form-group">
+                    <label for="username">Username or Email</label>
+                    <input type="text" id="username-lg" name="username" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password-lg" name="password" />
+                    <i style="margin-left: -30px; cursor: pointer" class="bi bi-eye-slash" id="togglePassword"></i>
+                </div>
+                <div class="form-group">
+                    <a class="btn btnSubmit" onclick="Login()">Login</a> <br />
+                    <a style="margin-left:10px" onclick="OpenModalUser('Users/_LostPassword')" class="button wc-forward account">Lost Password ?</a>
+                </div>
+                <p class="text--center">
+                    Not a member? <a onclick="OpenModalUser('Users/_Register')">Sign up now</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
