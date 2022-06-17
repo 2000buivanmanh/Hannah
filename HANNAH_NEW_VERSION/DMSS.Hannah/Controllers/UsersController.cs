@@ -20,17 +20,23 @@ namespace HANNAH_NEW_VERSION.Controllers
         private readonly ICaiDatService _caiDatService;
         private readonly IAuthenticationService _authenticationService;
         private readonly IDatSachService _datSachService;
+        private readonly IChiTietDatSachService _chiTietDatSachService;
+        private readonly ISachService _sachService;
 
 
         public UsersController(INguoiDungService nguoiDungService,
                                    ICaiDatService caiDatService,
                                    IAuthenticationService authenticationService,
-                                   IDatSachService datSachService)
+                                   IDatSachService datSachService,
+                                   IChiTietDatSachService chiTietDatSachService,
+                                   ISachService sachService)
         {
             _nguoiDungService = nguoiDungService;
             _caiDatService = caiDatService;
             _authenticationService = authenticationService;
-            _datSachService = datSachService;   
+            _datSachService = datSachService;
+            _chiTietDatSachService = chiTietDatSachService;
+            _sachService = sachService;
         }
 
         public ActionResult Login()
@@ -51,7 +57,7 @@ namespace HANNAH_NEW_VERSION.Controllers
         {
             return PartialView();
         }
-        public ActionResult _ConfirmAccount()
+        public ActionResult ConfirmAccount()
         {
             var setting = _caiDatService.LayThongTinWeb();
             return PartialView(setting);
@@ -69,8 +75,38 @@ namespace HANNAH_NEW_VERSION.Controllers
 
         public ActionResult BookLoanHistori()
         {
-            return View(_datSachService.DanhSachDatSach());
+            var thongTin = _authenticationService.GetAuthenticatedUser();
+            var datSach = _datSachService.DanhSachDatSach().Where(s => s.MaNguoiDung == thongTin.MaNguoiDung).ToList();
+            return View(datSach);
         }
+
+        [HttpPost]
+        public JsonResult HuyDon(int maDonHang)
+        {
+            var nguoiDung = _authenticationService.GetAuthenticatedUser();
+            var donHang = _datSachService.LayDonDatSachTheoMaDonSach(maDonHang);
+            var chitietdatsach = _chiTietDatSachService.LayChiTietDatSachTheoMa(maDonHang);
+            if (donHang.TinhTrangDonHang == TinhTrangDonHang.DangDat)
+            {
+                foreach (var item in chitietdatsach)
+                {
+                    var sach = _sachService.LayMaSach((int)item.MaSach);
+                    nguoiDung.DiemTichLuy = (int?)(sach.Gia + nguoiDung.DiemTichLuy);
+                }
+                donHang.TinhTrangDonHang = TinhTrangDonHang.DaHuy;
+                _nguoiDungService.CapNhatNguoiDung(nguoiDung);
+            }
+            var result = _datSachService.CapNhatDonDatSach(donHang);
+            if (result)
+            {
+                return Json(new { status = TrangThai.ThanhCong }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { status = TrangThai.ThatBai }, JsonRequestBehavior.AllowGet);
+            }
+        } 
+
 
         [HttpGet]
         public JsonResult KiemTraDangNhap(string tenDangNhap, string matKhau)
@@ -258,7 +294,7 @@ namespace HANNAH_NEW_VERSION.Controllers
 
             return Json(new { status = KiemTraDangKy.DangKyThanhCong, message = Message.Success }, JsonRequestBehavior.AllowGet);
         }
-   
+
         public JsonResult UploadAvatar(HttpPostedFileBase uploadedImage)
         {
             var user = _authenticationService.GetAuthenticatedUser();

@@ -1,0 +1,96 @@
+﻿@model  IEnumerable<DATA.Models.ChiTietDatSach>
+@{
+    ViewBag.Title = "BookLoanHistoriDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="main" class="site-main">
+    <div class="page_content">
+        <div class="left-pattern pattern pattern-2" style="width: 154.5px;"></div>
+        <main>
+        </main>
+        <div class="right-pattern pattern pattern-2" style="width: 154.5px;"></div>
+        <div class="footer_image"></div>
+    </div>
+</div>
+<section class="page_title wave">
+    <div class="container">
+        <div class="title">
+            <h1>Login</h1>
+        </div>
+        <nav class="bread-crumbs"><a href="/Home/Index">Home</a><i class="delimiter fa fa-chevron-right"></i><span class="current">Login</span></nav>
+    </div>
+    <canvas class="breadcrumbs" data-bg-color="#f8f2dc" data-line-color="#f9e8b2" height="71" width="1366" style="height: 71px; width: 1366px;"></canvas>
+</section>
+<div id="main" class="site-main">
+    <div class="page_content">
+        <!-- pattern container / -->
+        <div class="left-pattern pattern pattern-2" style="width: 69.5px;"></div>
+        <div class="container">
+            <main>
+                <div class="grid_row clearfix">
+                    <div class="grid_col grid_col_12">
+                        <div class="ce clearfix">
+                            <div>
+                                <div class="woocommerce">
+                                    <div class="grid_row clearfix">
+                                        <div class="cart_totals ">
+
+                                            <h2>Book Loan Detail</h2>
+                                            <br /><br />
+                                            <form action="#" method="post">
+                                                <!-- product cart table -->
+                                                <table class="shop_table cart">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="product-name">Book</th>
+                                                            <th class="product-name">Erudite Poin</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr class="cart_item">
+
+                                                                <td class="product-name product-thumbnail">
+                                                                    <div class="media_part">
+                                                                        <div class="">
+                                                                            <a href="/Book/BookDetail/@item.MaSach"><img style="width:90px; height:120px !important" src="@item.Sach.ThongTinAnhSach" class="attachment-90x90" alt="hoodie_4_front"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <a href="/Book/BookDetail/@item.MaSach">@item.Sach.TenSach </a>
+                                                                </td>
+                                                                <td class="product-price">
+                                                                    <span class="amount">@item.Sach.Gia <i class="erudite_poin"></i></span>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                                <!-- / product cart table -->
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <!-- pattern container /  -->
+        <div class="right-pattern pattern pattern-2" style="width: 69.5px;"></div>
+        <!-- footer image container / -->
+        <div class="footer_image"></div>
+    </div>
+    <!-- svg filter -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" style="display:none;">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"></feGaussianBlur>
+                <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
+                <feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite>
+            </filter>
+        </defs>
+    </svg>
+    <!-- / svg filter -->
+</div>

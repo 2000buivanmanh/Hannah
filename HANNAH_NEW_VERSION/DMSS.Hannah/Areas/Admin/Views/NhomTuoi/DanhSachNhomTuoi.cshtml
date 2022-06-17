@@ -23,8 +23,9 @@
                     <hr />
                 </div>
                 <div class="table-responsive text-center">
-                    <div id="data"></div>              
+                    <div id="data"></div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -58,7 +59,7 @@
 
             </div>
             <div class="col-md-2 ">
-                <button class="btn btn-success btn-sm  waves-effect waves-light " onclick="ModalThemSua('/Admin/NhomTuoi/_ThemOrSuaNhomTuoi')">
+                <button class="btn btn-success btn-sm  waves-effect waves-light " onclick="ModalThemSuaNhomTuoi('/Admin/NhomTuoi/_ThemOrSuaNhomTuoi')">
                     <i class="fas fa-plus-square"></i> ADD
                 </button>
             </div>
@@ -69,8 +70,11 @@
 
 
 @section Scripts{
-
-    <script src="~/Areas/Admin/Content/AdminJs/NhomTuoiJS.js"></script>
+    <script>
+        $(document).ready(function () {
+            ReloadData('/Admin/NhomTuoi/_DanhSachNhomTuoi');
+        });
+    </script>
 }
 
 

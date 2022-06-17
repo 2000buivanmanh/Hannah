@@ -10,7 +10,7 @@ using System.Web;
 namespace DATA.Models
 {
     [Table("CaiDat")]
-    public class CaiDat
+    public class CaiDat : DaDung
     {
         [Key]
         [Required]
@@ -72,23 +72,6 @@ namespace DATA.Models
         public int? DiemTichLuy { get; set; }
 
         public int? DiemDanhGia { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Meta Description")]
-        public string NoiDungSeo { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Meta Keywords")]
-        public string TuKhoaSeo { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Title Seo")]
-        public string TieuDeSeo { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Path Seo")]
-        public string DuongDanSeo { get; set; }
-
         public int? SoLanGuiMa { get; set; }
 
         public int? SoLanXacNhanSai { get; set; }
@@ -102,5 +85,6 @@ namespace DATA.Models
         public int ThoiHanMaXacNhan { get; set; }
 
         public int ThoiGianHetHanTaiKhoan { get; set; }
+        public string MatKhauDatLai { get; set; }
     }
 }

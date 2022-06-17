@@ -75,7 +75,7 @@ namespace SERVICE
         }
         public HangMucSach LayHangMucSachTheoMa(int maHangMucSach) 
         { 
-            return _baseRepository.Table.SingleOrDefault(s => s.MaHangMucSach == maHangMucSach); 
+            return _baseRepository.GetById( maHangMucSach); 
         }
 
         public string ThemExcel(List<HangMucSach> data)

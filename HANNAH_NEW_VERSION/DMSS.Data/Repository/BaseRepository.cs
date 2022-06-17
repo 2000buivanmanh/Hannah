@@ -156,7 +156,7 @@ namespace DATA.Repository
             catch (Exception ex)
             {
                 // TODO: log exception
-                throw ex;
+                 throw ex;
             }
             return result;
         }
@@ -177,11 +177,12 @@ namespace DATA.Repository
             return result;
         }
 
-        public List<T> GetAllPaging(Expression<Func<T, bool>> predicate, Expression<Func<T, int>> oderby, int Take, int Skip)
+        public virtual List<T> GetAllPaging(Expression<Func<T, bool>> predicate, Expression<Func<T, int>> oderby, int Take, int Skip)
         {
-            throw new NotImplementedException();
+            return this.Entities.Where(predicate).OrderBy(oderby).Skip(Skip).Take(Take).ToList();
         }
 
         public virtual IQueryable<T> Table => this.Entities;
+
     }
 }

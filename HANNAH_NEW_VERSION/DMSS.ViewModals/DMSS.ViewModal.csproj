@@ -66,15 +66,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookCase\BookCaseViewModal.cs" />
-    <Compile Include="DsExcelViewModal\BaiViet.cs" />
-    <Compile Include="DsExcelViewModal\ExcelDacQuyen.cs" />
+    <Compile Include="DsExcelViewModal\ExcelDiaChiXuatBan.cs" />
     <Compile Include="DsExcelViewModal\ExcelHangMucSach.cs" />
     <Compile Include="DsExcelViewModal\ExcelLoaiSach.cs" />
     <Compile Include="DsExcelViewModal\ExcelNguoiDung.cs" />
     <Compile Include="DsExcelViewModal\ExcelNhaXuatBan.cs" />
     <Compile Include="DsExcelViewModal\ExcelNhomTuoi.cs" />
+    <Compile Include="DsExcelViewModal\ExcelSach.cs" />
     <Compile Include="DsExcelViewModal\ExcelTacGia.cs" />
     <Compile Include="DsExcelViewModal\ExcelTheLoaiSach.cs" />
+    <Compile Include="DsExcelViewModal\ViewModalDaDung.cs" />
     <Compile Include="ExampleViewModal\ExampleViewModal.cs" />
     <Compile Include="HomePage\ListBookViewModal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

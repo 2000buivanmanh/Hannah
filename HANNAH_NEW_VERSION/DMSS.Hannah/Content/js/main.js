@@ -1,5 +1,5 @@
-﻿
-LoadBookListHomePage(1);
+﻿var startPage = 1;
+LoadBookListHomePage(startPage);
 LoadBookCaseHeader();
 LoadBookCase();
 
@@ -25,7 +25,6 @@ jQuery("#formDatSach").validate({
         }
     }
 });
-    
 function LoadBookListHomePage(page) {
     jQuery.ajax({
         type: "GET",
@@ -86,33 +85,99 @@ function LoadBookCase() {
         },
     });
 }
+function ShowBooking(id) {
+    jQuery.get('/Bookcases/_BookLoanAppointment',
+        {
+            Id: id
+        }).done(function (data) {
+            jQuery('#modal-Booking').attr('style', 'display: block;');
+            jQuery('#contentBooking').html(data);
+        }).fail(function (response) {
+            swal({
+                title: "error",
+                text: "server error!",
+                icon: "error",
+                button: false,
+                timer: 3000
+            });
+        });
+
+}
 
 function AddIntoBookCase(id) {
-    jQuery.post('/BookCases/AddIntoBookCase',
-        {
-            maSach: id
-        }).done(function (data) {
-            if (data.status == "1") {
-                LoadBookListHomePage(1);
-                LoadBookCaseHeader();
-                LoadBookCase();
-                swal({
-                    position: 'absolute',
-                    icon: 'success',
-                    title: 'success',
-                    text: 'Add to cart successfully'
-                })
-            }
-            if (data.status == "0") {
-                swal({
-                    position: 'absolute',
-                    icon: 'error',
-                    title: 'error',
-                    text: 'Accumulated points are not enough to make a booking'
 
-                })
-            }
-        });
+    jQuery("#formDatSach").validate({
+        rules: {
+            receivetime: "required",
+
+        },
+        messages: {
+            receivetime: "Please enter receive time !",
+
+        }
+    });
+    if (jQuery("#formDatSach").valid()) {
+        var ngayNhan = jQuery('#receive-time').val();
+        var ngayTra = jQuery('#return-time').val();
+        jQuery.post('/BookCases/AddIntoBookCase',
+            {
+                maSach: id,
+                ngayNhan: ngayNhan,
+                ngayTra: ngayTra
+
+            }).done(function (data) {
+                if (data.status == "1") {
+                    LoadBookListHomePage(1);
+                    LoadBookCaseHeader();
+                    LoadBookCase();
+                    swal({
+                        position: 'absolute',
+                        icon: 'success',
+                        title: 'success',
+                        text: 'Add to cart successfully'
+                    })
+                    window.location.href = '/BookCases/BookCase';
+                }
+                if (data.status == "-1") {
+                    swal({
+                        title: "Send your book loan?",
+                        text: "This time has a other bookloan, you maybe cannot borrow this book, continue?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            jQuery("td.chuaduyet").removeClass();
+                            window.location.href = '/Book/BookDetail/' + id;
+                        } else {
+                            RemoveBookCase(id)
+                            window.location.href = '/Book/BookDetail/' + id;
+                        }
+                    });
+
+                }
+                if (data.status == "2") {
+                    swal({
+                        position: 'absolute',
+                        icon: 'error',
+                        title: 'error',
+                        text: 'books have been lent!!!'
+
+                    })
+                }
+                if (data.status == "0") {
+                    swal({
+                        position: 'absolute',
+                        icon: 'error',
+                        title: 'error',
+                        text: 'Accumulated points are not enough to make a booking'
+
+                    })
+                }
+            });
+    }
+
+
 }
 
 function DatSach(e) {
@@ -122,6 +187,8 @@ function DatSach(e) {
     var diaChiNhan = jQuery('#basketAddress').val();
     var diaChiTra = jQuery('#basketReturnAddress').val();
     var dieuKhoan = jQuery('#dieuKhoan').val();
+    var gioNhan = jQuery('#GioNhan').val();
+    var gioTra = jQuery('#GioTra').val();
 
     if (jQuery("#formDatSach").valid()) {
         if (dieuKhoan == "true") {
@@ -137,6 +204,8 @@ function DatSach(e) {
                         jQuery.post('/BookCases/DatSach',
                             {
                                 GhiChu: ghiChu,
+                                gioNhan: gioNhan,
+                                gioTra: gioTra,
                                 NgayNhan: ngayNhan,
                                 NgayTra: ngayTra,
                                 DiaChiNhan: diaChiNhan,
@@ -181,6 +250,34 @@ function DatSach(e) {
     }
 
 
+}
+
+function HuyDon(id) {
+    jQuery.post('/Users/HuyDon', {
+        maDonHang: id
+    }).done(function (data) {
+        if (data.status == "1") {
+            swal({
+                position: 'absolute',
+                icon: 'success',
+                title: 'success',
+                text: 'Add to cart successfully'
+            })
+            swal({
+                title: "warning",
+                text: "Add to cart successfully?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = '/Users/BookLoanHistori';
+                } else {
+
+                }
+            });
+        }
+    });
 }
 
 function RemoveBookCase(id) {
@@ -248,18 +345,13 @@ function checkRTT() {
     receivetime = document.getElementById("return-time").value;
     receivetime1 = document.getElementById("receive-time").value;
     var min1 = Date.parse(receivetime1);
-
     var rtd = Date.parse('2000-01-14');
     var rtd1 = Date.parse('2000-01-21');
     rtd = rtd1 - rtd;
     rtd = min1 + rtd;
-
-
     var min = Date.parse(receivetime);
     var rd = min1;
     var max = rtd;
-
-
     if (receivetime == "") {
         jQuery("#lb-return-time").addClass('required');
         jQuery("#lb-return-time").focus();
@@ -269,8 +361,6 @@ function checkRTT() {
             jQuery("#lb-return-time").focus();
         } else {
             jQuery("#lb-return-time").removeClass('required');
-
-
         }
     }
 }
@@ -282,9 +372,7 @@ Date.prototype.addDays = function (days) {
 function checkRcT() {
     receivetime = document.getElementById("receive-time").value;
     var min = Date.parse(receivetime);
-    var rd = Date.parse('2022-05-29T02:03');
-
-
+    var rd = Date.parse('2022-05-29');
     if (receivetime == "") {
         jQuery("#lb-receive-time").addClass('required');
         jQuery("#lb-receive-time").focus();
@@ -294,14 +382,14 @@ function checkRcT() {
             jQuery("#lb-receive-time").focus();
         } else {
             jQuery("#lb-receive-time").removeClass('required');
-            var rtd = Date.parse('1996-08-06');
-            var rtd1 = Date.parse('1996-08-13');
+            var rtd = Date.parse('2000-01-14');
+            var rtd1 = Date.parse('2000-01-21');
             rtd = rtd1 - rtd;
             rtd = min + rtd;
             var d = new Date(rtd);
-            document.getElementById("return-time").value = d.toISOString().substring(0, 16);
+            document.getElementById("return-time").value = d.toISOString().substring(0, 10);
             document.getElementById("return-time").setAttribute("min", receivetime);
-            document.getElementById("return-time").setAttribute("max", d.toISOString().substring(0, 16));
+            document.getElementById("return-time").setAttribute("max", d.toISOString().substring(0, 10));
         }
     }
 }

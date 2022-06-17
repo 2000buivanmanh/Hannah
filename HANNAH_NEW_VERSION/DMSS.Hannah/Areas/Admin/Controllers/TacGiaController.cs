@@ -1,6 +1,8 @@
 ﻿using ClassLibrary1.Helper;
 using DATA.Models;
+using DATA.Repository;
 using DMSS.ViewModals.DsExcelViewModal;
+using HANNAH_NEW_VERSION.Configs;
 using LinqToExcel;
 using SERVICE;
 using System;
@@ -14,17 +16,19 @@ using static DATA.Constant.Constant;
 
 namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 {
-    [Authorize]
+    [AuthorizeUser(PhanQuyen.Admin)]
     public class TacGiaController : Controller
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly ITacGiaService _tacGiaService;
+        private readonly IBaseRepository<TacGia> _baseRepository;
 
-        public TacGiaController(ITacGiaService tacGiaService,
+        public TacGiaController(ITacGiaService tacGiaService, IBaseRepository<TacGia> baseRepository,
                                     IAuthenticationService authenticationService)
         {
             _authenticationService = authenticationService;
             _tacGiaService = tacGiaService;
+            _baseRepository = baseRepository;
         }
         public ActionResult DanhSachTacGia()
         {
@@ -54,9 +58,10 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
             {
                 tacGia.NguoiTao = nguoiDung.MaNguoiDung;
                 var result = _tacGiaService.ThemTacGia(tacGia);
+                var idTacGia = _baseRepository.GetAll(p => p.MaTacGia > 0).Max(p => p.MaTacGia);
+                
                 if (result == string.Empty)
-
-                    return Json(new { status = TrangThai.ThanhCong, message = Message.Success }, JsonRequestBehavior.AllowGet);
+                    return Json(new { status = TrangThai.ThanhCong, message = Message.Success , idTacGia }, JsonRequestBehavior.AllowGet);
                 else
                     return Json(new { status = TrangThai.ThatBai, message = result }, JsonRequestBehavior.AllowGet);
             }
@@ -204,22 +209,24 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         {
             try
             {
+                var nguoiDung = _authenticationService.GetAuthenticatedUser();
                 List<TacGia> listTacGia = new List<TacGia>();
                 DsThanhCong = (List<ExcelTacGia>)Session["DsThanhCong"];
                 if (DsThanhCong.Count != 0)
                 {
                         foreach (var item in DsThanhCong)
                     {
-                        TacGia TacGia = new TacGia();
-                        TacGia.TenTacGia = item.TenTacGia;
-                        TacGia.ThongTinTacGia = item.ThongTinTacGia;
-                        TacGia.NoiDungSeo = item.NoiDungSeo;
-                        TacGia.TuKhoaSeo = item.TuKhoaSeo;
-                        TacGia.TieuDeSeo = item.TieuDeSeo;
-                        TacGia.DuongDanSeo = item.DuongDanSeo;
-                        TacGia.NgayTao = DateTime.Now;
-                        TacGia.TrangThai = false;
-                        listTacGia.Add(TacGia);
+                        TacGia tacGia = new TacGia();
+                        tacGia.TenTacGia = item.TenTacGia;
+                        tacGia.ThongTinTacGia = item.ThongTinTacGia;
+                        tacGia.NoiDungSeo = item.NoiDungSeo;
+                        tacGia.TuKhoaSeo = item.TuKhoaSeo;
+                        tacGia.TieuDeSeo = item.TieuDeSeo;
+                        tacGia.DuongDanSeo = item.DuongDanSeo;
+                        tacGia.NgayTao = DateTime.Now;
+                        tacGia.NguoiTao = nguoiDung.MaNguoiDung;
+                        tacGia.TrangThai = false;
+                        listTacGia.Add(tacGia);
                     }
                     var result = _tacGiaService.ThemExcel(listTacGia);
                     if (result == string.Empty)

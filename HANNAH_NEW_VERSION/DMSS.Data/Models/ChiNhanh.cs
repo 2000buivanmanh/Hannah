@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DATA.Models
 {
     [Table("ChiNhanh")]
-    public class ChiNhanh
+    public class ChiNhanh : DaDung
     {
         [Key]
         [Required]
@@ -32,17 +32,5 @@ namespace DATA.Models
 
         [Display(Name = "Contact")]
         public string NguoiLienHe { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime? NgayTao { get; set; }
-
-        public int? NguoiTao { get; set; }
-
-        public int? QTVCapNhat { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime? LanCapNhatCuoi { get; set; }
-
-
     }
 }

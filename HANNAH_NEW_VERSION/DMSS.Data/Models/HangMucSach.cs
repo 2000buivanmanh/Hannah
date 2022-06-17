@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DATA.Models
 {
     [Table("HangMucSach")]
-    public class HangMucSach
+    public class HangMucSach : DaDung
     {
         [Key]
         [Required]
@@ -31,30 +31,6 @@ namespace DATA.Models
         [Display(Name = "Status")]
         public bool? TrangThai { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? NgayTao { get; set; }
 
-        public int? NguoiTao { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime? LanCapNhatCuoi { get; set; }
-
-        public int? QTVCapNhat { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Meta Keywords")]
-        public string TuKhoaSeo { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Meta Keywords")]
-        public string NoiDungSeo { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Title Seo")]
-        public string TieuDeSeo { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Path Seo")]
-        public string DuongDanSeo { get; set; }
     }
 }

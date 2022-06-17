@@ -23,7 +23,7 @@ namespace SERVICE
 
         public DacQuyen LayDacQuyenTheoMa(int maDacQuyen)
         {
-            return _baseRepository.Table.SingleOrDefault(s => s.MaDacQuyen == maDacQuyen);
+            return _baseRepository.GetById( maDacQuyen);
         }
         public List<DacQuyen> LayDanhSachMa(int[] data)
         {
@@ -33,7 +33,7 @@ namespace SERVICE
         {
             try
             {
-                var suaDacQuyen = _baseRepository.Table.SingleOrDefault(s => s.MaDacQuyen == dacQuyen.MaDacQuyen);
+                var suaDacQuyen = _baseRepository.GetById( dacQuyen.MaDacQuyen);
                 suaDacQuyen.TenDacQuyen = dacQuyen.TenDacQuyen;
                 suaDacQuyen.NoiDung = dacQuyen.NoiDung;
                 suaDacQuyen.Icon = dacQuyen.Icon;

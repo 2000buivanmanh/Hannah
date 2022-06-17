@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DATA.Models.Sach>
+
+<table id="tableLoad" class="table table-striped table-bordered no-wrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="checkall" value="false" onclick="SelectAll()"><span class="checkbox-material"><span class="check "></span></span>
+                    </label>
+                </div>
+            </th>
+            <th>@Html.DisplayNameFor(model => model.TenSach)</th>
+            <th>@Html.DisplayNameFor(model => model.MaNhanDienSach)</th>
+            <th>@Html.DisplayNameFor(model => model.ThongTinAnhSach)</th>
+            <th>@Html.DisplayNameFor(model => model.TheLoai.TenTheLoai)</th>
+            <th>@Html.DisplayNameFor(model => model.TrangThai)</th>
+            <th>@Html.DisplayNameFor(model => model.TinhTrangMuonSach)</th>
+            <th>@Html.DisplayNameFor(model => model.DuongDanSeo)</th>
+
+            <th>Edit</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" data-id="@item.MaSach" class="check-field" value="false" id="check-@item.MaLoaiSach" onclick="Check(@item.MaLoaiSach)"><span class="checkbox-material"><span class="check"></span></span>
+                    </label>
+                </div>
+
+            </td>
+            <td>
+                @item.TenSach
+            </td>
+            <td>
+                @item.MaNhanDienSach
+            </td>
+            <td>
+                <div class="text-center">
+                    <img class="img-ul " src="@item.ThongTinAnhSach" />
+                </div>
+            </td>
+            
+            <td>
+                @item.TheLoai.TenTheLoai
+            </td>
+            <td>
+                <input type="checkbox" class="check-toggle" data-style="ios" data-on="Public" @(item.TrangThai == DATA.Constant.Constant.TinhTrang.Activating ? "checked" : "" )
+                       onchange="CheckTrangThai(@item.MaSach ,'/Admin/Sach/CapNhatTrangThai')"
+                       data-off="Block" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-size="sm">
+
+            </td>
+            <td>
+                <input type="checkbox" class="check-toggle" data-style="ios" data-on="Public" @(item.TinhTrangMuonSach == DATA.Constant.Constant.TinhTrang.Activating ? "checked" : "" )
+                       onchange="CheckTrangThai(@item.MaSach ,'/Admin/Sach/CapNhatTinhTrangMuonSach')"
+                       data-off="Block" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-size="sm">
+
+            </td>
+            <td>
+                @item.DuongDanSeo
+            </td>
+
+            <td>
+                <div class="" id='@item.MaSach' type="submit"  onclick="ThemSuaSach('/Admin/Sach/_ThemOrSuaSach',@item.MaSach)">
+                    <i class="fas fa-edit text-center"></i>
+                </div>
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+

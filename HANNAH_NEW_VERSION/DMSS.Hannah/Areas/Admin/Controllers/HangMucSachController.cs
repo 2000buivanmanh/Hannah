@@ -15,7 +15,7 @@ using static DATA.Constant.Constant;
 
 namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 {
-    [Authorize]
+    [AuthorizeUser(PhanQuyen.Admin)]
     public class HangMucSachController : Controller
     {
         // GET: Admin/HangMucSach
@@ -227,6 +227,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         {
             try
             {
+                var nguoiDung = _authenticationService.GetAuthenticatedUser();
                 List<HangMucSach> listHangMucSach = new List<HangMucSach>();
                 DsThanhCong = (List<ExcelHangMucSach>)Session["DsThanhCong"];
                 if (DsThanhCong.Count != 0)
@@ -242,6 +243,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                         HangMucSach.TieuDeSeo = item.TieuDeSeo;
                         HangMucSach.DuongDanSeo = item.DuongDanSeo;
                         HangMucSach.NgayTao = DateTime.Now;
+                        HangMucSach.NguoiTao = nguoiDung.MaNguoiDung;
                         HangMucSach.TrangThai = false;
                         listHangMucSach.Add(HangMucSach);
                     }

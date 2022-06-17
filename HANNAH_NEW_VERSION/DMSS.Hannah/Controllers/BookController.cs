@@ -41,7 +41,7 @@ namespace HANNAH_NEW_VERSION.Controllers
      
         public ActionResult BookDetail(int id)
         {
-            ViewBag.ListNguoiDung = _nguoiDungSerivce.DanhSachNguoiDung();
+            ViewBag.NguoiDung = _authenticationService.GetAuthenticatedUser();
             return View(_sachService.LayMaSach(id));
         }
 
@@ -55,7 +55,11 @@ namespace HANNAH_NEW_VERSION.Controllers
             return View();
         }
 
-      
+        public ActionResult AllBook()
+        {
+            return View();
+        }
+        
 
         [Authorize]
         [HttpPost]

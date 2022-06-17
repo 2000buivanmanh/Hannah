@@ -22,14 +22,16 @@
     <link rel="apple-touch-icon-precomposed" href="~/Content/Kiddy-Template/img/cropped-favicon-180x180.png">
     <meta name="msapplication-TileImage" content="~/Content/Kiddy-Template/img/cropped-favicon-270x270.png">
     <link href="~/Content/Login-Register/Login-Register.css" rel="stylesheet" />
+    <link href="~/Content/Kiddy-Template/css/daterangepicker.css" rel="stylesheet" />
     <link href="~/Content/Modal-User/style.css" rel="stylesheet" />
     <link href="~/Content/Kiddy-Template/css/toast.css" rel="stylesheet" />
+    <link href="~/Content/Kiddy-Template/css/bs-pagination.min.css" rel="stylesheet" />
     <style>
         .site_top_panel.slider {
             z-index: 1000000 !important;
         }
 
-        /*   span.glyphicon.glyphicon-star {
+       /*    span.glyphicon.glyphicon-star {
             color: #f5b917 !important;
             font-size: 2rem !important;
         }
@@ -43,8 +45,8 @@
             display: inline-block;
             position: relative;
         }
-
-        .glyphicon {
+*/
+        /*.glyphicon {
             position: relative;
             top: 1px;
             display: inline-block;
@@ -118,7 +120,7 @@
     <script type="text/javascript" src="~/Content/Kiddy-Template/js/jquery.form.min.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/jquery.themepunch.tools.min.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/jquery.themepunch.revolution.min.js"></script>
-    @*<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>*@
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/tuner/tuner/js/colorpicker.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/tuner/tuner/js/scripts.js"></script>
@@ -129,15 +131,19 @@
     <script type="text/javascript" src="~/Content/Kiddy-Template/js/select2.min.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/js/wow.min.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/js/scripts.js"></script>
-    <script src="~/Content/Kiddy-Template/js/jquery.toast.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/extensions/revolution.extension.slideanims.min.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/extensions/revolution.extension.layeranimation.min.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/extensions/revolution.extension.navigation.min.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/extensions/revolution.extension.parallax.min.js"></script>
-    <script src="~/Content/Kiddy-Template/js/bootstrap-rating.min.js"></script>
+    <script src="~/Content/Kiddy-Template/js/jquery-ui.min.js"></script>
+    <script src="~/Content/Kiddy-Template/js/bootstrap-rating.js"></script>
+    <script src="~/Content/Kiddy-Template/js/pagination.js"></script>
     <script src="~/Content/Login-Register/Login-Register.js"></script>
+
     <script src="~/Assets/LoginRegister/js/User.js"></script>
+    <script src="~/Content/FeedBack/Feedback.js"></script>
     <script src="~/Content/js/main.js"></script>
+    <script src="~/Content/Kiddy-Template/js/jquery.toast.js"></script>
     <script>
         if (jQuery(window).width() <= 800) {
             jQuery("#topheader").removeClass("active");
@@ -145,7 +151,7 @@
             jQuery("#topheader").addClass("active");
         }
         jQuery('.loading').attr('style', 'display: none;');
-       
+
     </script>
     @RenderSection("scripts", false)
 </body>

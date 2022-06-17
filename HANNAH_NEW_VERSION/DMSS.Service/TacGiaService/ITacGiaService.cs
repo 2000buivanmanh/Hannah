@@ -13,8 +13,10 @@ namespace SERVICE
         string ThemTacGia(TacGia  tacGia);
         string SuaTacGia(TacGia tacGia);
         TacGia LayTacGiaTheoMa(int maTacGia);
+        TacGia LayTacGiaTheoTen(string tenTacGia);
         List<TacGia> LayDanhSachMa(int[] data);
         string XoaTacGia(List<TacGia> data);
         string ThemExcel(List<TacGia> data);
+
     }
 }

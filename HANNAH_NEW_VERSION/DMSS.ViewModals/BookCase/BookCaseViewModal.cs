@@ -17,6 +17,13 @@ namespace DMSS.ViewModals.BookCase
         public DateTime ThoiGianNhan { get; set; }
         public DateTime ThoiGianTra { get; set; }
 
+        public class NgayVuaChon
+        {
+            string NgayNhanVuaChon { get; set; }
+            string NgayNhanVuaTra { get; set; }
+
+        }
+
         public string DieuKhoan { get; set; }
     }
 }

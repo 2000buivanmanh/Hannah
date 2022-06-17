@@ -34,7 +34,7 @@
 <div class="footer-table">
     <div class="row">
         <div class="col-md-3 m-4">
-            <button class="btn btn-danger btn-sm  waves-effect waves-light " id="SelectDelete" onclick="XoaData('/LoaiSach/XoaLoaiSach','/Admin/LoaiSach/_DanhSachLoaiSach')">
+            <button class="btn btn-danger btn-sm  waves-effect waves-light " id="SelectDelete" onclick="XoaData('/TacGia/XoaTacGia','/Admin/TacGia/_DanhSachTacGia')">
                 <i class="fas fa-ban"></i> DELETE
             </button>
             <label class="non-touch" id="selected-row">
@@ -68,10 +68,13 @@
 </div>
 
 
+
 @section Scripts{
-    <script src="~/Areas/Admin/Content/AdminJs/TacGiaJS.js"></script>
+    <script>
+        $(document).ready(function () {
+            ReloadData('/Admin/TacGia/_DanhSachTacGia');
+        });
+    </script>
 }
-
-
 
 

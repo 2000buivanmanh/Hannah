@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DATA.Models
 {
     [Table("Slide")]
-    public class Slide
+    public class Slide : DaDung
     {
         [Key]
         [Required]

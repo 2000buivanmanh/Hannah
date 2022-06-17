@@ -25,13 +25,13 @@ namespace SERVICE
         }
         public NhomTuoi LayNhomTuoiTheoMa(int maNhomTuoi)
         {
-            return _baseRepository.Table.SingleOrDefault(s => s.MaNhomTuoi == maNhomTuoi);
+            return _baseRepository.GetById( maNhomTuoi);
         }
         public string SuaNhomTuoi(NhomTuoi nhomTuoi)
         {
             try
             {
-                var suaNhomTuoi = _baseRepository.Table.SingleOrDefault(s => s.MaNhomTuoi == nhomTuoi.MaNhomTuoi);
+                var suaNhomTuoi = _baseRepository.GetById( nhomTuoi.MaNhomTuoi);
                 suaNhomTuoi.DoTuoiMin = nhomTuoi.DoTuoiMin;
                 suaNhomTuoi.DoTuoiMax = nhomTuoi.DoTuoiMax;
                 suaNhomTuoi.MoTa = nhomTuoi.MoTa;
@@ -87,6 +87,12 @@ namespace SERVICE
             {
                 return ex.Message;
             }
+        }
+
+        public NhomTuoi KiemTraDoTuoi(int? doTuoiMin, int? doTuoiMax)
+        {
+            return  _baseRepository.GetAll(s => (s.DoTuoiMin == doTuoiMin && s.DoTuoiMax == doTuoiMax)).FirstOrDefault();
+
         }
     }
 }

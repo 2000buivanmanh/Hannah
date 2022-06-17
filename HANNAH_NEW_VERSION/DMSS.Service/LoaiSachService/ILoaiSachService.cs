@@ -13,6 +13,7 @@ namespace SERVICE
         string ThemLoaiSach(LoaiSach loaiSach);
         string SuaLoaiSach(LoaiSach loaiSach);
         LoaiSach LayLoaiSachTheoMa(int maLoaiSach);
+        LoaiSach LayLoaiSachTheoTen(string tenLoaiSach);
         string XoaLoaiSach(List<LoaiSach> data);
         List<LoaiSach> LayDanhSachMa(int[] data);
         string ThemExcel(List<LoaiSach> data);

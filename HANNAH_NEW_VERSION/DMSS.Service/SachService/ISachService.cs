@@ -12,5 +12,10 @@ namespace SERVICE
     {
         Sach LayMaSach(int maMaSach);
         List<Sach> ThongTinSach();
+        string ThemSach(Sach sach);
+        string SuaSach(Sach sach);
+        List<Sach> LayDanhSachMa(int[] data);
+        string XoaSach(List<Sach> data);
+        string ThemExcel(List<Sach> data);
     }
 }

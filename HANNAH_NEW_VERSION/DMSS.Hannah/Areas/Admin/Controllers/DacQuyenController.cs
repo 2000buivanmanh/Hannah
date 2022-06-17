@@ -1,6 +1,7 @@
 ﻿using ClassLibrary1.Helper;
 using DATA.Models;
 using DMSS.ViewModals.DsExcelViewModal;
+using HANNAH_NEW_VERSION.Configs;
 using LinqToExcel;
 using SERVICE;
 using System;
@@ -14,7 +15,7 @@ using static DATA.Constant.Constant;
 
 namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 {
-    [Authorize]
+    [AuthorizeUser(PhanQuyen.Admin)]
     public class DacQuyenController : Controller
     {
         private readonly IDacQuyenService _dacQuyenService;
@@ -77,7 +78,8 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         }
 
         public ActionResult _ThemOrSuaDacQuyen(int? Id)
-        {            if (Id == null)
+        {            
+            if (Id == null || Id == 0)
             {
                 var dacQuyen = new DacQuyen();
                 return PartialView(dacQuyen);

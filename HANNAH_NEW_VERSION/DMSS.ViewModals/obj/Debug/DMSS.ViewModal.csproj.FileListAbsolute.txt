@@ -2,11 +2,14 @@ C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.View
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\DMSS.ViewModals.dll
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\DMSS.ViewModals.pdb
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\AutoMapper.dll
+C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\DATA.dll
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\EntityFramework.dll
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\Microsoft.Owin.dll
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\Owin.dll
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\System.ValueTuple.dll
+C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\DATA.pdb
+C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\DATA.dll.config
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\AutoMapper.pdb
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\AutoMapper.xml
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\EntityFramework.xml
@@ -18,6 +21,3 @@ C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.View
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\obj\Debug\DMSS.ViewModal.csproj.CopyComplete
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\obj\Debug\DMSS.ViewModals.dll
 C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\obj\Debug\DMSS.ViewModals.pdb
-C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\DATA.dll
-C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\DATA.pdb
-C:\Users\DELL\OneDrive\Documents\hannah-new-version\HANNAH_NEW_VERSION\DMSS.ViewModals\bin\Debug\DATA.dll.config

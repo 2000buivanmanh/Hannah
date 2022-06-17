@@ -45,9 +45,27 @@ namespace SERVICE
             }
         }
 
+        public bool CapNhatDonDatSach(DatSach datSach)
+        {
+            try
+            {
+               
+                _baseRepository.Update(datSach);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public List<DatSach> LayDonHang(int[] data)
         {
             return _baseRepository.GetAll(s => data.Contains(s.MaDonSach));
+        }
+
+        public DatSach LayDonDatSachTheoMaDonSach(int maDonSach)
+        {
+            return _baseRepository.GetById(maDonSach);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace SERVICE
 
         public BaiViet LayBaiVietTheoMa(int maBaiViet)
         {
-            return _baseRepository.Table.SingleOrDefault(s => s.MaBaiViet == maBaiViet);
+            return _baseRepository.GetById( maBaiViet);
         }
         public List<BaiViet> LayDanhSachMa(int[] data)
         {
@@ -32,7 +32,7 @@ namespace SERVICE
         {
             try
             {
-                var suaBaiViet = _baseRepository.Table.SingleOrDefault(s => s.MaBaiViet == baiViet.MaBaiViet);
+                var suaBaiViet = _baseRepository.GetById( baiViet.MaBaiViet);
                 suaBaiViet.TenBaiViet = baiViet.TenBaiViet;
                 suaBaiViet.MoTaNgan = baiViet.MoTaNgan;
                 suaBaiViet.NoiDungBaiViet = baiViet.NoiDungBaiViet;
@@ -57,7 +57,7 @@ namespace SERVICE
         {
             try
             {
-                baiViet.NgayDang = DateTime.Now;
+                baiViet.NgayTao = DateTime.Now;
                 baiViet.TrangThai = false;
                 _baseRepository.Insert(baiViet);
                 return string.Empty;

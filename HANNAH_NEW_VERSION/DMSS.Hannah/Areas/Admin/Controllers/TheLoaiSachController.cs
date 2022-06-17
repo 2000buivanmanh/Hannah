@@ -1,6 +1,8 @@
 ﻿using ClassLibrary1.Helper;
 using DATA.Models;
+using DATA.Repository;
 using DMSS.ViewModals.DsExcelViewModal;
+using HANNAH_NEW_VERSION.Configs;
 using LinqToExcel;
 using SERVICE;
 using System;
@@ -15,13 +17,18 @@ using static DATA.Constant.Constant;
 
 namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 {
-    //[Authorize]
+    [AuthorizeUser(PhanQuyen.Admin)]
     public class TheLoaiSachController : Controller
     {
+        private readonly IAuthenticationService _authenticationService;
+        private readonly IBaseRepository<TheLoai> _baseRepository;
         private readonly ITheLoaiSachService _theLoaiSachService;
         private readonly IHangMucSachService _hangMucSachService;
-        public TheLoaiSachController(ITheLoaiSachService theLoaiSachService, IHangMucSachService hangMucSachSerivce)
+        public TheLoaiSachController(ITheLoaiSachService theLoaiSachService, IHangMucSachService hangMucSachSerivce,
+                                        IBaseRepository<TheLoai> baseRepository, IAuthenticationService authenticationService)
         {
+            _authenticationService = authenticationService;
+            _baseRepository = baseRepository;
             _theLoaiSachService = theLoaiSachService;
             _hangMucSachService = hangMucSachSerivce;
         }
@@ -38,20 +45,25 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         [HttpPost, ValidateInput(false)]
         public JsonResult ThemHoacSuaTheLoai(int? Id, TheLoai theloai)
         {
-
-            if (Id == 0 || Id == 0)
+            var nguoiDung = _authenticationService.GetAuthenticatedUser();
+            if (Id == 0 || Id == null)
                 {
-                    var result = _theLoaiSachService.ThemTheLoai(theloai);
-                    if (result == string.Empty)
-
-                        return Json(new { status = 1, message = Message.Success }, JsonRequestBehavior.AllowGet);
+                theloai.NguoiTao = nguoiDung.MaNguoiDung;
+                if (theloai.Icon == null)
+                {
+                    theloai.Icon = "/Areas/Admin/Content/dist/images/Update-icon.jpg";
+                }
+                var result = _theLoaiSachService.ThemTheLoai(theloai);
+                var idTheLoai = _baseRepository.GetAll(p => p.MaTheLoai > 0).Max(p => p.MaTheLoai);
+                if (result == string.Empty)
+                        return Json(new { status = 1, message = Message.Success, idTheLoai }, JsonRequestBehavior.AllowGet);
                     else
                         return Json(new { status = 0, message = result }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-
-                    var result = _theLoaiSachService.SuaTheLoai(theloai);
+                theloai.QTVCapNhat = nguoiDung.MaNguoiDung;
+                var result = _theLoaiSachService.SuaTheLoai(theloai);
                     if (result == string.Empty)
                         return Json(new { status = 1, message = Message.Updated }, JsonRequestBehavior.AllowGet);
                     else
@@ -62,9 +74,10 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult CapNhatTinhTrang(int Id)
         {
-
-                var theloai = _theLoaiSachService.LayTheLoaiTheoMa(Id);
-                if (theloai.TrangThai == TinhTrang.Activating)
+            var nguoiDung = _authenticationService.GetAuthenticatedUser();
+            var theloai = _theLoaiSachService.LayTheLoaiTheoMa(Id);
+                theloai.QTVCapNhat = nguoiDung.MaNguoiDung;
+            if (theloai.TrangThai == TinhTrang.Activating)
                     theloai.TrangThai = TinhTrang.IsBlocked;
                 else
                     theloai.TrangThai = TinhTrang.Activating;
@@ -159,9 +172,9 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                                     else
                                     {
 
-                                        if (KiemTraHinhAnh(st.Icon) == 0)
+                                        if (st.HangMuc.Length > 10)
                                         {
-                                            st.ThongBao = "Image does not exist in Ckfinder !";
+                                            st.ThongBao = "Category field only accepts 10 digits !";
                                             DsThatbai.Add(st);
                                         }
                                         else
@@ -173,10 +186,19 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                                             }
                                             else
                                             {
-                                                if (st.HangMuc.Length > 10)
+                                                if (KiemTraHinhAnh(st.Icon) == 0)
                                                 {
-                                                    st.ThongBao = "Category field only accepts 10 digits !";
-                                                    DsThatbai.Add(st);
+                                                    if (string.IsNullOrWhiteSpace(st.DuongDanSeo))
+                                                    {
+                                                        st.DuongDanSeo = AdminHelper.ToSeoUrl(st.TenTheLoai);
+                                                        st.ThongBao = "Image does not exist in Ckfinder - Please update after adding !";
+                                                        DsThanhCong.Add(st);
+                                                    }else
+                                                    {
+                                                        st.ThongBao = "Image does not exist in Ckfinder - Please update after adding !";
+                                                        DsThanhCong.Add(st);
+                                                    }
+                                                                                                      
                                                 }
                                                 else
                                                 {
@@ -240,6 +262,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         {
             try
             {
+                var nguoiDung = _authenticationService.GetAuthenticatedUser();
                 List<TheLoai> listTheLoaiSach = new List<TheLoai>();
                 DsThanhCong = (List<ExcelTheLoaiSach>)Session["DsThanhCong"];
                 if (DsThanhCong.Count != 0)
@@ -252,12 +275,21 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                         TheLoaiSach.HangMuc = item.HangMuc;
                         TheLoaiSach.MoTa = item.MoTa;
                         TheLoaiSach.MaNhanDienHangMucSach = item.MaNhanDienHangMucSach;
-                        TheLoaiSach.Icon = "/userfiles/images/" + item.Icon;
+                        if (TheLoaiSach.Icon == null)
+                        {
+                            TheLoaiSach.Icon = "/Areas/Admin/Content/dist/images/Update-icon.jpg";
+                        }
+                        else
+                        {
+                            TheLoaiSach.Icon = item.Icon;
+                        }
+                       
                         TheLoaiSach.NoiDungSeo = item.NoiDungSeo;
                         TheLoaiSach.TuKhoaSeo = item.TuKhoaSeo;
                         TheLoaiSach.TieuDeSeo = item.TieuDeSeo;
                         TheLoaiSach.DuongDanSeo = item.DuongDanSeo;
                         TheLoaiSach.NgayTao = DateTime.Now;
+                        TheLoaiSach.NguoiTao = nguoiDung.MaNguoiDung;
                         TheLoaiSach.TrangThai = false;
                         listTheLoaiSach.Add(TheLoaiSach);
                     }
@@ -280,7 +312,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 
         public int KiemTraHinhAnh(string img)
         {
-            string path = Path.Combine(Server.MapPath("~/userfiles/images/"), img);
+            string path = Path.Combine(Server.MapPath("~/Content/Images/Userupload/images/"), img);
             if (System.IO.File.Exists(Path.Combine(Directory.GetCurrentDirectory(), path)))
                 return 1;
             else

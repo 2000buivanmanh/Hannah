@@ -1,4 +1,5 @@
 ﻿using DATA.Models;
+using HANNAH_NEW_VERSION.Configs;
 using SERVICE;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,14 @@ using static DATA.Constant.Constant;
 
 namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 {
+    [AuthorizeUser(PhanQuyen.Admin)]
     public class SlideController : Controller
     {
+        private readonly IAuthenticationService _authenticationService;
         private readonly ISlideService _slideService;
-        public SlideController(ISlideService slideService)
+        public SlideController(ISlideService slideService, IAuthenticationService authenticationService)
         {
+            _authenticationService = authenticationService;
             _slideService = slideService;
         }
         // GET: Admin/Slide
@@ -40,8 +44,10 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         [HttpPost, ValidateInput(false)]
         public JsonResult ThemHoacSuaSlide(int? Id, Slide slide)
         {
+            var nguoiDung = _authenticationService.GetAuthenticatedUser();
             if (Id == 0 || Id == null)
             {
+                slide.NguoiTao = nguoiDung.MaNguoiDung;
                 var result = _slideService.ThemSlide(slide);
                 if (result == string.Empty)
                     return Json(new { status = TrangThai.ThanhCong, message = Message.Success }, JsonRequestBehavior.AllowGet);
@@ -50,6 +56,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
             }
             else
             {
+                slide.QTVCapNhat = nguoiDung.MaNguoiDung;
                 var result = _slideService.CapNhatSlide(slide);
                 if (result == string.Empty)
                     return Json(new { status = TrangThai.ThanhCong, message = Message.Success }, JsonRequestBehavior.AllowGet);
@@ -60,7 +67,9 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult CapNhatTinhTrang(int Id)
         {
+            var nguoiDung = _authenticationService.GetAuthenticatedUser();
             var slide = _slideService.LaySlideTheoMa(Id);
+            slide.QTVCapNhat = nguoiDung.MaNguoiDung;
             if (slide.TrangThai == TinhTrang.Activating)
                 slide.TrangThai = TinhTrang.IsBlocked;
             else

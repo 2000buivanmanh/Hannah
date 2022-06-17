@@ -1,4 +1,4 @@
-﻿$("#feedbackForm").validate({
+﻿jQuery("#formFeedbackUser").validate({
     rules: {
         feedbackName: {
             required: true,
@@ -40,7 +40,7 @@ function PhanHoi() {
     var feedbackEmail = jQuery('#feedbackEmail').val();
     var feedbackPhone = jQuery('#feedbackPhone').val();
     var feedbackContent = jQuery('#feedbackContent').val();
-    if ($("#feedbackForm").valid()) {
+    if (jQuery("#formFeedbackUser").valid()) {
         Swal.fire({
             title: 'Are you sure?',
             text: "Do you want send feedback",
@@ -51,7 +51,7 @@ function PhanHoi() {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                $.post('/PhanHoiNguoiDung/GuiPhanHoi',
+                jQuery.post('/FeedbackUser/GuiPhanHoi',
                     {
                         tenNguoiGui: feedbackName,
                         Email: feedbackEmail,

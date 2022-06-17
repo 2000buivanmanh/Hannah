@@ -1,7 +1,13 @@
 ﻿$(document).ready(function () {
     ReloadData('/Admin/QLNguoiDung/_DanhSachNguoiDung');
 });
-
+var iconLoading = document.getElementById("loading");
+var showLoading = () => {
+    iconLoading.style.display = "block";
+}
+var hideLoading = () => {
+    iconLoading.style.display = "none";
+}
 
 function ThemOrSuaNguoiDung(id, url) {
     var idnguoidung = $('#idnguoidung').val();
@@ -66,7 +72,6 @@ function ThemOrSuaNguoiDung(id, url) {
                     },
 
                 }).done(function (data) {
-                   
 
                         if (data.status == "1") {
                             $('#ThemOrSuaModal').modal('hide');
@@ -317,6 +322,7 @@ function ResetPass(url, urlLoad) {
         })
             .then((result) => {
                 if (result.isConfirmed) {
+                    
                     var data = [];
                     $('.check-field').each(function () {
                         const self = $(this);
@@ -326,20 +332,21 @@ function ResetPass(url, urlLoad) {
                             data.push(id);
                         }
                     });
+                    showLoading();
                     $.post(url, { data: data })
                         .done(function (data) {
                             if (data.status == "1") {
+                                hideLoading();
                                 $.toast({
                                     heading: ' Reset Password',
                                     text: data.message,
                                     showhidetransition: 'fade',
                                     icon: 'success'
                                 });
-                                Swal.fire(
-                                    'Update !',
-                                    'The new default password is: 12345',
-                                    'success'
-                                )
+                                Swal.fire({
+                                    title: 'Update !',
+                                    text: 'The new default password is:' + data.matKhau,
+                                    icon: 'success',})
                                 ReloadData(urlLoad);
                             }
                             if (data.status == "0") {

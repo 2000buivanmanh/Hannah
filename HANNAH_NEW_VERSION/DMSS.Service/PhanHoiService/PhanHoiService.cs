@@ -20,7 +20,7 @@ namespace SERVICE
         {
             try
             {
-                var chiTietPhanHoi = _baseRepository.Table.SingleOrDefault(s => s.MaPhanHoi == phanHoi.MaPhanHoi);
+                var chiTietPhanHoi = _baseRepository.GetById( phanHoi.MaPhanHoi);
                 chiTietPhanHoi.TenNguoiGui = phanHoi.TenNguoiGui;
                 chiTietPhanHoi.Email = phanHoi.Email;
                 chiTietPhanHoi.SDT = phanHoi.SDT;
@@ -55,7 +55,7 @@ namespace SERVICE
         }
         public PhanHoi LayPhanHoiTheoMa(int maPhanHoi)
         {
-            return _baseRepository.Table.SingleOrDefault(s => s.MaPhanHoi == maPhanHoi);
+            return _baseRepository.GetById( maPhanHoi);
         }
     }
 }

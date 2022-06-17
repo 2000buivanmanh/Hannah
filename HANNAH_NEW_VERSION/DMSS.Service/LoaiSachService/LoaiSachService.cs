@@ -26,14 +26,14 @@ namespace SERVICE
         }
         public LoaiSach LayLoaiSachTheoMa(int maLoaiSach)
         {
-            return _baseRepository.Table.SingleOrDefault(s => s.MaLoaiSach == maLoaiSach);
+            return _baseRepository.GetById( maLoaiSach);
         }
 
         public string SuaLoaiSach(LoaiSach loaiSach)
         {
             try
             {
-                var suaLoaiSach = _baseRepository.Table.SingleOrDefault(s => s.MaLoaiSach == loaiSach.MaLoaiSach);
+                var suaLoaiSach = _baseRepository.GetById( loaiSach.MaLoaiSach);
                 suaLoaiSach.TenLoaiSach = loaiSach.TenLoaiSach;
                 suaLoaiSach.MoTa = loaiSach.MoTa;
                 suaLoaiSach.TrangThai = loaiSach.TrangThai;
@@ -92,6 +92,11 @@ namespace SERVICE
             {
                 return ex.Message;
             }
+        }
+
+        public LoaiSach LayLoaiSachTheoTen(string tenLoaiSach)
+        {
+            return _baseRepository.GetAll(s => s.TenLoaiSach == tenLoaiSach).FirstOrDefault();
         }
     }
 }

@@ -1,0 +1,319 @@
+﻿
+@model DATA.Models.Sach
+
+
+
+<div class="body">
+    <div class="text-center mt-2 mb-4">
+        <h2 id="tieude">
+        </h2>
+    </div>
+
+    <form class="pl-5 pr-5" action="#" id="frmThemOrSuaSach">
+
+        <div class="form-group">
+            <label for="bookname">
+                @Html.DisplayNameFor(model => model.TenSach)
+            </label>
+            <input class="form-control" type="text" value="@Model.TenSach" id="name" name="bookname">
+        </div>
+        <div class="form-group">
+            <label for="price">
+                @Html.DisplayNameFor(model => model.Gia)
+            </label>
+            <input class="form-control" type="text" value="@Model.Gia" id="pricee" name="price">
+        </div>
+        <div class="form-group" id="form-name">
+            <label for="Describe">@Html.DisplayNameFor(model => model.MoTaSachEn)</label>
+            <textarea class="ckeditor1" name="description"
+                      id="descriptionen">@Model.MoTaSachEn</textarea>
+        </div>
+        <div class="form-group" id="form-name">
+            <label for="Describe">@Html.DisplayNameFor(model => model.MoTaSachVi)</label>
+            <textarea class="ckeditor1" name="description"
+                      id="descriptionvi">@Model.MoTaSachVi</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image">@Html.DisplayNameFor(model => model.ThongTinAnhSach)</label>
+            <div class="container">
+                <div class="preview">
+                    <img class="img-icon" id="img-preview" src="@Model.ThongTinAnhSach" />
+                    <input id="save-img" hidden value="@Model.ThongTinAnhSach" />
+                    <div class="label-icon" onclick="onCkfider()" for="file-input">Upload Image</div>
+                    <input accept="image/*" type="file" id="file-input" />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="image">chi tiết ảnh</label>
+
+            <div class="container">
+                <div class="row">
+                    <div id="slider-container" class="slider">
+                        <div onclick="prev()" class="control-prev-btn ">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                        <div class="slide ">
+                            <img class="vien" onclick="onCkfider1()" src="/Content/Images/Userupload/images/2.gif" />
+                        </div>
+
+
+                        <div onclick="next()" class="control-next-btn">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label for="agegroup">
+                @Html.DisplayNameFor(model => model.NhomTuoi.MaNhomTuoi)
+            </label>
+            <div class="d-flex ">
+                <select class="form-control col-md-10" type="text" name="agegroup"
+                        id="agegroup">
+
+                    @foreach (var item in ViewBag.NhomTuoi)
+                    {
+                        if (item.MaNhomTuoi == Model.MaNhomTuoi)
+                        {
+                            <option value="@Model.NhomTuoi.MaNhomTuoi " selected>@Model.NhomTuoi.DoTuoiMin-@Model.NhomTuoi.DoTuoiMax</option>
+                        }
+                        else
+                        {
+                            <option value="@item.MaNhomTuoi">@item.DoTuoiMin-@item.DoTuoiMax </option>
+                        }
+
+                    }
+                </select>
+                <div class="btn btn-primary ml-auto " onclick="ModalThemSuaNhomTuoi('/Admin/NhomTuoi/_ThemOrSuaNhomTuoi')">
+                    Insert
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="bookcatagory">
+                @Html.DisplayNameFor(model => model.TheLoai.TenTheLoai)
+            </label>
+            <div class="d-flex ">
+                <select class="form-control col-md-10" type="text" name="bookcatagory"
+                        id="bookcatagory">
+
+                    @foreach (var item in ViewBag.TheLoaiSach)
+                    {
+                        if (item.MaTheLoai == Model.MaTheLoai)
+                        {
+                            <option value="@Model.TheLoai.MaTheLoai" selected> @Model.TheLoai.TenTheLoai </option>
+                        }
+                        else
+                        {
+                            <option value="@item.MaTheLoai">@item.TenTheLoai</option>
+                        }
+
+                    }
+                </select>
+                <div class="btn btn-primary ml-auto " onclick="ModalThemSua('/Admin/TheLoaiSach/_ThemOrSuaTheLoai')">
+                    Insert
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="author">
+                @Html.DisplayNameFor(model => model.TacGia.TenTacGia)
+            </label>
+            <div class="d-flex ">
+                <select class="form-control col-md-10" type="text" name="author"
+                        id="author">
+
+                    @foreach (var item in ViewBag.TacGia)
+                    {
+                        if (item.MaTacGia == Model.MaTacGia)
+                        {
+                            <option value="@Model.TacGia.MaTacGia" selected> @Model.TacGia.TenTacGia </option>
+                        }
+                        else
+                        {
+                            <option value="@item.MaTacGia">@item.TenTacGia</option>
+                        }
+
+                    }
+                </select>
+                <div class="btn btn-primary ml-auto " onclick="ModalThemSua('/Admin/TacGia/_ThemOrSuaTacGia')">
+                    Insert
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="booktype">
+                @Html.DisplayNameFor(model => model.LoaiSach.TenLoaiSach)
+            </label>
+            <div class="d-flex ">
+                <select class="form-control col-md-10" type="text" name="booktype"
+                        id="booktype">
+
+                    @foreach (var item in ViewBag.LoaiSach)
+                    {
+                        if (item.MaLoaiSach == Model.MaLoaiSach)
+                        {
+                            <option value="@Model.LoaiSach.MaLoaiSach" selected> @Model.LoaiSach.TenLoaiSach </option>
+                        }
+                        else
+                        {
+                            <option value="@item.MaLoaiSach">@item.TenLoaiSach</option>
+                        }
+
+                    }
+                </select>
+                <div class="btn btn-primary ml-auto " onclick="ModalThemSua('/Admin/LoaiSach/_ThemOrSuaLoaiSach')">
+                    Insert
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="publishers">
+                @Html.DisplayNameFor(model => model.NhaXuatBan.TenNhaXuatBan)
+            </label>
+            <div class="d-flex ">
+                <select class="form-control col-md-10" type="text" name="publishers"
+                        id="publishers">
+
+                    @foreach (var item in ViewBag.NhaXuatBan)
+                    {
+                        if (item.MaNhaXuatBan == Model.MaNhaXuatBan)
+                        {
+                            <option value="@Model.NhaXuatBan.MaNhaXuatBan" selected> @Model.NhaXuatBan.TenNhaXuatBan </option>
+                        }
+                        else
+                        {
+                            <option value="@item.MaNhaXuatBan">@item.TenNhaXuatBan</option>
+                        }
+
+                    }
+                </select>
+                <div class="btn btn-primary ml-auto " onclick="ModalThemSua('/Admin/NhaXuatBan/_ThemOrSuaNhaXuatBan')">
+                    Insert
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-row ">
+                <div class="form-group col-md-6">
+                    <label for="datexb">
+                        @Html.DisplayNameFor(model => model.NgayXuatBan)
+                    </label>
+                    <input class="form-control" type="date" value="@Model.NgayXuatBan" id="datexb" name="datexb">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="datefirst">
+                        @Html.DisplayNameFor(model => model.LanDauXuatBan)
+                    </label>
+                    <input class="form-control" type="date" value="@Model.LanDauXuatBan" id="datefirst" name="datefirst">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="infoxb">
+                @Html.DisplayNameFor(model => model.DiaChiXuatBan.TenDiaChi)
+            </label>
+            <div class="d-flex ">
+                <select class="form-control col-md-10" type="text" name="infoxb"
+                        id="infoxb">
+
+                    @foreach (var item in ViewBag.DiaChiXuatBan)
+                    {
+                        if (item.MaDiaChi == Model.MaDiaChi)
+                        {
+                            <option value="@Model.DiaChiXuatBan.MaDiaChi" selected> @Model.DiaChiXuatBan.TenDiaChi </option>
+                        }
+                        else
+                        {
+                            <option value="@item.MaDiaChi">@item.TenDiaChi</option>
+                        }
+
+                    }
+                </select>
+                <div class="btn btn-primary ml-auto " onclick="ModalThemSua('/Admin/DiaChiXuatBan/_ThemOrSuaDiaChiXuatBan')">
+                    Insert
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="standardcode">
+                @Html.DisplayNameFor(model => model.MaTieuChuanSach)
+            </label>
+            <input class="form-control" value="@Model.MaTieuChuanSach" type="text" name="standardcode"
+                   id="standardcode">
+        </div>
+        <div class="form-group">
+            <div class="form-row ">
+                <div class="form-group col-md-6">
+                    <label for="amountbook">
+                        @Html.DisplayNameFor(model => model.SoLuongTrang)
+                    </label>
+                    <input class="form-control" type="text" value="@Model.SoLuongTrang" id="amountbook" name="amountbook">
+                </div>
+                <div class="form-group col-md-6 float-right">
+                    <label for="sizebook">
+                        @Html.DisplayNameFor(model => model.KichThuocSach)
+                    </label>
+                    <input class="form-control" type="text" value="@Model.KichThuocSach" id="sizebook" name="sizebook">
+                </div>
+            </div>
+        </div>
+        <div class="form-group" id="form-name">
+            <label for="SEOContent">
+                @Html.DisplayNameFor(model => model.NoiDungSeo)
+            </label>
+            <textarea class="ckeditor1" type="text" name="seocontent"
+                      id="seocontent">@Model.NoiDungSeo</textarea>
+        </div>
+        <div class="form-group">
+            <label for="SEOKeyWord">
+                @Html.DisplayNameFor(model => model.TuKhoaSeo)
+            </label>
+            <input class="form-control" value="@Model.TuKhoaSeo" type="text" name="seokeyword"
+                   id="seokeyword">
+        </div>
+        <div class="form-group">
+            <label for="SEOTitle">
+                @Html.DisplayNameFor(model => model.TieuDeSeo)
+            </label>
+            <input class="form-control" type="text"
+                   id="seotitle" value="@Model.TieuDeSeo" name="seotitle">
+
+        </div>
+        <div class="form-group">
+            <label for="seolink">
+                @Html.DisplayNameFor(model => model.DuongDanSeo)
+            </label>
+            <input class="form-control" type="text"
+                   id="seolink" value="@Model.DuongDanSeo" name="seolink">
+
+        </div>
+
+        <div id="appdata" hidden data-obj="@Json.Encode(@ViewBag.HinhAnh)"></div>
+        <div hidden id="trangthai">
+            @Model.TrangThai
+        </div>
+        <div hidden id="trangthaimuonsach">
+            @Model.TinhTrangMuonSach
+        </div>
+        <div class="form-group text-center">
+            <div class="btn btn-primary" id="btnsumit" onclick="ThemOrSuaSach(@Model.MaSach, '/Admin/Sach/_DanhSachSach')">
+                Update
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+

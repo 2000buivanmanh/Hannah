@@ -1,6 +1,8 @@
 ﻿using ClassLibrary1.Helper;
 using DATA.Models;
+using DATA.Repository;
 using DMSS.ViewModals.DsExcelViewModal;
+using HANNAH_NEW_VERSION.Configs;
 using LinqToExcel;
 using SERVICE;
 using System;
@@ -14,15 +16,17 @@ using static DATA.Constant.Constant;
 
 namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 {
-    [Authorize]
+    [AuthorizeUser(PhanQuyen.Admin)]
     public class NhomTuoiController : Controller
     {
+        private readonly IBaseRepository<NhomTuoi> _baseRepository;
         private readonly IAuthenticationService _authenticationService;
         private readonly INhomTuoiService _nhomTuoiService;
 
-        public NhomTuoiController(INhomTuoiService nhomTuoiService,
+        public NhomTuoiController(INhomTuoiService nhomTuoiService, IBaseRepository<NhomTuoi> baseRepository,
                                     IAuthenticationService authenticationService)
         {
+            _baseRepository = baseRepository;
             _authenticationService = authenticationService;
             _nhomTuoiService = nhomTuoiService;
         }
@@ -49,13 +53,19 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         public JsonResult ThemHoacSuaNhomTuoi(int? Id, NhomTuoi nhomTuoi)
         {
             var nguoiDung = _authenticationService.GetAuthenticatedUser();
+            if (_nhomTuoiService.KiemTraDoTuoi(nhomTuoi.DoTuoiMin , nhomTuoi.DoTuoiMax) != null)
+            {
+                return Json(new { status = KiemTraTonTai.DaTonTai, message = "Age group already exists!" }, JsonRequestBehavior.AllowGet);
+            }
+
             if (Id == 0 || Id == null)
             {
                 nhomTuoi.NguoiTao = nguoiDung.MaNguoiDung;
                 var result = _nhomTuoiService.ThemNhomTuoi(nhomTuoi);
+                var idNhomTuoi = _baseRepository.GetAll(p => p.MaNhomTuoi > 0).Max(p => p.MaNhomTuoi);
                 if (result == string.Empty)
 
-                    return Json(new { status = TrangThai.ThanhCong, message = Message.Success }, JsonRequestBehavior.AllowGet);
+                    return Json(new { status = TrangThai.ThanhCong, message = Message.Success, idNhomTuoi }, JsonRequestBehavior.AllowGet);
                 else
                     return Json(new { status = TrangThai.ThatBai, message = result }, JsonRequestBehavior.AllowGet);
             }
@@ -143,34 +153,58 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                                     st.TuKhoaSeo = kh.TuKhoaSeo;
                                     st.TieuDeSeo = kh.TieuDeSeo;
                                     st.DuongDanSeo = kh.DuongDanSeo;
-
+                                    if (string.IsNullOrWhiteSpace(st.DoTuoiMin) || string.IsNullOrWhiteSpace(st.DoTuoiMax)) {
+                                        st.ThongBao = "Information cannot be blank!";
+                                        DsThatbai.Add(st);
+                                    }
+                                    else
+                                    {
                                         if (IsNumber(st.DoTuoiMin) == false || IsNumber(st.DoTuoiMax) == false)
                                         {
                                             st.ThongBao = "Age must enter number !";
                                             DsThatbai.Add(st);
                                         }
-                                        else {
-                                            if (Int32.Parse(st.DoTuoiMin) > Int32.Parse(st.DoTuoiMax))
+                                        else
+                                        {
+                                            if (Int32.Parse(st.DoTuoiMin) < 0 || Int32.Parse(st.DoTuoiMax) < 0)
                                             {
-                                                st.ThongBao = "The minimum age must not be greater than the maximum age !";
+                                                st.ThongBao = "Age cannot enter a negative number !";
                                                 DsThatbai.Add(st);
                                             }
                                             else
                                             {
-                                                if (string.IsNullOrWhiteSpace(st.DuongDanSeo))
+                                                if (Int32.Parse(st.DoTuoiMin) > Int32.Parse(st.DoTuoiMax))
                                                 {
-                                                    st.DuongDanSeo = AdminHelper.ToSeoUrl(st.DoTuoiMin + " " + st.DoTuoiMax + " "+ "years old");
-                                                    st.ThongBao = "New data added";
-                                                    DsThanhCong.Add(st);
+                                                    st.ThongBao = "The minimum age must not be greater than the maximum age !";
+                                                    DsThatbai.Add(st);
                                                 }
                                                 else
                                                 {
-                                                    st.ThongBao = "New data added";
-                                                    DsThanhCong.Add(st);
+                                                    if (_nhomTuoiService.KiemTraDoTuoi(Int32.Parse(st.DoTuoiMin), Int32.Parse(st.DoTuoiMax)) == null)
+                                                    {
+                                                        st.ThongBao = "Age group already exists!";
+                                                        DsThatbai.Add(st);
+                                                    }
+                                                    else
+                                                    {
+                                                        if (string.IsNullOrWhiteSpace(st.DuongDanSeo))
+                                                        {
+                                                            st.DuongDanSeo = AdminHelper.ToSeoUrl(st.DoTuoiMin + " " + st.DoTuoiMax + " " + "years old");
+                                                            st.ThongBao = "New data added";
+                                                            DsThanhCong.Add(st);
+                                                        }
+                                                        else
+                                                        {
+                                                            st.ThongBao = "New data added";
+                                                            DsThanhCong.Add(st);
+                                                        }
+                                                    }
                                                 }
-                                            }
 
+                                            }
                                         }
+                                    }
+                                        
 
                                     Session["DsThatbai"] = DsThatbai;
                                     Session["DsThanhCong"] = DsThanhCong;
@@ -213,6 +247,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         {
             try
             {
+                var nguoiDung = _authenticationService.GetAuthenticatedUser();
                 List<NhomTuoi> listNhomTuoi = new List<NhomTuoi>();
                 DsThanhCong = (List<ExcelNhomTuoi>)Session["DsThanhCong"];
                 if (DsThanhCong.Count != 0)
@@ -229,6 +264,8 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                         NhomTuoi.NgayTao = DateTime.Now;
                         NhomTuoi.TrangThai = false;
                         listNhomTuoi.Add(NhomTuoi);
+
+
                     }
                     var result = _nhomTuoiService.ThemExcel(listNhomTuoi);
                     if (result == string.Empty)

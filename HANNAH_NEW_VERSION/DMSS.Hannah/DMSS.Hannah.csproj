@@ -53,6 +53,9 @@
     <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.9\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="CKSource.CKFinder.Connector.Config, Version=3.5.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CKSource.CKFinder.Connector.Config.3.5.2\lib\net461\CKSource.CKFinder.Connector.Config.dll</HintPath>
     </Reference>
@@ -79,6 +82,9 @@
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="ImageProcessor, Version=2.9.1.225, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ImageProcessor.2.9.1\lib\net452\ImageProcessor.dll</HintPath>
@@ -288,12 +294,14 @@
     <Compile Include="Areas\Admin\Controllers\BaiVietController.cs" />
     <Compile Include="Areas\Admin\Controllers\CaiDatController.cs" />
     <Compile Include="Areas\Admin\Controllers\DacQuyenController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DiaChiXuatBanController.cs" />
     <Compile Include="Areas\Admin\Controllers\HangMucSachController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoaiSachController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhaXuatBanController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhomTuoiController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhanHoiAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\QLNguoiDungController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SachController.cs" />
     <Compile Include="Areas\Admin\Controllers\SlideController.cs" />
     <Compile Include="Areas\Admin\Controllers\TacGiaController.cs" />
     <Compile Include="Areas\Admin\Controllers\TheLoaiSachController.cs" />
@@ -317,15 +325,10 @@
     <Content Include="Areas\Admin\Content\AdminJs\BaiVietJS.js" />
     <Content Include="Areas\Admin\Content\AdminJs\DacQuyenJS.js" />
     <Content Include="Areas\Admin\Content\AdminJs\HangMucSachJS.js" />
-    <Content Include="Areas\Admin\Content\AdminJs\LoaiSachJS.js" />
-    <Content Include="Areas\Admin\Content\AdminJs\NhaXuatBanJS.js" />
-    <Content Include="Areas\Admin\Content\AdminJs\NhomTuoiJS.js" />
-    <Content Include="Areas\Admin\Content\AdminJs\PhanHoiJs.js" />
     <Content Include="Areas\Admin\Content\AdminJs\QLNguoiDungJS.js" />
+    <Content Include="Areas\Admin\Content\AdminJs\SachJS.js" />
     <Content Include="Areas\Admin\Content\AdminJs\SharedAdmin.js" />
     <Content Include="Areas\Admin\Content\AdminJs\SlideJS.js" />
-    <Content Include="Areas\Admin\Content\AdminJs\TacGiaJS.js" />
-    <Content Include="Areas\Admin\Content\AdminJs\TheLoaiSachJS.js" />
     <Content Include="Areas\Admin\Content\assets\extra-libs\c3\c3.min.css" />
     <Content Include="Areas\Admin\Content\assets\extra-libs\c3\c3.min.js" />
     <Content Include="Areas\Admin\Content\assets\extra-libs\c3\d3.min.js" />
@@ -607,12 +610,15 @@
     <Content Include="Areas\Admin\Content\assets\libs\jquery\dist\jquery.slim.min.js" />
     <Content Include="Areas\Admin\Content\dist\css\buttons.dataTables.min.css" />
     <Content Include="Areas\Admin\Content\dist\css\jquery.dataTables.min.css" />
+    <Content Include="Areas\Admin\Content\dist\css\custom.css" />
     <Content Include="Areas\Admin\Content\dist\css\select2.min.css" />
     <Content Include="Areas\Admin\Content\dist\images\sort_asc.png" />
     <Content Include="Areas\Admin\Content\dist\images\sort_asc_disabled.png" />
     <Content Include="Areas\Admin\Content\dist\images\sort_both.png" />
     <Content Include="Areas\Admin\Content\dist\images\sort_desc.png" />
     <Content Include="Areas\Admin\Content\dist\images\sort_desc_disabled.png" />
+    <Content Include="Areas\Admin\Content\dist\images\Update-icon.jpg" />
+    <Content Include="Areas\Admin\Content\dist\images\update.jpg" />
     <Content Include="Areas\Admin\Content\dist\js\datatables.init.js" />
     <Content Include="Areas\Admin\Content\dist\js\jquery.dataTables.min.js" />
     <Content Include="Areas\Admin\Content\AdminJs\CaiDatWeb.js" />
@@ -1336,6 +1342,7 @@
     <Content Include="CKFinderScripts\skins\neko\images\svg\white\arrow-left-white.svg" />
     <Content Include="CKFinderScripts\skins\neko\images\svg\white\arrow-right-white.svg" />
     <Content Include="CKFinderScripts\skins\neko\skin.js" />
+    <Content Include="Common\GuiMatkhauDatLai.html" />
     <Content Include="Common\GuiPhanHoi.html" />
     <Content Include="Content\FeedBack\Feedback.js" />
     <Content Include="Content\fontawesome\fontawesome.css" />
@@ -1352,6 +1359,9 @@
     <Content Include="Content\Images\Userupload\images\Book\the shakespeare.jpg" />
     <Content Include="Content\Images\Userupload\images\Book\View More Images Usborne- Philosophy for Beginners.jpg" />
     <Content Include="Content\Images\Userupload\images\Book\View More Images Usborne- Politics for Beginners.jpg" />
+    <Content Include="Content\Images\Userupload\images\HinhAnhSach\sach1.jpg" />
+    <Content Include="Content\Images\Userupload\images\HinhAnhSach\sach2.jpg" />
+    <Content Include="Content\Images\Userupload\images\HinhAnhSach\sach3.jpg" />
     <Content Include="Content\Images\Userupload\images\Icon\000 Computer science, knowledge &amp; systems.png" />
     <Content Include="Content\Images\Userupload\images\Icon\010 Bibliographies.png" />
     <Content Include="Content\Images\Userupload\images\Icon\020 Library &amp; information sciences.png" />
@@ -1383,10 +1393,19 @@
     <Content Include="Content\Images\Userupload\thumbs\images\__thumbs\Silde\5D02CFD2-EEE2-4F8E-B4EE-54DF5C4736C8.jpeg\5D02CFD2-EEE2-4F8E-B4EE-54DF5C4736C8__150x87.jpeg" />
     <Content Include="Content\Images\Userupload\thumbs\images\__thumbs\Silde\slider1.jpg\slider1__150x94.jpg" />
     <Content Include="Content\Images\Userupload\thumbs\images\__thumbs\Silde\slider3.jpg\slider3__150x70.jpg" />
+    <Content Include="Content\Kiddy-Template\calendar\calendar.js" />
+    <Content Include="Content\Kiddy-Template\calendar\calendar.min.js" />
+    <Content Include="Content\Kiddy-Template\calendar\page.css" />
+    <Content Include="Content\Kiddy-Template\calendar\style.css" />
+    <Content Include="Content\Kiddy-Template\calendar\theme.css" />
     <Content Include="Content\Kiddy-Template\css\bootstrap-rating.css" />
+    <Content Include="Content\Kiddy-Template\css\bs-pagination.min.css" />
+    <Content Include="Content\Kiddy-Template\css\daterangepicker.css" />
+    <Content Include="Content\Kiddy-Template\css\px-pagination.css" />
     <Content Include="Content\Kiddy-Template\css\toast.css" />
     <Content Include="Content\Kiddy-Template\js\bootstrap-rating.js" />
     <Content Include="Content\Kiddy-Template\js\bootstrap-rating.min.js" />
+    <Content Include="Content\Kiddy-Template\js\jquery.daterangepicker.js" />
     <Content Include="Content\Kiddy-Template\js\jquery.toast.js" />
     <Content Include="Areas\Admin\Content\assets\libs\moment\ender.js" />
     <Content Include="Areas\Admin\Content\assets\libs\moment\locale\af.js" />
@@ -1698,6 +1717,7 @@
     <Content Include="Content\Kiddy-Template\js\jquery.validate.min.js" />
     <Content Include="Content\Kiddy-Template\js\modernizr.js" />
     <Content Include="Content\Kiddy-Template\js\owl.carousel.js" />
+    <Content Include="Content\Kiddy-Template\js\pagination.js" />
     <Content Include="Content\Kiddy-Template\js\retina_1.3.0.js" />
     <Content Include="Content\Kiddy-Template\js\scripts.js" />
     <Content Include="Content\Kiddy-Template\js\select2.min.js" />
@@ -2281,6 +2301,14 @@
     <Content Include="Areas\Admin\Views\QLNguoiDung\_ChiTietAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\QLNguoiDung\_ThemNguoiDung.cshtml" />
     <Content Include="Areas\Admin\Views\ThongBao\_ThongBaoAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Sach\ThongTinSach.cshtml" />
+    <Content Include="Areas\Admin\Views\Sach\_DanhSachSach.cshtml" />
+    <Content Include="Areas\Admin\Views\Sach\_ThemOrSuaSach.cshtml" />
+    <Content Include="Areas\Admin\Views\DiaChiXuatBan\_DanhSachDiaChiXuatBan.cshtml" />
+    <Content Include="Areas\Admin\Views\DiaChiXuatBan\DanhSachDiaChiXuatBan.cshtml" />
+    <Content Include="Areas\Admin\Views\DiaChiXuatBan\_ThemOrSuaDiaChiXuatBan.cshtml" />
+    <Content Include="Areas\Admin\Content\Excel\Sach.xls" />
+    <Content Include="Areas\Admin\Views\Sach\_DanhSachExcel.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2341,12 +2369,14 @@
     <Content Include="Views\FeedbackUser\FeedbackUser.cshtml" />
     <Content Include="Views\Users\BookLoanHistori.cshtml" />
     <Content Include="Views\BookCases\_BookCase.cshtml" />
+    <Content Include="Views\BookCases\BookLoanHistoriDetail.cshtml" />
+    <Content Include="Views\BookCases\_BookLoanAppointment.cshtml" />
+    <Content Include="Views\Book\AllBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\Images\Userupload\files\" />
-    <Folder Include="Content\Images\Userupload\images\HinhAnhSach\" />
     <Folder Include="Content\Images\Userupload\images\Reader\" />
     <Folder Include="Content\Upload\" />
     <Folder Include="Models\" />

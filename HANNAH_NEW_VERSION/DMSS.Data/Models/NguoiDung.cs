@@ -40,21 +40,15 @@ namespace DATA.Models
         public bool? CongKhaiThongTin { get; set; }
         [Display(Name = "User Status")]
         public bool? TinhTrangNguoiDung { get; set; }
-
         public DateTime? NgayTao { get; set; }
-
         public DateTime? NgayHetHan { get; set; }
-
         public DateTime? LanHoatDongCuoi { get; set; }
         [Display(Name = "User Role")]
         public int? VaiTro { get; set; }
         [Display(Name = "Status")]
         public int? TrangThai { get; set; }
-
         public string Capcha { get; set; }
-
         public DateTime? ThoiHanCapcha { get; set; }
-
         public int? SoLanGuiMa { get; set; }
         [Display(Name = "Referrer's name")]
         public string TenNguoiGioiThieu { get; set; }

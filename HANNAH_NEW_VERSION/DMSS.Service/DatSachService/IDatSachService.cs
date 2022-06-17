@@ -13,7 +13,9 @@ namespace SERVICE
         bool HuyDon(List<DatSach> data);
         bool DatSach(DatSach datSach);
         List<DatSach> DanhSachDatSach();
-
+        DatSach LayDonDatSachTheoMaDonSach(int maDonSach);
+        bool CapNhatDonDatSach(DatSach datSach);
+        
 
     }
 }

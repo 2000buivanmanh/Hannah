@@ -16,6 +16,7 @@ namespace SERVICE
         List<TheLoai> LayDanhSachMa(int[] data);
         string ThemExcel(List<TheLoai> data);
         TheLoai LayTheLoaiTheoMa(int maTheLoai);
+        TheLoai LayTheLoaiTheoTen(string tenTheLoai);
 
     }
 }

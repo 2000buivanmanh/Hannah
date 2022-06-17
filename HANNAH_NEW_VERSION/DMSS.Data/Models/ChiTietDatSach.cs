@@ -28,5 +28,7 @@ namespace DATA.Models
         public virtual DatSach DatSach { get; set; }
 
         public virtual Sach Sach { get; set; }
+
+        public DateTime? NgayDat { get; set; }
     }
 }

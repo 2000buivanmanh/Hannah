@@ -26,6 +26,7 @@ namespace SERVICE
         {
             try
             {
+                slide.NgayTao = DateTime.Now;
                 _baseRepository.Insert(slide);
                 return string.Empty;
             }
@@ -40,7 +41,7 @@ namespace SERVICE
         }
         public Slide LaySlideTheoMa(int maSlide)
         {
-            return _baseRepository.Table.SingleOrDefault(s => s.MaSlide == maSlide);
+            return _baseRepository.GetById( maSlide);
         }
 
         public string CapNhatSlide(Slide slide)

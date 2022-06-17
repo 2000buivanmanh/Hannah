@@ -29,8 +29,9 @@
             margin-left: auto;
         }
     }
-</style>
 
+
+</style>
 <div id="content" role="main">
     <div class="woo_panel">
         <p class="woocommerce-result-count">
@@ -58,10 +59,10 @@
         <!-- product 01 -->
         @foreach (var item in Model)
         {
-        
+
             <li class="first post-70 product type-product status-publish has-post-thumbnail product_cat-posters sale shipping-taxable purchasable product-type-simple product-cat-posters instock">
                 <div class="sale-wrapper">
-                   
+
                     @if (item.IsNew)
                     {
                         <span class="onsale">New!</span>
@@ -136,22 +137,6 @@
                         </div>
                     </div>
                     <div class="gridlist-buttonwrap">
-                            @if (User.Identity.IsAuthenticated)
-                            {
-
-                                if (item.AllowAdd)
-                                {
-                                    <a onclick="AddIntoBookCase(@item.Sach.MaSach)" class="cws_button alt small"><span class="cws_button_inner" data-bg_hover_color="" data-bg_color="" data-text_color="">Add To Book Basket</span></a>
-
-                                }
-
-                            }
-                            else
-                            {
-                                <a href="/Users/Login" class="cws_button alt small"><span class="cws_button_inner" data-bg_hover_color="" data-bg_color="" data-text_color="">Login to ...</span></a>
-                            }
-
-
                     </div>
                 </div>
 
@@ -161,7 +146,20 @@
         }
     </ul>
     <nav class="woocommerce-pagination">
-        <div class='button_section'><a href='#' class='cws_button xlarge'>View more <div class='button-shadow'></div></a></div>
+        <ul id="example" class="pagination"></ul>
+
+
+        @*<ul class="page-numbers">
+            <li><span class="page-numbers current">1</span></li>
+            @for (int i = 1; i < 6; i++)
+            {
+                <li><a class="page-numbers" onclick="LoadBookListHomePage(@i)">@i</a></li>
+            }
+            <li><a class="next page-numbers" onclick="NextPage()">►</a></li>
+            <li><a class="nexthome page-numbers" onclick="LoadBookListHomePage(117)">►►</a></li>
+        </ul>*@
+
+        <div class='button_section'><a href='/Book/AllBook' class='cws_button xlarge'>View more <div class='button-shadow'></div></a></div>
     </nav>
 </div>
 
@@ -171,7 +169,6 @@
         document.getElementById("transtale-" + @item.Sach.MaNhanDienSach).value = "EN";
     </script>
 }
-
 <script type="text/javascript">
 
     function Translate(id) {
@@ -208,4 +205,26 @@
         modal = document.getElementById("myModal-" + id);
         modal.style.display = "none";
     }
+
+    jQuery('#example').pagination({
+        // the number of entries
+        total: 1,
+
+        // current page
+        current: 1,
+
+        // the number of entires per page
+        length: 50,
+
+        // pagination size
+        size:1,
+
+        // Prev/Next text
+        prev: "&lt;",
+        next: "&gt;",
+
+        // fired on each click
+        click: function (e) { }
+    });
+   
 </script>

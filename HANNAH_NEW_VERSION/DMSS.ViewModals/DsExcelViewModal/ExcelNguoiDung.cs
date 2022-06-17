@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DMSS.ViewModals.DsExcelViewModal
 {
     [Table("ExcelNguoiDung")]
-    public class ExcelNguoiDung
+    public class ExcelNguoiDung : ViewModalDaDung
     {
 
         [Display(Name = "User Name")]
@@ -18,9 +18,6 @@ namespace DMSS.ViewModals.DsExcelViewModal
         public string EmailNguoiDung { get; set; }
         [Display(Name = "Full Name")]
         public string HoTen { get; set; }
-        [Display(Name = "Notify")]
-        public string ThongBao { get; set; }
-        [Display(Name = "#")]
-        public int? Stt { get; set; }
+
     }
 }

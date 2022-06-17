@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DATA.Models
 {
     [Table("Sach")]
-    public class Sach
+    public class Sach : DaDung
     {
         [Key]
         [Required]
@@ -17,84 +17,60 @@ namespace DATA.Models
         public int MaSach { get; set; }
 
         [MaxLength(50)]
+        [Display(Name = "Book ID")]
         public string MaNhanDienSach { get; set; }
 
         [StringLength(500)]
+        [Display(Name = "Book Name")]
         public string TenSach { get; set; }
-
+        [Display(Name = "Price")]
         public decimal? Gia { get; set; }
-
-        [Column(TypeName = "ntext")]
+        [Column( TypeName = "ntext")]
+        [Display(Name = "Book Description En")]
         public string MoTaSachEn { get; set; }
-
         [Column(TypeName = "ntext")]
+        [Display(Name = "Book Description Vi")]
+        
         public string MoTaSachVi { get; set; }
 
         public int? MaNhomTuoi { get; set; }
 
         public int? MaTheLoai { get; set; }
+        public int? MaDiaChi { get; set; }
 
         public int? MaTacGia { get; set; }
 
         public int? MaNhaXuatBan { get; set; }
 
         [MaxLength(500)]
+        [Display(Name = "Book Pictures")]
         public string ThongTinAnhSach { get; set; }
-
+        [Display(Name = "Number of Pages")]
         public int? SoLuongTrang { get; set; }
-
         [Column(TypeName = "date")]
+        [Display(Name = "Publication Date" )]
         public DateTime? NgayXuatBan { get; set; }
-
         [Column(TypeName = "date")]
+        [Display(Name = "First Published")]
         public DateTime? LanDauXuatBan { get; set; }
-
-        [MaxLength(500)]
-        public string DiaChiXuatBan { get; set; }
 
         [MaxLength(50)]
         [Display(Name = "ISBN")]
         public string MaTieuChuanSach { get; set; }
 
         [MaxLength(250)]
+        [Display(Name = "Book Size")]
         public string KichThuocSach { get; set; }
 
-        [MaxLength(500)]
-        public string TinhTrangSach { get; set; }
-
+        [Display(Name = "Book Status")]
+        public int? TinhTrangSach { get; set; }
         public bool? TinhTrangMuonSach { get; set; }
-
+        [Display(Name = "Status")]
         [Required]
+
         public bool? TrangThai { get; set; }
 
         public int? MaLoaiSach { get; set; }
-
-
-        [Column(TypeName = "date")]
-        public DateTime? NgayTao { get; set; }
-
-        public int? NguoiTao { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime? LanCapNhatCuoi { get; set; }
-
-        public int? QTVCapNhat { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Meta Description")]
-        public string NoiDungSeo { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Meta Keywords")]
-        public string TuKhoaSeo { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Title Seo")]
-        public string TieuDeSeo { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Path Seo")]
-        public string DuongDanSeo { get; set; }
 
         public virtual NhomTuoi NhomTuoi { get; set; }
 
@@ -111,6 +87,7 @@ namespace DATA.Models
         public virtual TheLoai TheLoai { get; set; }
 
         public virtual NhaXuatBan NhaXuatBan { get; set; }
+        public virtual DiaChiXuatBan DiaChiXuatBan { get; set; }
 
         public virtual ICollection<DanhGia> DanhGia { get; set; }
     }

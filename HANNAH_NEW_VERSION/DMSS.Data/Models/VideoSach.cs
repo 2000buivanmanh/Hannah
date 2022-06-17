@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DATA.Models
 {
     [Table("VideoSach")]
-    public class VideoSach
+    public class VideoSach : DaDung
     {
         [Key]
         [Required]
@@ -35,22 +35,6 @@ namespace DATA.Models
         public DateTime? NgayGuiDanhGia { get; set; }
 
         public bool? TinhTrangDanhGia { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Meta Description")]
-        public string NoiDungSeo { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Meta Keywords")]
-        public string TuKhoaSeo { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Title Seo")]
-        public string TieuDeSeo { get; set; }
-
-        [StringLength(500)]
-        [Display(Name = "Path Seo")]
-        public string DuongDanSeo { get; set; }
 
         public virtual Sach Sach { get; set; }
     }

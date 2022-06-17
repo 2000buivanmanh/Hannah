@@ -22,7 +22,7 @@ namespace SERVICE
 
         public TacGia LayTacGiaTheoMa(int maTacGia)
         {
-            return _baseRepository.Table.SingleOrDefault(s => s.MaTacGia == maTacGia);
+            return _baseRepository.GetById(maTacGia);
         }
         public List<TacGia> LayDanhSachMa(int[] data)
         {
@@ -32,7 +32,7 @@ namespace SERVICE
         {
             try
             {
-                var suaNhanXuatBan = _baseRepository.Table.SingleOrDefault(s => s.MaTacGia == TacGia.MaTacGia);
+                var suaNhanXuatBan = _baseRepository.GetById( TacGia.MaTacGia);
                 suaNhanXuatBan.TenTacGia = TacGia.TenTacGia;
                 suaNhanXuatBan.ThongTinTacGia = TacGia.ThongTinTacGia;
                 suaNhanXuatBan.TrangThai = TacGia.TrangThai;
@@ -58,6 +58,7 @@ namespace SERVICE
                 TacGia.NgayTao = DateTime.Now;
                 TacGia.TrangThai = false;
                 _baseRepository.Insert(TacGia);
+               
                 return string.Empty;
             }
             catch (Exception ex)
@@ -90,5 +91,9 @@ namespace SERVICE
             }
         }
 
+        public TacGia LayTacGiaTheoTen(string tenTacGia)
+        {
+            return _baseRepository.GetAll(s => s.TenTacGia == tenTacGia).FirstOrDefault();
+        }
     }
 }

@@ -3,7 +3,7 @@
 });
 
 
-function ThemOrSuaTheLoai(id, url) {
+function ThemOrSuaSlide(id, url) {
     var image = $('#img-preview').attr('src') == '' ? $('#save-img').val() : $('#img-preview').attr('src');
     var slidename = $('#name').val();
     var title = $('#title').val();

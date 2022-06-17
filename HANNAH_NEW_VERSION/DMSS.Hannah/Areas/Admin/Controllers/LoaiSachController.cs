@@ -1,6 +1,8 @@
 ﻿using ClassLibrary1.Helper;
 using DATA.Models;
+using DATA.Repository;
 using DMSS.ViewModals.DsExcelViewModal;
+using HANNAH_NEW_VERSION.Configs;
 using LinqToExcel;
 using SERVICE;
 using System;
@@ -20,15 +22,17 @@ using static DATA.Constant.Constant;
 
 namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 {
-    [Authorize]
+    [AuthorizeUser(PhanQuyen.Admin)]
     public class LoaiSachController : Controller
     {
+        private readonly IBaseRepository<LoaiSach> _baseRepository;
         private readonly IAuthenticationService _authenticationService;
         private readonly ILoaiSachService _loaiSachService;
 
-        public LoaiSachController(ILoaiSachService loaiSachService,
+        public LoaiSachController(ILoaiSachService loaiSachService, IBaseRepository<LoaiSach> baseRepository,
                                     IAuthenticationService authenticationService)
         {
+            _baseRepository = baseRepository;
             _authenticationService = authenticationService;
             _loaiSachService = loaiSachService;
         }
@@ -60,9 +64,10 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
             {
                 loaiSach.NguoiTao = nguoiDung.MaNguoiDung;
                 var result = _loaiSachService.ThemLoaiSach(loaiSach);
+                var idLoaiSach = _baseRepository.GetAll(p => p.MaLoaiSach > 0).Max(p => p.MaLoaiSach);
                 if (result == string.Empty)
 
-                    return Json(new { status = TrangThai.ThanhCong, message = Message.Success }, JsonRequestBehavior.AllowGet);
+                    return Json(new { status = TrangThai.ThanhCong, message = Message.Success, idLoaiSach }, JsonRequestBehavior.AllowGet);
                 else
                     return Json(new { status = TrangThai.ThatBai, message = result }, JsonRequestBehavior.AllowGet);
             }
@@ -212,6 +217,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         {
             try
             {
+                var nguoiDung = _authenticationService.GetAuthenticatedUser();
                 List<LoaiSach> listLoaiSach = new List<LoaiSach>();
                 DsThanhCong = (List<ExcelLoaiSach>)Session["DsThanhCong"];
                 if (DsThanhCong.Count != 0)
@@ -226,6 +232,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                         loaiSach.TieuDeSeo = item.TieuDeSeo;
                         loaiSach.DuongDanSeo = item.DuongDanSeo;
                         loaiSach.NgayTao = DateTime.Now;
+                        loaiSach.NguoiTao = nguoiDung.MaNguoiDung;
                         loaiSach.TrangThai = false;
                         listLoaiSach.Add(loaiSach);
                     }

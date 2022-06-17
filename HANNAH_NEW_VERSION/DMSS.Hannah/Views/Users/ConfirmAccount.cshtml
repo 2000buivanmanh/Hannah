@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "ConfirmAccount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="main" class="site-main">
+    <div class="page_content">
+        <div class="left-pattern pattern pattern-2" style="width: 154.5px;"></div>
+        <main>
+        </main>
+        <div class="right-pattern pattern pattern-2" style="width: 154.5px;"></div>
+        <div class="footer_image"></div>
+    </div>
+</div>
+<section class="page_title wave">
+    <div class="container">
+        <div class="title">
+            <h1>Confirm Account</h1>
+        </div>
+        <nav class="bread-crumbs"><a href="/Home/Index">Home</a><i class="delimiter fa fa-chevron-right"></i><span class="current">Cofirm Account</span></nav>
+    </div>
+    <canvas class="breadcrumbs" data-bg-color="#f8f2dc" data-line-color="#f9e8b2" height="71" width="1366" style="height: 71px; width: 1366px;"></canvas>
+</section>
+<div class="container">
+    <div class="grid_row clearfix">
+        <div class="woocommerce">
+            <div class="col2-set" id="customer_login">
+                <div class="col-md-12">
+                    <form class="login" id="frmConfirmAccount">
+                        <input type="hidden" name="EmailHide" id="EmailHide" value="@ViewBag.EmailHide" />
+                        <p class="form-row form-row-wide">
+                            <h2>A security code has been sent to your email address, please enter this code to continue register!</h2>
+                        </p>
+                        <p class="form-row form-row-wide">
+                            <label for="Capcha">Enter your code! <span class="required">*</span></label>
+                            <input type="text" class="input-text" name="Capcha" id="capchaConfirmAccount" value="" required style="width:50% !important">
+                            <a class="cws_button small" onclick="XacNhanMail()">Submit</a>
+
+                        </p>
+                        <p class="form-row">
+                            <button type="button" id="sent" onclick="Resend()" class="automation-countdown"
+                                    data-remain-time="300" data-template-inprogress="Resend in" data-template-done="Resend">
+                                Resend
+                            </button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

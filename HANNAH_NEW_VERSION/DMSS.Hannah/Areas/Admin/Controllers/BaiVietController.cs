@@ -1,6 +1,7 @@
 ﻿using ClassLibrary1.Helper;
 using DATA.Models;
 using DMSS.ViewModals.DsExcelViewModal;
+using HANNAH_NEW_VERSION.Configs;
 using LinqToExcel;
 using SERVICE;
 using System;
@@ -14,7 +15,7 @@ using static DATA.Constant.Constant;
 
 namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 {
-     [Authorize]
+    [AuthorizeUser(PhanQuyen.Admin)]
     public class BaiVietController : Controller
     {
         // GET: Admin/BaiViet
@@ -41,7 +42,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
             var nguoiDung = _authenticationService.GetAuthenticatedUser();
             if (Id == 0 || Id == null)
             {
-                baiViet.NguoiDang = nguoiDung.MaNguoiDung;
+                baiViet.NguoiTao  = nguoiDung.MaNguoiDung;
                 var result = _baiVietService.ThemBaiViet(baiViet);
                 if (result == string.Empty)
 
@@ -78,7 +79,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 
         public ActionResult _ThemOrSuaBaiViet(int? Id)
         {
-            if (Id == null)
+            if (Id == null || Id  == null)
             {
                 var baiViet = new BaiViet();
                 return PartialView(baiViet);

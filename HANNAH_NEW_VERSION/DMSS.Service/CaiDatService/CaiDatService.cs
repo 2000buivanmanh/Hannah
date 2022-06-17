@@ -60,6 +60,7 @@ namespace SERVICE
                 capNhatCaiDat.IconWebSite = caiDat.IconWebSite;
                 capNhatCaiDat.ThoiHanMaXacNhan = caiDat.ThoiHanMaXacNhan;
                 capNhatCaiDat.ThoiGianHetHanTaiKhoan = caiDat.ThoiGianHetHanTaiKhoan;
+                capNhatCaiDat.LanCapNhatCuoi = DateTime.Now;
                 _baseRepository.Update(capNhatCaiDat);
                 return true;
             }

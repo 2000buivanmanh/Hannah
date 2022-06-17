@@ -3,6 +3,12 @@
     ViewBag.Title = "About";
     Layout = "~/Views/Shared/_LayoutIndexOnly.cshtml";
 }
+<style>
+    #ServiceandCapabbilities {
+        font-size: 30px;
+        font-family: Patrick Hand;
+    }
+</style>
 <div id="main" class="site-main">
     <div class="page_content">
         <div class="left-pattern pattern pattern-2" style="width: 154.5px;"></div>
@@ -21,104 +27,137 @@
     </div>
     <canvas class="breadcrumbs" data-bg-color="#f8f2dc" data-line-color="#f9e8b2"></canvas>
 </section>
-<div id="main" class="site-main">
-    <div class="page_content">
-        <div class="left-pattern pattern pattern-2"></div>
-        <main>
-            <div class="grid_row clearfix">
-                <div class="grid_col grid_col_6">
-                    <div class="ce clearfix">
-                        <div class='callout_title'>
-                            <div class="bees bees-end"><span></span></div>Terms and Condition
-                        </div>
-                        <div>
-                            <p><img class="size-medium image-type alignleft" src="@Model.GioiThieuHinhAnhWebsite" width="150" height="150" alt="our_team_2" /></p>
-                            <p style="justify-content: center">@Model.DieuKhoan</p>
-                            <p>&nbsp;</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid_col grid_col_6">
-                    <div class='ce clearfix'>
-                        <div class='callout_title'>
-                            <div class="bees bees-end"><span></span></div>Who we are
-                        </div>
-                        <div class='cws_callout'>
-                            <div class='content_section'>
-
-                                <div class='separate'></div>
-                                <div class='callout_text'>
-                                    <p id="yui_3_18_1_1_1442493473998_1372" style="justify-content: left; word-spacing: 1.5px ">@Model.GioiThieuWebSite</p>
+<body class="page wide wave-style">
+    <div class="page">
+        <div id="main" class="site-main">
+            <div class="page_content">
+                <div class="left-pattern pattern pattern-2"></div>
+                <main>
+                    <div class="grid_row clearfix">
+                        <div class="grid_col grid_col_6">
+                            <div class="ce clearfix">
+                                <div class='callout_title'>
+                                    <div class="bees bees-end"><span></span></div>Terms and Condition
+                                </div>
+                                <div>
+                                    <p><img class="size-medium image-type alignleft" src="@Model.GioiThieuHinhAnhWebsite" width="150" height="150" alt="our_team_2" /></p>
+                                    <p style="justify-content: center">@Model.DieuKhoan</p>
+                                    <p>&nbsp;</p>
                                 </div>
                             </div>
-                            <div class='button_section'><a href='/home' class='cws_button xlarge'>Visit us<div class='button-shadow'></div></a></div>
+                        </div>
+
+                        <div class="grid_col grid_col_6">
+                            <div class='ce clearfix'>
+                                <div class='callout_title'>
+                                    <div class="bees bees-end"><span></span></div>Who we are
+                                </div>
+                                <div class='cws_callout'>
+                                    <div class='content_section'>
+
+                                        <div class='separate'></div>
+                                        <div class='callout_text'>
+                                            <p id="yui_3_18_1_1_1442493473998_1372">@Model.GioiThieuWebSite</p>
+                                        </div>
+                                    </div>
+                                    <div class='button_section'><a href='/home' class='cws_button xlarge'>Visit us<div class='button-shadow'></div></a></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="grid_row clearfix">
+                        <div class="grid_col grid_col_12">
+                            <div class="ce clearfix">
+                                <h3 class="ce_title" style="text-align: center;">Services and Capabilities</h3>
+                                <div>
+                                    <p id="ServiceandCapabbilities" style="text-align: justify;">With the goal of getting kids excited about reading, hannah is always on the lookout for different books - diverse in genre and form. This is also the heart of the hannha libarary team</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid_row clearfix">
+                        <div class="grid_col grid_col_3">
+                            <div class="ce clearfix">
+                                <div>
+                                    <p style="text-align: center;"><span class="cws_fa_wrapper"><i class="cws_fa fa fa-4x fa-money"></i><span class="ring"></span></span>
+                                    <p style="text-align: center;">
+                                        <strong>All are free</strong>
+                                        <br /> Non-Profit Project
+                                        <br /> Complete with Hannh Library
+                                    </p>
+                                    <p style="text-align: center;"><a href="#" class="cws_button">View More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid_col grid_col_3">
+                            <div class="ce clearfix">
+                                <div>
+                                    <p style="text-align: center;"><span class="cws_fa_wrapper"><i class="cws_fa fa fa-4x fa-leanpub"></i><span class="ring"></span></span>
+                                    <p style="text-align: center;">
+                                        <strong>More than 1000+ books</strong>
+                                        <br />Diverse genres with great knowledge to help children absorb new lessons
+                                    </p>
+                                    <p style="text-align: center;"><a href="#" class="cws_button">View More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid_col grid_col_3">
+                            <div class="ce clearfix">
+                                <div>
+                                    <p style="text-align: center;"><span class="cws_fa_wrapper"><i class="cws_fa fa fa-4x fa-child"></i><span class="ring"></span></span>
+                                    <p style="text-align: center;">
+                                        <strong>Self Growth</strong>
+                                        <br />Not only reading books but also developing all senses of children
+                                    </p>
+                                    <p style="text-align: center;"><a href="#" class="cws_button">View More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid_col grid_col_3" id="imap">
+                            <div class="ce clearfix">
+                                <div>
+                                    <p style="text-align: center;"><span class="cws_fa_wrapper"><i class="cws_fa fa fa-4x fa-shield"></i><span class="ring"></span></span>
+                                    <p style="text-align: center;">
+                                        <strong>Censored Books</strong>
+                                        <br />Suitable for children, make sure there are no negative element
+                                    </p>
+                                    <p style="text-align: center;"><a href="#" class="cws_button">View More</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- benefits section / -->
+                    <div data-wow-duration='2s' data-wow-offset='10' data-wow-iteration='1' class='grid_row clearfix wow fadeInUp' style='padding-top: 50px;padding-bottom: 50px;'>
+                        <div class='grid_col grid_col_12'>
+                            <div class='ce clearfix'>
+                                <div>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- benefits section -->
+                    <div data-wow-duration='2s' data-wow-offset='10' data-wow-iteration='1' class='grid_row clearfix wow fadeInUp'>
+                        <div class='grid_col grid_col_4'>
+                            <div class='ce clearfix'>
+                                <div>
+                                    <h3 class="ce_title" style=" text-align: right;">Top-notch<br /> <span>Support</span></h3>
+                                    <p style="text-align: justify; font-size: 25px; font-family: Patrick Hand;">Need help? Just let us know and our team will provide you with a professional top-notch support! </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='grid_col grid_col_8'>
+                            <div class='ce clearfix'>
+                                <div><img class="aligncenter size-full image-type noborder" src="~/Content/Kiddy-Template/img/help.png" alt="help" width="436" height="443" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- benefits section / -->
+                </main>
             </div>
-            <div class="grid_row clearfix">
-                <div class="grid_col grid_col_12">
-                    <div class="ce clearfix">
-                        <h3 class="ce_title" style="text-align: center;">Services and Capabilities</h3>
-                        <div>
-                            <p style="text-align: center;">Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque dolor lectus, consectetur ut condimentum at, lobortis et sapien. Donec eu cursus ligula. Phasellus augue quam, eleifend vitae velit ac, pharetra blandit velit. Vivamus convallis magna at sodales mollis. Integer eu leo quis justo dapibus aliquet.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid_row clearfix">
-                <div class="grid_col grid_col_3">
-                    <div class="ce clearfix">
-                        <div>
-                            <p style="text-align: center;"><span class="cws_fa_wrapper"><i class="cws_fa fa fa-4x fa-money"></i><span class="ring"></span></span>
-                            <p style="text-align: center;">
-                                <strong>All are free</strong>
-                                <br /> Non-Profit Project
-                                <br /> Complete with Hannh Library
-                            </p>
-                            <p style="text-align: center;"><a href="#" class="cws_button">View More</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid_col grid_col_3">
-                    <div class="ce clearfix">
-                        <div>
-                            <p style="text-align: center;"><span class="cws_fa_wrapper"><i class="cws_fa fa fa-4x fa-magic"></i><span class="ring"></span></span>
-                            <p style="text-align: center;">
-                                <strong>Extensive Style Options</strong>
-                                <br />Create YOUR OWN color scheme within a few seconds using built!
-                            </p>
-                            <p style="text-align: center;"><a href="#" class="cws_button">View More</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid_col grid_col_3">
-                    <div class="ce clearfix">
-                        <div>
-                            <p style="text-align: center;"><span class="cws_fa_wrapper"><i class="cws_fa fa fa-4x fa-trophy"></i><span class="ring"></span></span>
-                            <p style="text-align: center;">
-                                <strong>Parallax Sections</strong>
-                                <br />The theme includes Parallax Effect sections which make the website.
-                            </p>
-                            <p style="text-align: center;"><a href="#" class="cws_button">View More</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid_col grid_col_3" id="imap">
-                    <div class="ce clearfix">
-                        <div>
-                            <p style="text-align: center;"><span class="cws_fa_wrapper"><i class="cws_fa fa fa-4x fa-cog"></i><span class="ring"></span></span>
-                            <p style="text-align: center;">
-                                <strong>Retina Ready</strong>
-                                <br />This product provides responsive and flexible layout. HiDPI images.
-                            </p>
-                            <p style="text-align: center;"><a href="#" class="cws_button">View More</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+        </div>
     </div>
-</div>
+</body>
+    
+
 

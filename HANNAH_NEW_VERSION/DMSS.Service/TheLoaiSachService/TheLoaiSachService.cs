@@ -28,14 +28,14 @@ namespace SERVICE
 
         public TheLoai LayTheLoaiTheoMa(int maTheLoai)
         {
-            return _baseRepository.Table.SingleOrDefault(s => s.MaTheLoai == maTheLoai);
+            return _baseRepository.GetById( maTheLoai);
         }
 
         public string SuaTheLoai(TheLoai theLoai)
         {
             try
             {
-                var suaTheLoai = _baseRepository.Table.SingleOrDefault(s => s.MaTheLoai == theLoai.MaTheLoai);
+                var suaTheLoai = _baseRepository.GetById( theLoai.MaTheLoai);
                 suaTheLoai.TenTheLoai = theLoai.TenTheLoai;
                 suaTheLoai.HangMuc = theLoai.HangMuc;
                 suaTheLoai.Icon = theLoai.Icon;
@@ -96,6 +96,11 @@ namespace SERVICE
             {
                 return ex.Message;
             }
+        }
+
+        public TheLoai LayTheLoaiTheoTen(string tenTheLoai)
+        {
+            return _baseRepository.GetAll(s => s.TenTheLoai == tenTheLoai).FirstOrDefault();
         }
     }
 }

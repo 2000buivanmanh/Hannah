@@ -131,6 +131,7 @@ namespace HANNAH_NEW_VERSION.Controllers
             int skip = (page - 1) * pageSize;
             int take = page * pageSize;
             var lstBook = _sachService.GetAllPaging(s => s.TrangThai != true, s=>s.MaSach , take, skip).OrderByDescending(s => s.LanCapNhatCuoi).ToList();
+            ViewBag.ListRating = _danhGiaService.DanhSachDanhGia();
             var data = new List<ListBookViewModal>();
             var CheckTime = DateTime.Now.AddDays(-15);
             foreach (var book in lstBook)
@@ -145,6 +146,7 @@ namespace HANNAH_NEW_VERSION.Controllers
                 dt.AllowAdd = CheckAllowAddToBookCase(book);
                 data.Add(dt);
             }
+            ViewBag.ListBook = _sachService.ThongTinSach().Where(s => s.TrangThai != true).OrderByDescending(s => s.LanCapNhatCuoi).ToPagedList(1, pageSize);
             ViewBag.TotalRecord = _sachService.ThongTinSach().Where(s => s.TrangThai != true).Count();
             ViewBag.GioHang = Session["GioHang"];
             return PartialView(data);

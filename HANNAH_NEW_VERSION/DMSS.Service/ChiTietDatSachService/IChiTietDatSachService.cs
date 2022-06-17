@@ -12,5 +12,8 @@ namespace SERVICE
     {
         List<ChiTietDatSach> DanhSachChiTietDatSach();
         bool ThemChiTietDatSach(List<ChiTietDatSach> chiTietDatSach);
+        List<ChiTietDatSach> LayChiTietDatSachTheoMa(int maDonSach);
+        ChiTietDatSach LayChiTietDatSachTheoMaSach(int maSach);
+        List<ChiTietDatSach> LayListChiTietTheoMaSach(int maSach);
     }
 }

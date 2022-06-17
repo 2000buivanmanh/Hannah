@@ -1,6 +1,8 @@
 ﻿using ClassLibrary1.Helper;
 using DATA.Models;
+using DATA.Repository;
 using DMSS.ViewModals.DsExcelViewModal;
+using HANNAH_NEW_VERSION.Configs;
 using LinqToExcel;
 using SERVICE;
 using System;
@@ -14,17 +16,19 @@ using static DATA.Constant.Constant;
 
 namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 {
-    [Authorize]
+    [AuthorizeUser(PhanQuyen.Admin)]
     public class NhaXuatBanController : Controller
     {
         // GET: Admin/NhaXuatBan
-
+        private readonly IBaseRepository<NhaXuatBan> _baseRepository;
         private readonly IAuthenticationService _authenticationService;
         private readonly INhaXuatBanService _nhaXuatBanService;
 
-        public NhaXuatBanController(INhaXuatBanService nhaXuatBanService,
+        public NhaXuatBanController(INhaXuatBanService nhaXuatBanService, IBaseRepository<NhaXuatBan> baseRepository,
                                     IAuthenticationService authenticationService)
         {
+            _baseRepository = baseRepository;
+            _authenticationService = authenticationService;
             _authenticationService = authenticationService;
             _nhaXuatBanService = nhaXuatBanService;
         }
@@ -39,7 +43,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         }
         public ActionResult _ThemOrSuaNhaXuatBan(int? Id)
         {
-            if (Id == null)
+            if (Id == null || Id == 0)
             {
                 var nhaXuatBan = new NhaXuatBan();
                 return PartialView(nhaXuatBan);
@@ -56,9 +60,10 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
             {
                 nhaXuatBan.NguoiTao = nguoiDung.MaNguoiDung;
                 var result = _nhaXuatBanService.ThemNhaXuatBan(nhaXuatBan);
+                var idNXB = _baseRepository.GetAll(p => p.MaNhaXuatBan > 0).Max(p => p.MaNhaXuatBan);
                 if (result == string.Empty)
 
-                    return Json(new { status = TrangThai.ThanhCong, message = Message.Success }, JsonRequestBehavior.AllowGet);
+                    return Json(new { status = TrangThai.ThanhCong, message = Message.Success , idNXB }, JsonRequestBehavior.AllowGet);
                 else
                     return Json(new { status = TrangThai.ThatBai, message = result }, JsonRequestBehavior.AllowGet);
             }
@@ -206,6 +211,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         {
             try
             {
+                var nguoiDung = _authenticationService.GetAuthenticatedUser();
                 List<NhaXuatBan> listNhaXuatBan = new List<NhaXuatBan>();
                 DsThanhCong = (List<ExcelNhaXuatBan>)Session["DsThanhCong"];
                 if (DsThanhCong.Count != 0)
@@ -220,6 +226,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                         nhaXuatBan.TieuDeSeo = item.TieuDeSeo;
                         nhaXuatBan.DuongDanSeo = item.DuongDanSeo;
                         nhaXuatBan.NgayTao = DateTime.Now;
+                        nhaXuatBan.NguoiTao = nguoiDung.MaNguoiDung;
                         nhaXuatBan.TrangThai = false;
                         listNhaXuatBan.Add(nhaXuatBan);
                     }

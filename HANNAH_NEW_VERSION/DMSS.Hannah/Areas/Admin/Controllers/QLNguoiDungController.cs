@@ -1,7 +1,9 @@
 ﻿using ClassLibrary1.Helper;
 using ClassLibrary1.MaHoa;
+using ClassLibrary1.MailHelper;
 using DATA.Models;
 using DMSS.ViewModals.DsExcelViewModal;
+using HANNAH_NEW_VERSION.Configs;
 using LinqToExcel;
 using SERVICE;
 using System;
@@ -16,7 +18,7 @@ using static DATA.Constant.Constant;
 
 namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 {
-    [Authorize]
+    [AuthorizeUser(PhanQuyen.Admin)]
     public class QLNguoiDungController : Controller
     {
         private readonly INguoiDungService _nguoiDungService;
@@ -108,6 +110,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult ThemNguoiDung(NguoiDung nguoiDung)
         {
+            var taiKhoan = _authenticationService.GetAuthenticatedUser();
             if (_nguoiDungService.KiemTraTonTaiEmail(nguoiDung.EmailNguoiDung) == false)
             {
                 return Json(new { status = KiemTraTonTai.DaTonTai, message = "Email already exists!" }, JsonRequestBehavior.AllowGet);
@@ -270,6 +273,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         {
             try
             {
+                var taiKhoan = _authenticationService.GetAuthenticatedUser();
                 List<NguoiDung> listNguoiDung = new List<NguoiDung>();
                 DsThanhCong = (List<ExcelNguoiDung>)Session["DsThanhCong"];
                 if (DsThanhCong.Count != 0)
@@ -327,18 +331,21 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 
         public JsonResult ResetPass(int[] data)
         {
+            var caiDat = _caiDatService.LayThongTinWeb();
             List<NguoiDung> listNguoiDung = new List<NguoiDung>();
             var dsNguoiDung = _nguoiDungService.LayDanhSachMa(data);
-            foreach(var item in dsNguoiDung)
+            var matKhau = caiDat.MatKhauDatLai;
+            foreach (var item in dsNguoiDung)
             {
                 var nguoiDung = _nguoiDungService.LayMaNGuoiDung(item.MaNguoiDung);
-                nguoiDung.MatKhau = MaHoaMD5.MaHoa("12345");
+                GuiDatLaiMatKhau(nguoiDung.TenDangNhap, nguoiDung.HoTen, nguoiDung.EmailNguoiDung, nguoiDung.SoDienThoai, matKhau);
+                nguoiDung.MatKhau = MaHoaMD5.MaHoa(matKhau);
                 listNguoiDung.Add(nguoiDung);
             }
 
             var result = _nguoiDungService.UpdateList(listNguoiDung);
             if (result == string.Empty)
-                return Json(new { status = TrangThai.ThanhCong, message = Message.Success }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = TrangThai.ThanhCong, message = Message.Success, matKhau }, JsonRequestBehavior.AllowGet);
             else
                 return Json(new { status = TrangThai.ThatBai, message = result }, JsonRequestBehavior.AllowGet);
         }
@@ -351,6 +358,26 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
             else
                 return false;
         }
-
+        public void GuiDatLaiMatKhau(string tenDangNhap, string tenNguoiNhan, string Email, string SDT, string matKhauMoi)
+        {
+            var caiDat = _caiDatService.LayThongTinWeb();
+            String strPathAndQuery = System.Web.HttpContext.Current.Request.Url.PathAndQuery;
+            String strUrl = System.Web.HttpContext.Current.Request.Url.AbsoluteUri.Replace(strPathAndQuery, "/");
+            string noiDungMail = System.IO.File.ReadAllText(Server.MapPath("~/Common/GuiMatKhauDatLai.html"));
+            noiDungMail = noiDungMail.Replace("{{TenWeb}}", strUrl);
+            noiDungMail = noiDungMail.Replace("{{DuongDan}}", strUrl);
+            noiDungMail = noiDungMail.Replace("{{MatKhauMoi}}", matKhauMoi);
+            noiDungMail = noiDungMail.Replace("{{TenNguoiNhan}}", tenNguoiNhan);
+            noiDungMail = noiDungMail.Replace("{{TenDangNhap}}", tenDangNhap);
+            noiDungMail = noiDungMail.Replace("{{SDTNguoiNhan}}", SDT);
+            noiDungMail = noiDungMail.Replace("{{EmailNguoiNhan}}", Email);
+            noiDungMail = noiDungMail.Replace("{{HinhAnh}}", caiDat.Logo);
+            noiDungMail = noiDungMail.Replace("{{TieuDe}}", "Contact us");
+            noiDungMail = noiDungMail.Replace("{{SDT}}", caiDat.SDTLienHe);
+            noiDungMail = noiDungMail.Replace("{{Email}}", caiDat.EmailGoiMail);
+            noiDungMail = noiDungMail.Replace("{{DiaChi}}", caiDat.DiaChiCuaHang);
+            new GuiMail().SendMailPhanHoi(caiDat.EmailGoiMail, caiDat.MatKhauEmail, "Reset Password", Email, strUrl+ "Reset your password ", noiDungMail);
+            new GuiMail().SendMailPhanHoi(caiDat.EmailGoiMail, caiDat.MatKhauEmail, "Reset Password", caiDat.EmailGoiMail, strUrl + "Reset your password ", noiDungMail);
+        }
     }
 }

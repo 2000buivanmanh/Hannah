@@ -16,5 +16,6 @@ namespace SERVICE
         NhomTuoi LayNhomTuoiTheoMa(int maNhomTuoi);
         List<NhomTuoi> LayDanhSachMa(int[] data);
         string ThemExcel(List<NhomTuoi> data);
+        NhomTuoi KiemTraDoTuoi(int? doTuoiMin, int? doTuoiMax);
     }
 }

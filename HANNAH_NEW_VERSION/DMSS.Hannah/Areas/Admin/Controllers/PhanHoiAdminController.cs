@@ -1,5 +1,6 @@
 ﻿using ClassLibrary1.MailHelper;
 using DATA.Models;
+using HANNAH_NEW_VERSION.Configs;
 using SERVICE;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using static DATA.Constant.Constant;
 
 namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 {
-    [Authorize]
+    [AuthorizeUser(PhanQuyen.Admin)]
     public class PhanHoiAdminController : Controller
     {
         private readonly IPhanHoiService _phanHoiService;
@@ -42,13 +43,15 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         public JsonResult TraLoiPhanHoi(PhanHoi phanHoi)
         {
             var nguoiDung = _authenticationService.GetAuthenticatedUser();
+            GuiMailPhanHoi(phanHoi.TenNguoiGui, phanHoi.Email, phanHoi.SDT, phanHoi.NoiDungXuLy);
             phanHoi.MaNguoiDung = nguoiDung.MaNguoiDung;
             if (phanHoi.TrangThai == TinhTrang.IsBlocked)
                 phanHoi.TrangThai = TinhTrang.Activating;
+
             var result = _phanHoiService.ChiTietPhanHoi(phanHoi);
 
             if (result == string.Empty){
-                GuiMailPhanHoi(phanHoi.TenNguoiGui, phanHoi.Email, phanHoi.SDT, phanHoi.NoiDungXuLy);
+               
                 return Json(new { status = TrangThai.ThanhCong, message = Message.Success }, JsonRequestBehavior.AllowGet);
             }
             else

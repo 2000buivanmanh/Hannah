@@ -1,14 +1,17 @@
 ﻿
 using DATA.Models;
+using HANNAH_NEW_VERSION.Configs;
 using SERVICE;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static DATA.Constant.Constant;
 
 namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 {
+    [AuthorizeUser(PhanQuyen.Admin)]
     public class ThongBaoController : Controller
     {
         // GET: Admin/ThongBao
@@ -46,15 +49,15 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                     dsNguoiDung.Add(nguoiDung);
                 }
             }
-            List<DanhGia> dsDanhGia = new List<DanhGia>();
-            foreach (var item in dsThongBao)
-            {
-                if (item.MaPhanHoi != 0 && item.DaXem == false)
-                {
-                    var phanHoi = _phanHoiService.LayPhanHoiTheoMa(item.MaPhanHoi);
-                    dsPhanHoi.Add(phanHoi);
-                }
-            }
+            //List<DanhGia> dsDanhGia = new List<DanhGia>();
+            //foreach (var item in dsThongBao)
+            //{
+            //    if (item.MaPhanHoi != 0 && item.DaXem == false)
+            //    {
+            //        var phanHoi = _phanHoiService.LayPhanHoiTheoMa(item.MaPhanHoi);
+            //        dsPhanHoi.Add(phanHoi);
+            //    }
+            //}
             ViewBag.dsNguoiDung = dsNguoiDung;
             ViewBag.dsPhanHoi = dsPhanHoi;
             return PartialView();

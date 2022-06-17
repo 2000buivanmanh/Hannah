@@ -17,21 +17,21 @@
         <tbody>
             @foreach (var sach in Model.DanhSachSach)
             {
-                <tr class="cart_item">
-                    <td class="product-name product-thumbnail">
-                        <div class="media_part">
-                            <input type="hidden" id="maSach" value="@sach.MaSach" />
-                            <a href="/Book/BookDetail/@sach.MaSach"><img width="90" height="90" src="@sach.ThongTinAnhSach" class="attachment-90x90" alt="hoodie_4_front"></a>
-                        </div>
-                        <a href="/Book/BookDetail/@sach.MaSach">@sach.TenSach </a>
-                    </td>
-                    <td class="product-price">
-                        <span class="amount">@sach.Gia</span>
-                    </td>
-                    <td class="product-remove">
-                        <a onclick="RemoveBookCase(@sach.MaSach)" class="remove" title="Remove this item">×</a>
-                    </td>
-                </tr>
+            <tr class="cart_item">
+                <td class="product-name product-thumbnail">
+                    <div class="media_part">
+                        <input type="hidden" id="maSach" value="@sach.MaSach" />
+                        <a href="/Book/BookDetail/@sach.MaSach"><img width="90" height="90" src="@sach.ThongTinAnhSach" class="attachment-90x90" alt="hoodie_4_front"></a>
+                    </div>
+                    <a href="/Book/BookDetail/@sach.MaSach">@sach.TenSach </a>
+                </td>
+                <td class="product-price">
+                    <span class="amount">@sach.Gia</span>
+                </td>
+                <td class="product-remove">
+                    <a onclick="RemoveBookCase(@sach.MaSach)" class="remove" title="Remove this item">×</a>
+                </td>
+            </tr>
             }
             <tr class="cart_item">
                 <td class="product-remove">
@@ -60,6 +60,6 @@
 }
 else
 {
-    <h3>Chưa Có cuốn sách nào trong giỏ hàng </h3>
+    
 }
 

@@ -38,5 +38,6 @@ namespace DATA.DB
         public virtual DbSet<VideoSach> VideoSach { get; set; }
         public virtual DbSet<ThongBao> ThongBao { get; set; }
         public virtual DbSet<TuKhoa> TuKhoa { get; set; }
+        public virtual DbSet<DiaChiXuatBan> DiaChiXuatBan { get; set; }
     }
 }

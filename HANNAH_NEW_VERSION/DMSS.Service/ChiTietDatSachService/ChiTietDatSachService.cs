@@ -32,5 +32,20 @@ namespace SERVICE
                 return false;
             }
         }
+        public List<ChiTietDatSach> LayChiTietDatSachTheoMa(int maDonSach)
+        {
+            return _baseRepository.GetAll(s => s.MaDonSach == maDonSach);
+        }
+
+        public ChiTietDatSach LayChiTietDatSachTheoMaSach(int maSach)
+        {
+            return _baseRepository.GetAll(s => s.MaSach == maSach).OrderByDescending(s => s.NgayDat).Take(1).FirstOrDefault();
+        }
+
+        public List<ChiTietDatSach> LayListChiTietTheoMaSach(int maSach)
+        {
+            return _baseRepository.GetAll(s => s.MaSach == maSach);
+        }
+
     }
 }

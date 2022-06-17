@@ -1,0 +1,203 @@
+﻿
+<style>
+    td.ui-datepicker-unselectable.ui-state-disabled.undefined {
+        background-color: #dcdc86;
+    }
+
+    td.chuaduyet, table.ui-datepicker-calendar tbody td.redday a {
+        background: none !important;
+        background-color: #dcdc86 !important;
+        background-image: none !important;
+        color: White !important;
+        font-weight: bold !important;
+        font-size: 12pt;
+    }
+
+
+    td.redday, table.ui-datepicker-calendar tbody td.redday a {
+        background: none !important;
+        background-color: palevioletred !important;
+        background-image: none !important;
+        color: White !important;
+        font-weight: bold !important;
+        font-size: 12pt;
+    }
+
+
+    td.ngayvuachon, table.ui-datepicker-calendar tbody td.ngayvuachon a {
+        background: none !important;
+        background-color: blue !important;
+        background-image: none !important;
+        color: White !important;
+        font-weight: bold !important;
+        font-size: 12pt;
+    }
+    .column-Test {
+        float: left;
+        padding: 10px;
+    }
+    .left-Test {
+        width: 50%
+    }
+    .right-Test {
+        width: 50%;
+        padding-left: 5%;
+    }
+    .row-Test {
+        display: flex;
+    }
+        .row-Test:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    .table-test {
+        border:none !important;
+    }
+    .ui-datepicker-title {
+        text-align: center;
+    }
+    .ui-datepicker-next{
+        float: right;
+    }
+    .table-test{
+        padding:0px !important;
+    }
+    button.button-addBook {
+        display: inline-block;
+        line-height: 1;
+        border-radius: 9px;
+        padding: 8px 25px;
+        margin: 2px 0;
+        font-size: 1.0211em;
+        border: none;
+        color: #333;
+        cursor: pointer;
+        background-color: #26b4d7;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+</style>
+<span class="close" onclick="CloseModal()">&times;</span>
+<div class="row-Test User-info">
+    <div class="column-Test left-Test">
+        <div name="receive-time" id="ThoiGianRanhCuaSach" />
+        <table class="table-MoTa">
+            <tr class="moTa">
+                <td align="center" width="20px" class="table-test">
+                    <div style="width: 15px; height: 15px; background-color:  palevioletred "></div>
+                </td>
+                <td class="table-test">
+                    <span>
+                        Borrowed
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" width="20px" class="table-test">
+                    <div style="width: 15px; height: 15px; background-color: #dcdc86 "></div>
+                </td>
+                <td class="table-test">
+                    <span> Waiting for progressing</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" width="20px" class="table-test">
+                    <div style="width: 15px; height: 15px; background-color: blue"></div>
+                </td>
+                <td class="table-test">
+                    <span>Borrowing schedule has been selected</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="column-Test right-Test">
+        <form class="ch-time" id="formDatSach">
+            <h1> Book Pre-orders</h1>
+            <p class="">
+                <label for="receivetime">Receive Time <span class="required"><b>*</b></span></label>
+                <input type="date" class="input-text" name="receivetime" onfocusout="checkRcT()" min="@DateTime.Now.Date.ToString("yyyy-MM-dd")" id="receive-time" placeholder="" value="">
+            </p>
+            <p class="">
+                <label for="basketReturnTime">Return Time <span class="required"><b>*</b></span></label>
+                <input type="date" class="input-text" onfocusout="checkRTT()" min="" name="return-time" id="return-time" placeholder="" value="">
+            </p>
+            <button onclick="AddIntoBookCase(@ViewBag.MaSach)" type="button" class="button-addBook"> Add to bookcase </button>
+            <hr />
+        </form>
+        
+    </div>
+</div>
+
+
+<script>
+    jQuery(document).ready(function () {
+        var jsonObj = @Html.Raw(Json.Encode(@ViewBag.NgayChuaDuyet));
+        var myValue = jsonObj;
+        var date_range = @Html.Raw(Json.Encode(@ViewBag.NgayBan));
+        var ngayVuaChon = @Html.Raw(Json.Encode(@ViewBag.NgayVuaChon));
+        function DisableDates(date) {
+            var string = jQuery.datepicker.formatDate('mm-dd-yy', date);
+            var tooltipDate = "This date is DISABLED!!";
+            var tooltipDate1 = "This date is DISABLED!!";
+            if (ngayVuaChon != null) {
+                for (var i = 0; i < ngayVuaChon.length; i++) {
+                    if (Array.isArray(ngayVuaChon[i])) {
+                        var from = new Date(ngayVuaChon[i][0]);
+                        var to = new Date(ngayVuaChon[i][1]);
+                        var current = new Date(string);
+                        if (current >= from && current <= to)
+                            return [false, 'ngayvuachon', tooltipDate1];
+                    }
+                }
+                for (var i = 0; i < date_range.length; i++) {
+                    if (Array.isArray(date_range[i])) {
+                        var from = new Date(date_range[i][0]);
+                        var to = new Date(date_range[i][1]);
+                        var current = new Date(string);
+                        if (current >= from && current <= to)
+                            return [false, 'redday', tooltipDate];
+                    }
+                }
+            } else {
+                for (var i = 0; i < myValue.length; i++) {
+                    if (Array.isArray(myValue[i])) {
+                        var from = new Date(myValue[i][0]);
+                        var to = new Date(myValue[i][1]);
+                        var current = new Date(string);
+                        if (current >= from && current <= to)
+                            return [false, 'chuaduyet', tooltipDate];
+                    }
+                }
+                for (var i = 0; i < date_range.length; i++) {
+                    if (Array.isArray(date_range[i])) {
+                        var from = new Date(date_range[i][0]);
+                        var to = new Date(date_range[i][1]);
+                        var current = new Date(string);
+                        if (current >= from && current <= to)
+                            return [false, 'redday', tooltipDate];
+                    }
+                }
+            }
+            return [date_range.indexOf(string) == -1];
+        }
+    //table
+        jQuery("#ThoiGianRanhCuaSach").datepicker({
+            beforeShowDay: DisableDates
+        });
+
+    });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+

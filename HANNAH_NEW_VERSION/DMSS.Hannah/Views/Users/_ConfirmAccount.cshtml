@@ -1,34 +1,48 @@
 ﻿@model  DATA.Models.CaiDat
-<div class="col-md-3 register-left">
-    <img src="~/Content/Images/Top-header/login.png" />
-</div>
-
-<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-<div class="col-md-9 register-right">
-    <div class="tab-content-register" id="myTabContent">
-        <div class="row register-form-login">
-            <p class="tilte-name-form" id="tilte-name-form">Security code</p>
-            <div class="form-group">
-                <label id="Label-SecurityCode" style="color:red" class="Label-SecurityCode">Please confirm yout email ! </label>
-                <input type="text" id="Inp-SecurityCode" class="form-control" value="" />
-            </div>
-            <div class="loading" id="loading">
-                <img src="~/Content/Kiddy-Template/img/loading_hannah.gif" />
-            </div>
-            <div class="form-group" style="display:flex">
-                <div class="col">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="submit" class="button" id="btnLogin" name="login" onclick="XacNhanMail()" value="Submit">
-                        </div>
-                        <div class="col-md-6">
-                            <input id="btnct" class="button" type="button" value="Resend" onclick="GuiMaXacNhan()" />
-                        </div>
-                    </div>
-                    <input type="hidden" value="@Model.ThoiHanMaXacNhan" id="thoiGianGuiMa" />
-                    <h3 id="some_div"></h3>
-                </div>
-            </div>
-        </div>
+<!-- The Modal -->
+<div id="ModalUser" class="modal">
+    <div id="ModalContent">
+        <form class="login" id="frmLogin">
+            <p class="form-row form-row-wide">
+                <label for="username">Username or email <span class="required">*</span></label>
+                <input type="text" class="input-text" name="usernameEmailLogin" id="usernameEmailLogin">
+            </p>
+            <p class="form-row form-row-wide">
+                <label for="password">Password <span class="required">*</span></label>
+                <input class="input-text" type="password" name="passwordLogin" id="passwordLogin">
+            </p>
+            <p class="form-row">
+                <a class="cws_button small" onclick="DangNhap()">Login</a>
+                <a href="/register" id="lostPassword">Or Lost password ?</a>
+                <a class="pull-right" id="btnCreateAccount">Create an acount</a>
+            </p>
+        </form>
     </div>
 </div>
+
+<script>
+    var modal = document.getElementById('ModalUser');
+
+    // Lấy phần button mở Modal
+    var btn = document.getElementById("myBtn");
+
+    // Lấy phần span đóng Modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Khi button được click thi mở Modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // Khi span được click thì đóng Modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // Khi click ngoài Modal thì đóng Modal
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

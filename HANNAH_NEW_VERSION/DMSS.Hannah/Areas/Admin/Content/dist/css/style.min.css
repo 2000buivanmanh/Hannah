@@ -1,3 +1,6 @@
+
+
+
 .notifications-wrapper {
     overflow: auto;
     max-height: 250px;
@@ -114,6 +117,10 @@ input.error, textarea.error {
 }
 .img-icon-ul {
     height: 80px;
+    width: 80px;
+}
+.img-ul {
+    height: 100px;
     width: 80px;
 }
 .label-icon {
@@ -8498,8 +8505,7 @@ textarea.form-control {
 .form-row {
     display: flex;
     flex-wrap: wrap;
-    margin-right: -5px;
-    margin-left: -5px
+
 }
 
     .form-row > .col,

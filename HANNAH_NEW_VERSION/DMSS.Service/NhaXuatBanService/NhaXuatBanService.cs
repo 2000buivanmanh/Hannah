@@ -25,14 +25,14 @@ namespace SERVICE
         }
         public NhaXuatBan LayNhaXuatBanTheoMa(int maNhaXuatBan)
         {
-            return _baseRepository.Table.SingleOrDefault(s => s.MaNhaXuatBan == maNhaXuatBan);
+            return _baseRepository.GetById( maNhaXuatBan);
         }
 
         public string SuaNhaXuatBan(NhaXuatBan nhaXuatBan)
         {
             try
             {
-                var suaNhaXuatBan = _baseRepository.Table.SingleOrDefault(s => s.MaNhaXuatBan == nhaXuatBan.MaNhaXuatBan);
+                var suaNhaXuatBan = _baseRepository.GetById( nhaXuatBan.MaNhaXuatBan);
                 suaNhaXuatBan.TenNhaXuatBan = nhaXuatBan.TenNhaXuatBan;
                 suaNhaXuatBan.ThongTinNXB = nhaXuatBan.ThongTinNXB;
                 suaNhaXuatBan.TrangThai = nhaXuatBan.TrangThai;
@@ -88,6 +88,11 @@ namespace SERVICE
             {
                 return ex.Message;
             }
+        }
+
+        public NhaXuatBan LayNhaXuatBanTheoTen(string tenNhaXuatBan)
+        {
+            return _baseRepository.GetAll(s => s.TenNhaXuatBan == tenNhaXuatBan).FirstOrDefault();
         }
     }
 }

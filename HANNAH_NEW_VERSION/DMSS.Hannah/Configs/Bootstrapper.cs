@@ -30,13 +30,18 @@ namespace HANNAH_NEW_VERSION.Configs
             container.RegisterType<ILoaiSachService, LoaiSachService>();
             container.RegisterType<ITheLoaiSachService, TheLoaiSachService>();
             container.RegisterType<ISachService, SachService>();
+            container.RegisterType<IChiNhanhService, ChiNhanhService>();
             container.RegisterType<IDanhGiaService, DanhGiaService>();
+            container.RegisterType<IChiTietDatSachService, ChiTietDatSachService>();
             container.RegisterType<IDatSachService, DatSachService>();
+            container.RegisterType<IDiaChiXuatBanService, DiaChiXuatBanService>();
             container.RegisterType<IBaiVietService, BaiVietService>();
             container.RegisterType<IThongBaoService, ThongBaoService>();
             container.RegisterType<INhomTuoiService, NhomTuoiService>();
+            container.RegisterType<IHinhAnhSachService, HinhAnhSachService>();
             container.RegisterType<INhaXuatBanService, NhaXuatBanService>();
             container.RegisterType<ITacGiaService, TacGiaService>();
+            container.RegisterType<IVideoSachService, VideoSachService>();
             container.RegisterType<IAuthenticationService,AuthenticationService>();
             container.RegisterType<INguoiDungService, NguoiDungService>();
             container.RegisterType<HttpContextBase>(new InjectionFactory(_ =>

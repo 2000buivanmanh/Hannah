@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DATA.Models.DiaChiXuatBan>
+
+
+
+<table id="tableLoad" class="table table-striped table-bordered no-wrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="checkall" value="false" onclick="SelectAll()"><span class="checkbox-material"><span class="check "></span></span>
+                    </label>
+                </div>
+            </th>
+            <th>@Html.DisplayNameFor(model => model.TenDiaChi)</th>
+            <th>@Html.DisplayNameFor(model => model.ChiTietDiaChi)</th>
+            <th>@Html.DisplayNameFor(model => model.DuongDanSeo)</th>
+            <th>@Html.DisplayNameFor(model => model.TieuDeSeo)</th>
+            <th>Edit</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" data-id="@item.MaDiaChi" class="check-field" value="false" id="check-@item.MaDiaChi" onclick="Check(@item.MaDiaChi)"><span class="checkbox-material"><span class="check"></span></span>
+                    </label>
+                </div>
+
+            </td>
+            <td>
+                @item.TenDiaChi
+            </td>
+            <td>
+                @item.ChiTietDiaChi
+            </td>
+            <td>
+                @item.DuongDanSeo
+            </td>
+            <td>
+                @item.TieuDeSeo
+            </td>
+            <td>
+                <div class="" id='@item.MaDiaChi' type="submit" data-toggle="modal" onclick="ModalThemSuaHangMucSach('/Admin/DiaChiXuatBan/_ThemOrSuaDiaChi',@item.MaDiaChi)">
+                    <i class="fas fa-edit text-center"></i>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+

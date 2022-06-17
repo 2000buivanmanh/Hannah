@@ -74,7 +74,7 @@
     .modal {
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
+        z-index: 100000; /* Sit on top */
         padding-top: 100px; /* Location of the box */
         left: 0;
         top: 5%;
@@ -129,6 +129,14 @@
 </section>
 @if (Model != null)
 {
+    <div class="modal fade " data-keyboard="false" tabindex="-1" data-backdrop="static" role="dialog" id="modal-Booking">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="contentBooking">
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
     <div class="container">
         <div class="grid_row clearfix">
             <div class="woocommerce">
@@ -144,7 +152,6 @@
                                 </p>
                                 <p class="form-row form-row-wide">
                                     <label for="basketAddress">Receive Address</label><span class="required"><b>*</b></span>
-
                                     <select name="basketAddress" class="orderby" id="basketAddress" required>
                                         @foreach (var item in Model.DanhSachChiNhanh)
                                         {
@@ -153,8 +160,12 @@
                                     </select>
                                 </p>
                                 <p class="form-row form-row-wide">
-                                    <label for="receive-time">Receive Time </label><span class="required"><b>*</b></span>
-                                    <input type="datetime-local" class="input-text" name="receive-time" id="receive-time" placeholder="" value="@Model.ThoiGianNhan.Date.ToString("yyyy-MM-ddThh:ss")" onfocusout="checkRcT()" min="@Model.ThoiGianNhan.Date.ToString("yyyy-MM-ddThh:ss")" required>
+                                    <label for="receive-time">Receive date </label><span class="required"><b>*</b></span>
+                                    <input type="date" class="input-text" name="receive-time" id="receive-time" value="@Model.ThoiGianNhan.Date.ToString("yyyy-MM-dd")" onfocusout="checkRcT()" readonly>
+                                </p>
+                                <p class="form-row form-row-wide">
+                                    <label for="GioNhan">Receive time </label><span class="required"><b>*</b></span>
+                                    <input type="time" class="input-text" name="GioNhan" id="GioNhan">
                                 </p>
                                 <p class="form-row form-row-wide">
                                     <label for="basketReturnAddress">Return Address</label><span class="required"><b>*</b></span>
@@ -166,12 +177,16 @@
                                     </select>
                                 </p>
                                 <p class="form-row form-row-wide">
-                                    <label for="basketReturnTime">Return Time</label><span class="required"><b>*</b></span>
-                                    <input type="datetime-local" class="input-text" onfocusout="checkRTT()" name="return-time" id="return-time" placeholder="" value="@Model.ThoiGianTra.Date.ToString("yyyy-MM-ddThh:ss")" required>
+                                    <label for="basketReturnTime">Return date</label><span class="required"><b>*</b></span>
+                                    <input type="date" class="input-text" name="return-time" id="return-time" placeholder="" value="@Model.ThoiGianTra.Date.ToString("yyyy-MM-dd")" readonly>
+                                </p>
+                                <p class="form-row form-row-wide">
+                                    <label for="GioTra">Return time </label><span class="required"><b>*</b></span>
+                                    <input type="time" class="input-text" name="GioTra" id="GioTra">
                                 </p>
                                 <p class="form-row form-row-wide">
                                     <label for="basketNote">Note</label>
-                                    <textarea type="text" class="input-text" name="basketNote" id="basketNote" > </textarea>
+                                    <textarea type="text" class="input-text" name="basketNote" id="basketNote"> </textarea>
                                 </p>
                             </div>
                             <div class="suggester" id="load-book-cases">
@@ -191,7 +206,7 @@
                                             <a class="cws_button small pull-right" id="DongY">Tôi đồng ý</a>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>

@@ -2,11 +2,17 @@
 @{
     ViewBag.Title = "BookDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var nguoidung = ViewBag.NguoiDung;
 }
 
 <style>
     #contentSlideDetail {
         background-color: black;
+    }
+
+    #contentBooking {
+        width: 50% !important;
+        height: 50% !important;
     }
     /* Position the "next button" to the right */
     #owl-demo .item {
@@ -33,12 +39,16 @@
         width: auto;
         height: auto;
     }
+
+    button#notPoint {
+        background-color: #DD0000;
+    }
 </style>
 <!-- Modal Cho Website -->
 <div class="modal fade " data-keyboard="false" tabindex="-1" data-backdrop="static" role="dialog" id="modal-DetailProduct">
     <div class="modal-dialog" role="document">
         <div class="modal-content" id="contentSlideDetail">
-            <span class="close" onclick=" CloseModal()">&times;</span>
+            <span class="close" onclick="CloseModal()">&times;</span>
             <div>
                 <h1 style="text-align:center">@Model.TenSach</h1><br />
             </div>
@@ -54,7 +64,15 @@
 </div><!-- /.modal -->
 <!-- \\ Modal Cho Website -->
 <!-- Hình ảnh header-->
-<input type="hidden" value="@Model.MaSach" id="maSach" />
+<div class="modal fade " data-keyboard="false" tabindex="-1" data-backdrop="static" role="dialog" id="modal-Booking">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="contentBooking">
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
 <div id="main" class="site-main">
     <div class="page_content">
         <div class="left-pattern pattern pattern-2" style="width: 154.5px;"></div>
@@ -102,6 +120,8 @@
                 <main>
                     <div id="container">
                         <div id="content" role="main">
+                            <input type="hidden" value="@Model.MaSach" id="maSach" />
+
                             <div itemscope itemtype="http://schema.org/Product" id="product-70" class="post-70 product type-product status-publish has-post-thumbnail product_cat-posters sale shipping-taxable purchasable product-type-simple product-cat-posters instock">
                                 <span class="onsale">Sale!</span>
                                 <div class="images">
@@ -179,23 +199,34 @@
                                     <div class="product_meta">
                                         <span class="posted_in">ISBN: @Model.MaNhanDienSach</span>
                                     </div>
-                                    <form class="cart" method="post" enctype='multipart/form-data'>
-                                        <div class="quantity">
-                                            <input type="number" step="1" min="1" name="quantity" value="1"
-                                                   title="Qty" class="input-text qty text" size="4" />
-                                        </div>
-                                        <input type="hidden" name="add-to-cart" value="70" />
-                                        <button type="button" onclick="AddIntoBookCase(@Model.MaSach)" class="single_add_to_cart_button button alt">
-                                            Add to
-                                            cart
-                                        </button>
-                                    </form>
                                     <div class="product_meta">
                                         <span class="posted_in">
                                             Category: <a href="features-shop.html"
                                                          rel="tag">Posters</a>
                                         </span>
                                     </div>
+                                    <form class="cart" method="post" enctype='multipart/form-data'>
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+
+                                            if (Model.Gia > nguoidung.DiemTichLuy)
+                                            {
+                                                <button type="button" onclick="CachKiemDiemTichLuy()" class="single_add_to_cart_button button alt" id="notPoint">
+                                                    Not enough erudite point
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" onclick="ShowBooking(@Model.MaSach)" class="single_add_to_cart_button button alt">
+                                                    Book Pre-orders
+                                                </button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <a class="button wc-forward account" href="/Users/Login"><i class="fa fa-sign-in"></i>  Login to borrow</a>
+                                        }
+                                    </form>
                                 </div>
                                 <!-- \\ product -->
                                 <div class="woocommerce-tabs wc-tabs-wrapper cws_ce_content ce_tabs">
@@ -419,10 +450,39 @@
 
     function CloseModal() {
         jQuery("#modal-DetailProduct").removeAttr('style');
+        jQuery('#modal-Booking').removeAttr('style');
     }
 
     function ShowSlider() {
         jQuery('#modal-DetailProduct').attr('style', 'display: block;');
+    }
+
+    function CachKiemDiemTichLuy() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "You haven't enough erudite point to borrow this book",
+            footer: '<a href="/Home/Preview">How to earn erudite point?</a>'
+        })
+    }
+
+    function ShowBooking(id) {
+        jQuery.get('/Bookcases/_BookLoanAppointment',
+            {
+                Id: id
+            }).done(function (data) {
+                jQuery('#modal-Booking').attr('style', 'display: block;');
+                jQuery('#contentBooking').html(data);
+            }).fail(function (response) {
+                swal({
+                    title: "error",
+                    text: "server error!",
+                    icon: "error",
+                    button: false,
+                    timer: 3000
+                });
+            });
+
     }
 
     function LoadListReview() {
@@ -461,10 +521,7 @@
                 });
             });
     }
-
-
     function XoaDanhGia(id) {
-
         jQuery.post('/Book/XoaDanhGia', { id: id })
             .done(function (data) {
                 if (data.status == "1") {
@@ -476,34 +533,25 @@
             })
 
     }
+   
 </script>
 @section scripts {
     <script>
-
         jQuery(document).ready(function () {
-
             LoadListReview();
-
             jQuery("#owl-demo").owlCarousel({
                 autoPlay: 3000, //Set AutoPlay to 3 seconds
                 items: 2,
                 itemsDesktop: [1200, 2],
                 itemsDesktopSmall: [979, 2]
             });
-
-
             jQuery("#owl-slider").owlCarousel({
-
                 autoPlay: 3000, //Set AutoPlay to 3 seconds
-
                 items: 4,
                 itemsDesktop: [1199, 3],
                 itemsDesktopSmall: [979, 3]
-
             });
         });
-
-
     </script>
 
 }

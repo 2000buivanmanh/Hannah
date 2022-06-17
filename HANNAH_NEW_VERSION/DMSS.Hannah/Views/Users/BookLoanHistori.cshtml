@@ -28,6 +28,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="product-name">Book Loan Code</th>
+                                                            <th class="product-name">Date Submited</th>
                                                             <th class="product-name">Date Receive</th>
                                                             <th class="product-name">Receive Address</th>
                                                             <th class="product-name">Date Return</th>
@@ -44,11 +45,14 @@
                                                                 <td class="product-name product-thumbnail">
                                                                     @item.MaHoaDonSach
                                                                 </td>
-                                                                <td class="product-price">
+                                                                <td class="product-name product-thumbnail">
                                                                     @item.NgayDat
                                                                 </td>
                                                                 <td class="product-price">
-                                                                   @item.DiaChiNhan
+                                                                    @item.NgayNhan
+                                                                </td>
+                                                                <td class="product-price">
+                                                                    @item.DiaChiNhan
                                                                 </td>
                                                                 <td class="product-price">
                                                                     @item.NgayTra
@@ -61,11 +65,22 @@
                                                                 </td>
                                                                 <td class="product-price">
                                                                     <div class="cws_msg_box warning-box">
-                                                                        Canceled (User canceled)
+                                                                        @if (@item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.DangDat)
+                                                                        {
+                                                                            <a onclick="HuyDon(@item.MaDonSach)"> Canceled</a>
+                                                                        }
+                                                                        @if (@item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.DaHuy)
+                                                                        {
+                                                                            <a> Canceled (User canceled)</a>
+                                                                        }
+                                                                        @if (@item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.DaDuyet)
+                                                                        {
+                                                                            <a>approved for loan</a>
+                                                                        }
                                                                     </div>
                                                                 </td>
                                                                 <td class="product-price">
-                                                                    <a href="/Book/BookDetail/@item.MaDonSach">View Detail</a>
+                                                                    <a href="/BookCases/BookLoanHistoriDetail/@item.MaDonSach">View Detail</a>
                                                                 </td>
                                                             </tr>
 

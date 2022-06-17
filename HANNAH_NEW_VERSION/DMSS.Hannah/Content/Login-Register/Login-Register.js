@@ -253,8 +253,9 @@ function DangKy() {
             if (data.status == -1) {
                 swal(data.message)
                     .then((value) => {
-                        $('#_ConfirmAccount').modal('show');
+                       /* $('#_ConfirmAccount').modal('show');*/
                         //OpenModalUser('/NguoiDung/_ConfirmAccount');
+                        window.location.href = 'Users/ConfirmAccount';
                         tempEmail = username;
                         success = true;
                     });

@@ -102,6 +102,8 @@
     <Compile Include="DanhGiaService\IDanhGiaService.cs" />
     <Compile Include="DatSachService\DatSachService.cs" />
     <Compile Include="DatSachService\IDatSachService.cs" />
+    <Compile Include="DiaChiXuatBanService\DiaChiXuatBanService.cs" />
+    <Compile Include="DiaChiXuatBanService\IDiaChiXuatBanService.cs" />
     <Compile Include="ExampleSerivce\ExampleService.cs" />
     <Compile Include="ExampleSerivce\IExampleService.cs" />
     <Compile Include="HangMucSachService\HangMucSachService.cs" />

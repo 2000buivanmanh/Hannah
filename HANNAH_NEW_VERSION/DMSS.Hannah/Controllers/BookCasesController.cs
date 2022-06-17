@@ -4,9 +4,9 @@ using SERVICE;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using static DATA.Constant.Constant;
+using static DMSS.ViewModals.BookCase.BookCaseViewModal;
 
 namespace HANNAH_NEW_VERSION.Controllers
 {
@@ -39,6 +39,61 @@ namespace HANNAH_NEW_VERSION.Controllers
             _caiDatService = caiDatService;
         }
 
+        public ActionResult BookLoanHistoriDetail(int id)
+        {
+            return View(_chiTietDatSachService.LayChiTietDatSachTheoMa(id));
+        }
+
+        public ActionResult _BookLoanAppointment(int Id)
+        {
+            var chiTietDatSach = _chiTietDatSachService.LayListChiTietTheoMaSach(Id);
+            List<DatSach> ListDatSach = new List<DatSach>();
+            foreach (var chiTiet in chiTietDatSach)
+            {
+                var ds = _datSachService.LayDonDatSachTheoMaDonSach((int)chiTiet.MaDonSach);
+                ListDatSach.Add(ds);
+            }
+
+            List<List<string>> ngayBans = new List<List<string>>();
+            List<string> nb = new List<string>();
+            List<List<string>> ngayChuaDuyets = new List<List<string>>();
+
+            foreach (var item in ListDatSach)
+            {
+                if (item.TinhTrangDonHang == TinhTrangDonHang.DaDuyet)
+                {
+                    nb.Add(item.NgayNhan.Value.Date.ToString("MM-dd-yyyy"));
+                    nb.Add(item.NgayTra.Value.Date.ToString("MM-dd-yyyy"));
+                    ngayBans.Add(nb);
+                }
+                if (item.TinhTrangDonHang == TinhTrangDonHang.DangDat)
+                {
+                    List<string> ncd = new List<string>();
+                    ncd.Add(item.NgayNhan.Value.Date.ToString("MM-dd-yyyy"));
+                    ncd.Add(item.NgayTra.Value.Date.ToString("MM-dd-yyyy"));
+                    ngayChuaDuyets.Add(ncd);
+                }
+
+            }
+
+            List<string> ngayVuaChon = new List<string>();
+            List<List<string>> ListngayVuaChon = new List<List<string>>();
+
+            if (Session["GioHang"] != null)
+            {
+                KeSach = Session["GioHang"] as BookCaseViewModal;
+                ngayVuaChon.Add(KeSach.ThoiGianNhan.Date.ToString("MM-dd-yyyy"));
+                ngayVuaChon.Add(KeSach.ThoiGianTra.Date.ToString("MM-dd-yyyy"));
+                ListngayVuaChon.Add(ngayVuaChon);
+                ViewBag.NgayVuaChon = ListngayVuaChon.ToArray();
+            }
+
+            ViewBag.NgayChuaDuyet = ngayChuaDuyets.ToArray();
+            ViewBag.NgayBan = ngayBans.ToArray();
+            ViewBag.MaSach = Id;
+            return PartialView();
+        }
+
         public ActionResult BookCase()
         {
 
@@ -48,8 +103,6 @@ namespace HANNAH_NEW_VERSION.Controllers
                 var dieuKhoan = _caiDatService.DanhSachCaiDat().FirstOrDefault();
                 KeSach.NguoiDung = _authenticationService.GetAuthenticatedUser();
                 KeSach = Session["GioHang"] as BookCaseViewModal;
-                KeSach.ThoiGianNhan = DateTime.Now;
-                KeSach.ThoiGianTra = DateTime.Now.AddDays(7);
                 KeSach.DanhSachChiNhanh = dsChiNhanh;
                 KeSach.DieuKhoan = dieuKhoan.DieuKhoan;
                 return View(KeSach);
@@ -80,18 +133,18 @@ namespace HANNAH_NEW_VERSION.Controllers
         }
 
         [HttpPost]
-        public JsonResult DatSach(DatSach datSach)
+        public JsonResult DatSach(DatSach datSach, DateTime ngayNhan, DateTime ngayTra,string gioNhan, string gioTra)
         {
             KeSach = Session["GioHang"] as BookCaseViewModal;
             KeSach.NguoiDung.DiemTichLuy = (int?)(KeSach.NguoiDung.DiemTichLuy - KeSach.TongDiem);
             _nguoiDungService.CapNhatNguoiDung(KeSach.NguoiDung);
             datSach.MaHoaDonSach = KeSach.NguoiDung.MaNguoiDung.ToString() + DateTime.Now.ToString("yyyyMMddHHmmss");
             datSach.MaNguoiDung = KeSach.NguoiDung.MaNguoiDung;
-            datSach.TinhTrangDonHang = TinhTrangDonHang.DangCho;
+            datSach.TinhTrangDonHang = TinhTrangDonHang.DangDat;
+            datSach.NgayNhan = DateTime.Parse(ngayNhan.Date.ToString("dd/MM/yyyy") + " " + gioNhan);
+            datSach.NgayTra = DateTime.Parse(ngayTra.Date.ToString("dd/MM/yyyy") + " " + gioTra);
             datSach.NgayDat = DateTime.Now;
             var result = _datSachService.DatSach(datSach);
-
-
             List<ChiTietDatSach> chiTietDatSach = new List<ChiTietDatSach>();
             foreach (var item in KeSach.DanhSachSach)
             {
@@ -102,26 +155,77 @@ namespace HANNAH_NEW_VERSION.Controllers
                 chiTietDatSach.Add(chiTiet);
             }
             var serultCTDS = _chiTietDatSachService.ThemChiTietDatSach(chiTietDatSach);
-            Session["GioHang"] = null;
+
             if (result && serultCTDS)
             {
+                Session["GioHang"] = null;
                 return Json(new { status = TrangThai.ThanhCong }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { status = TrangThai.ThatBai }, JsonRequestBehavior.AllowGet);
         }
 
-
-
         [HttpPost]
-        public JsonResult AddIntoBookCase(int maSach)
+        public JsonResult AddIntoBookCase(int maSach, DateTime ngayNhan, DateTime ngayTra)
         {
             var Sach = _sachService.LayMaSach(maSach);
+            var DatSach = _datSachService.DanhSachDatSach();
+            var ChiTietDatSach = _chiTietDatSachService.LayListChiTietTheoMaSach(maSach);
+            List<DatSach> ListDatSach = new List<DatSach>();
+            foreach (var chiTiet in ChiTietDatSach)
+            {
+                var ds = _datSachService.LayDonDatSachTheoMaDonSach((int)chiTiet.MaDonSach);
+                ListDatSach.Add(ds);
+            }
+            var datesBan = new List<DateTime>();
+            var datesChuaDuyet = new List<DateTime>();
+            var start = DateTime.Now;
+            var end = DateTime.Now;
+            var startChuaDuyet = DateTime.Now;
+            var endChuaDuyet = DateTime.Now;
+            foreach (var dat in ListDatSach)
+            {
+                if (dat.TinhTrangDonHang == TinhTrangDonHang.DaDuyet)
+                {
+                    start = dat.NgayNhan.Value.Date;
+                    end = dat.NgayTra.Value.Date;
+                }
+                if (dat.TinhTrangDonHang == TinhTrangDonHang.DangDat)
+                {
+                    startChuaDuyet = dat.NgayNhan.Value.Date;
+                    endChuaDuyet = dat.NgayTra.Value.Date;
+                }
+            }
+            for (var dt = start; dt <= end; dt = dt.AddDays(1))
+            {
+                datesBan.Add(dt);
+            }
+            for (var dt = startChuaDuyet; dt <= endChuaDuyet; dt = dt.AddDays(1))
+            {
+                datesChuaDuyet.Add(dt);
+            }
+            bool thoiGianBan = datesBan.Any(item => item == ngayNhan || item == ngayTra);
+            bool thoiGianChuaDuyet = datesChuaDuyet.Any(item => item == ngayNhan || item == ngayTra);
+            if (thoiGianBan)
+            {
+                return Json(new { status = TinhTrangDonHang.DaDuyet}, JsonRequestBehavior.AllowGet);
+            }
             if (!CheckAllowAddToBookCase(Sach))
                 return Json(new { status = TrangThai.ThatBai }, JsonRequestBehavior.AllowGet);
 
             if (Session["GioHang"] != null)
             {
                 KeSach = Session["GioHang"] as BookCaseViewModal;
+                if (KeSach.ThoiGianNhan.Date == ngayNhan.Date && KeSach.DanhSachSach.Any(s=>s.MaSach == maSach))
+                {
+                    return Json(new { status = TrangThai.ThatBai }, JsonRequestBehavior.AllowGet);
+                }
+                if (KeSach.DanhSachSach.Any(s => s.MaSach == maSach))
+                {
+                    KeSach.ThoiGianNhan = ngayNhan;
+                    KeSach.ThoiGianTra = ngayTra;
+                    Session["GioHang"] = KeSach;
+                    return Json(new { status = TrangThai.ThanhCong }, JsonRequestBehavior.AllowGet);
+                }
             }
             else
             {
@@ -134,7 +238,18 @@ namespace HANNAH_NEW_VERSION.Controllers
             {
                 return Json(new { status = TrangThai.ThatBai }, JsonRequestBehavior.AllowGet);
             }
+            if (thoiGianChuaDuyet)
+            {
+                KeSach.DanhSachSach.Add(Sach);
+                KeSach.ThoiGianNhan = ngayNhan;
+                KeSach.ThoiGianTra = ngayTra;
+                KeSach.TongDiem = KeSach.DanhSachSach.Sum(s => s.Gia).Value;
+                Session["GioHang"] = KeSach;
+                return Json(new { status = TinhTrangDonHang.DangDat }, JsonRequestBehavior.AllowGet);
+            }
             KeSach.DanhSachSach.Add(Sach);
+            KeSach.ThoiGianNhan = ngayNhan;
+            KeSach.ThoiGianTra = ngayTra;
             KeSach.TongDiem = KeSach.DanhSachSach.Sum(s => s.Gia).Value;
             Session["GioHang"] = KeSach;
             return Json(new { status = TrangThai.ThanhCong }, JsonRequestBehavior.AllowGet);
@@ -174,6 +289,7 @@ namespace HANNAH_NEW_VERSION.Controllers
         }
 
 
+
         bool CheckAllowAddToBookCase(Sach sach)
         {
             if (sach.TinhTrangMuonSach == true)
@@ -184,7 +300,7 @@ namespace HANNAH_NEW_VERSION.Controllers
             {
                 var gioHang = Session["GioHang"] as BookCaseViewModal;
                 if (gioHang.DanhSachSach.Any(s => s.MaSach == sach.MaSach))
-                    return false;
+                    return true;
                 var nguoiDung = _authenticationService.GetAuthenticatedUser();
 
                 if (!User.Identity.IsAuthenticated)
