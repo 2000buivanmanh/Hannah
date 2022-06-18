@@ -294,6 +294,7 @@
     <Compile Include="Areas\Admin\Controllers\BaiVietController.cs" />
     <Compile Include="Areas\Admin\Controllers\CaiDatController.cs" />
     <Compile Include="Areas\Admin\Controllers\DacQuyenController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DatSachController.cs" />
     <Compile Include="Areas\Admin\Controllers\DiaChiXuatBanController.cs" />
     <Compile Include="Areas\Admin\Controllers\HangMucSachController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoaiSachController.cs" />
@@ -324,6 +325,7 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Content\AdminJs\BaiVietJS.js" />
     <Content Include="Areas\Admin\Content\AdminJs\DacQuyenJS.js" />
+    <Content Include="Areas\Admin\Content\AdminJs\DatSachJS.js" />
     <Content Include="Areas\Admin\Content\AdminJs\HangMucSachJS.js" />
     <Content Include="Areas\Admin\Content\AdminJs\QLNguoiDungJS.js" />
     <Content Include="Areas\Admin\Content\AdminJs\SachJS.js" />
@@ -2309,6 +2311,9 @@
     <Content Include="Areas\Admin\Views\DiaChiXuatBan\_ThemOrSuaDiaChiXuatBan.cshtml" />
     <Content Include="Areas\Admin\Content\Excel\Sach.xls" />
     <Content Include="Areas\Admin\Views\Sach\_DanhSachExcel.cshtml" />
+    <Content Include="Areas\Admin\Views\DatSach\QuanLyDatSach.cshtml" />
+    <Content Include="Areas\Admin\Views\DatSach\_DanhSachDatSach.cshtml" />
+    <Content Include="Areas\Admin\Views\DatSach\_ChiTietDatSach.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2372,6 +2377,7 @@
     <Content Include="Views\BookCases\BookLoanHistoriDetail.cshtml" />
     <Content Include="Views\BookCases\_BookLoanAppointment.cshtml" />
     <Content Include="Views\Book\AllBook.cshtml" />
+    <Content Include="Views\Users\ConfirmAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

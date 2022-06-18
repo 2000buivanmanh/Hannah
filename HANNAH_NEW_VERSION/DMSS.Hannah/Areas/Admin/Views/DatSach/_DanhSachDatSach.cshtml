@@ -1,0 +1,84 @@
+﻿
+
+@model IEnumerable<DATA.Models.DatSach>
+
+<table id="tableLoad" class="table table-striped table-bordered no-wrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.NgayDat)</th>
+            <th>@Html.DisplayNameFor(model => model.MaHoaDonSach)</th>
+            <th>@Html.DisplayNameFor(model => model.NguoiDung.HoTen)</th>
+            <th>@Html.DisplayNameFor(model => model.NgayNhan)</th>
+            <th>@Html.DisplayNameFor(model => model.DiaChiNhan)</th>
+            <th>@Html.DisplayNameFor(model => model.NgayTra)</th>
+            <th>@Html.DisplayNameFor(model => model.DiaChiTra)</th>
+            <th>@Html.DisplayNameFor(model => model.TinhTrangDonHang)</th>
+            <th>@Html.DisplayNameFor(model => model.GhiChu)</th>
+            <th>Detail</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @item.NgayDat
+            </td>
+            <td>
+                @item.MaHoaDonSach
+            </td>
+            <td>
+                @item.NguoiDung.HoTen
+            </td>
+
+            <td>
+                @item.NgayNhan
+            </td>
+            <td>
+                @item.DiaChiNhan
+            </td>
+            <td>
+                @item.NgayTra
+            </td>
+            <td>
+                @item.DiaChiTra
+            </td>
+            <td>
+                @if (item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.DaHuy)
+                {
+                <p>
+                    <i class="text-danger fa fa-circle"></i>
+                    Canceled
+                </p>
+                }
+                @if (item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.DangDat)
+                {
+                    <p>
+                        <i class="text-warning fa fa-circle">
+                        </i>
+                        Waiting for approval <br />
+                    </p>
+                }
+                @if (item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.DaDuyet)
+                {
+                    <p>
+                        <i class="text-success fa fa-circle"></i>
+                         Approved
+                    </p>
+                }
+
+            </td>
+            <td>
+                @item.GhiChu
+            </td>
+            <td>
+                <div class="" id='@item.MaDonSach' type="submit" data-toggle="modal" onclick="ModalThemSua('/Admin/DatSach/_ChiTietDatSach',@item.MaDonSach)">
+                    <i class="fas fa-edit text-center"></i>
+                </div>
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>

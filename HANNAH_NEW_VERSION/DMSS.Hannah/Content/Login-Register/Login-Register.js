@@ -157,7 +157,7 @@ function DangNhap() {
                             position: 'bottom-right',
                             icon: 'success'
                         });
-                        window.location.href = 'Admin/Admin/Index';
+                        window.location.href = '/Admin/Admin/Index';
                     }
                     if (data.isAdmin == false) {
                         jQuery.toast({
@@ -202,7 +202,7 @@ function DangNhap() {
                     //OpenModalUser('/NguoiDung/_ConfirmAccount');
                 }
                 if (data.status == 2) {
-                    window.location.href = 'NguoiDung/WaitAccount';
+                    window.location.href = '/Users/WaitAccount';
                 }
             },
             failure: function (response) {
@@ -255,7 +255,7 @@ function DangKy() {
                     .then((value) => {
                        /* $('#_ConfirmAccount').modal('show');*/
                         //OpenModalUser('/NguoiDung/_ConfirmAccount');
-                        window.location.href = 'Users/ConfirmAccount';
+                        window.location.href = '/Users/ConfirmAccount';
                         tempEmail = username;
                         success = true;
                     });
@@ -317,7 +317,7 @@ function XacNhanMail() {
         dataType: "json",
         success: function (data) {
             if (data.status == 1) {
-                window.location.href = 'NguoiDung/WaitAccount';
+                window.location.href = '/Users/WaitAccount';
             }
             if (data.status == 0) {
                 swal({
