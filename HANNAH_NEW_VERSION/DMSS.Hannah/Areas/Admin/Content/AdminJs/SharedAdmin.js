@@ -18,12 +18,13 @@ function ReloadDT(idtable) {
         }
     });
 }
+
 function ReloadData(url) {
     $.get(url, {})
         .done(function (data) {
             if (data) {
                 $("#data").html(data);
-               $(function () { $('.check-toggle').bootstrapToggle() });
+                $(function () { $('.check-toggle').bootstrapToggle() });
                 ReloadDT('#tableLoad');
                 updateNumberOfSelectedRows();
             }
@@ -314,6 +315,12 @@ function ImportExcel(url, urlLoad) {
                                     ReloadDT('#tableLoad');
                                     updateNumberOfSelectedRows();
                                 }
+                                table.draw();
+                                var table = $('#data').DataTable();
+
+                                table.on('draw', function () {
+                                    $('.check-toggle').bootstrapToggle()
+                                });
                             }).fail(function () {
                                 $body.removeClass("loading");
                             })
@@ -958,6 +965,8 @@ function ThemOrSuaTheLoai(id, url) {
     var icon = $('#img-preview').attr('src') == '' ? $('#save-img').val() : $('#img-preview').attr('src');
     var categoryname = $('#name').val();
     var categories = $('#categories').val();
+    var bookshelf = $('#bookshelf').val();
+    var bookpartition = $('#bookpartition').val();
     var trangthai = $('#trangthai').text();
     var bookitemidentifier = $('#bookitemidentifier').val();
     var description = $('#description').val();
@@ -980,6 +989,12 @@ function ThemOrSuaTheLoai(id, url) {
             icon: {
                 required: true,
             },
+            bookshelf: {
+                number: true,
+            },
+            bookpartition: {
+                number: true,
+            },
             bookitemidentifier: {
                 required: true,
             },
@@ -1001,6 +1016,12 @@ function ThemOrSuaTheLoai(id, url) {
             },
             icon: {
                 required: "Please enter your Image Icon",
+            },
+            bookshelf: {
+                number: "Can only enter numbers ",
+            },
+            bookpartition: {
+                number: "Can only enter numbers ",
             },
             seolink: {
                 required: "Please enter your SEO Link",
@@ -1029,6 +1050,8 @@ function ThemOrSuaTheLoai(id, url) {
                         MaTheLoai: id,
                         HangMuc: categories,
                         TenTheLoai: categoryname,
+                        NganSach: bookpartition,
+                        KeSach: bookshelf,
                         TrangThai: trangthai,
                         MaNhanDienHangMucSach: bookitemidentifier,
                         Icon: icon,
@@ -1201,3 +1224,62 @@ function ThemOrSuaDiaChi(id, url) {
     }
 }
 
+function Back() {
+    $('#btnback').attr('hidden', true);
+    $('#btnthemsua').show();
+    $('#frmdata').hide();
+    $('#dttable').show();
+}
+
+
+function LoadSach(url, id) {
+    $('#dttable').hide();
+    $('#frmdata').show();
+    $('#btnthemsua').hide();
+    $('#btnback').removeAttr('hidden');
+
+    $.get(url + "/" + id, {}).done(function (data) {
+        $('#frmdata').html(data);
+        if (id == null) {
+            $("#tieude").text('Add New ');
+            $("#btnsumit").text('Insert');
+        } else {
+            $("#tieude").text('Edit ');
+            $("#btnsumit").text('Update');
+        };
+        let input = $('#name');
+        let output = $('#seolink');
+        input.keyup(function () {
+            output.val(toSlug(input.val()));
+        });
+        var obj = $('#appdata').data('obj');
+        if (obj != null) {
+            obj.forEach(function (file) {
+                storedFiles.push(file.TenAnh);
+                var output = $("#slider-container");
+                var html = "<div class=" + "slide" + "><img src=" + file.TenAnh + " class='selFile'><a class='close'></a></div>";
+                output.append(html);
+            });
+        }
+        
+
+        
+        //ckeditor
+        document.querySelectorAll('.ckeditor1').forEach(e => {
+            ClassicEditor
+                .create(e)
+                .then(ckeditor => {
+                    ckeditor.model.document.on('change:data', () => {
+                        e.value = ckeditor.getData();
+                    });
+                })
+
+                .catch(error => {
+                    console.error(error);
+                });
+        });
+    })
+
+
+
+}

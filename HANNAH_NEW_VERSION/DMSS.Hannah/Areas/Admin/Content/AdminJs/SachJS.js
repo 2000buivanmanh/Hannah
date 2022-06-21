@@ -5,64 +5,6 @@ $(document).ready(function () {
     
 });
 
-function Back() {
-    $('#btnback').attr('hidden', true);
-    $('#btnthemsua').show();
-    $('#frmdata').hide();
-    $('#dttable').show();
-}
-
-function ThemSuaSach(url, id) {
-    $('#dttable').hide();
-    $('#frmdata').show();
-    $('#btnthemsua').hide();
-    $('#btnback').removeAttr('hidden');
-
-    $.get(url + "/" + id, {}).done(function (data) {
-        $('#frmdata').html(data);
-        if (id == null) {
-        $("#tieude").text('Add New ');
-        $("#btnsumit").text('Insert');
-    } else {
-        $("#tieude").text('Edit ');
-        $("#btnsumit").text('Update');
-    };
-    let input = $('#name');
-    let output = $('#seolink');
-    input.keyup(function () {
-        output.val(toSlug(input.val()));
-    });
-        var obj = $('#appdata').data('obj');
-        
-        obj.forEach(function (file) {
-            storedFiles.push(file.TenAnh);
-            var output = $("#slider-container");
-            var html = "<div class=" + "slide" + "><img src=" + file.TenAnh + " class='selFile'><a class='close'></a></div>";
-            output.append(html);
-
-        });
-    //ckeditor
-    document.querySelectorAll('.ckeditor1').forEach(e => {
-        ClassicEditor
-            .create(e)
-            .then(ckeditor => {
-                ckeditor.model.document.on('change:data', () => {
-                    e.value = ckeditor.getData();
-                });
-            })
-
-            .catch(error => {
-                console.error(error);
-            });
-    });
-    }).fail(function (response) {
-
-        location.reload();
-    });
- 
-
-    
-}
 
 
 function prev() {
@@ -144,7 +86,7 @@ function ThemOrSuaSach(id, url) {
     var seokeyword = $('#seokeyword').val();
     var seotitle = $('#seotitle').val();
     var seolink = $('#seolink').val();
-    $("#frmThemOrSuaSach").validate({
+    $("#frmLoadSach").validate({
         errorClass: "error fail-alert",
         validClass: "valid success-alert",
         rules: {
@@ -179,7 +121,7 @@ function ThemOrSuaSach(id, url) {
         },
     })
 
-    if ($("#frmThemOrSuaSach").valid()) {
+    if ($("#frmLoadSach").valid()) {
         Swal.fire({
             position: 'absolute',
             icon: 'question',

@@ -39,9 +39,9 @@ namespace DATA.Models
         [StringLength(10)]
         [Display(Name = "Book class name")]
         public string MaNhanDienHangMucSach { get; set; }
-
+        [Display(Name = "Book Shelf")]
         public int? KeSach { get; set; }
-
+        [Display(Name = "Book Partition")]
         public int? NganSach { get; set; }
     }
 }

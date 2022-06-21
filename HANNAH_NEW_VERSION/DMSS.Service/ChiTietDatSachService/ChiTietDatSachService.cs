@@ -36,7 +36,10 @@ namespace SERVICE
         {
             return _baseRepository.GetAll(s => s.MaDonSach == maDonSach);
         }
-
+        public List<ChiTietDatSach> LayListChiTietTheoMaSach(int[] data)
+        {
+            return _baseRepository.GetAll(s => data.Contains((Int32)s.MaSach));
+        }
         public ChiTietDatSach LayChiTietDatSachTheoMaSach(int maSach)
         {
             return _baseRepository.GetAll(s => s.MaSach == maSach).OrderByDescending(s => s.NgayDat).Take(1).FirstOrDefault();
@@ -44,7 +47,8 @@ namespace SERVICE
 
         public List<ChiTietDatSach> LayListChiTietTheoMaSach(int maSach)
         {
-            return _baseRepository.GetAll(s => s.MaSach == maSach);
+            var a = _baseRepository.GetAll(s => s.MaSach == maSach).ToList();
+            return a;
         }
 
     }

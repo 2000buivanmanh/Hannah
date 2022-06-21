@@ -180,7 +180,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                                                 }
                                                 else
                                                 {
-                                                    if (_nhomTuoiService.KiemTraDoTuoi(Int32.Parse(st.DoTuoiMin), Int32.Parse(st.DoTuoiMax)) == null)
+                                                    if (_nhomTuoiService.KiemTraDoTuoi(Int32.Parse(st.DoTuoiMin), Int32.Parse(st.DoTuoiMax)) != null)
                                                     {
                                                         st.ThongBao = "Age group already exists!";
                                                         DsThatbai.Add(st);

@@ -4,49 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
-    .login {
-        padding-left: 2% !important;
-        padding-right: 2% !important;
-    }
-
-    #formTitle {
-        padding-left: 25%;
-    }
-
-    .User-info {
-        width: 45%;
-        padding: 1%;
-        margin: 1%;
-        border-style: solid !important;
-        border: 2px;
-        border-radius: 10px;
-    }
-
-    #input-text {
-    }
-
-        #input-text:hover {
-            border: 1px solid black;
-            border-radius: 5px;
-        }
-
-        #input-text:focus {
-            outline: none;
-            box-shadow: 0px 0px 5px #61C5FA;
-            border-color: #5AB0DB;
-        }
-
-    .suggester {
-        position: absolute;
-        top: 38px;
-        margin-left: 46% !important;
-        width: 45%;
-        padding: 1%;
-        margin: 1%;
-        border-style: solid !important;
-        border: 2px;
-        border-radius: 10px;
-    }
+ 
 
     @@media (max-width: 987px) {
         .User-info {
@@ -83,80 +41,73 @@
     <canvas class="breadcrumbs" data-bg-color="#f8f2dc" data-line-color="#f9e8b2" height="71" width="1366" style="height: 71px; width: 1366px;"></canvas>
 </section>
 <div class="container">
-    <div class="grid_row clearfix">
-        <div class="woocommerce">
-            <div class="col2-set" id="customer_login">
-                <div class="col-md-8">
-                    <form class="login" id="formRegister">
-                        <div class="User-info">
-                            <h2 id="formTitle"> Your Infomation</h2>
-                            <br />
-                            <p class="form-row form-row-wide">
-                                <label for="readerName">Full Name </label><span class="required"><b>*</b></span>
-                                <input class="input-text" type="text" name="readerName" id="readerName">
-                            </p>
-                            <p class="form-row form-row-wide">
-                                <label for="readerEmail" id="lb-email1">Email</label><span class="required"><b>*</b></span>
-                                <input type="text" class="input-text" name="readerEmail" id="readerEmail">
-                            </p>
-                            <p class="form-row form-row-wide">
-                                <label for="readerUserName" id="lb-userName1">Username</label><span class="required"><b>*</b></span>
-                                <input type="text" class="input-text" name="readerUserName" id="readerUserName">
-                            </p>
-                            <p class="form-row form-row-wide">
-                                <label for="readerPassWord">Password </label><span class="required"><b>*</b></span>
-                                <input class="input-text" type="password" name="readerPassWord" id="readerPassWord">
-                            </p>
-                            <p class="form-row form-row-wide">
-                                <label for="readerRePassWord" id="lb-repass1">Confirm Password </label><span class="required"><b>*</b></span>
-                                <input class="input-text" type="password" name="readerRePassWord" id="readerRePassWord">
-                            </p>
-                            <p class="form-row form-row-wide">
-                                <label for="readerDOB">Date Of Birth </label>
-                                <input class="input-text" type="date" name="readerDOB" id="readerDOB">
-                            </p>
-                            <p class="form-row form-row-wide">
-                                <label for="readerPhoneNumber">Phone Number </label>
-                                <input class="input-text" maxlength="10" type="text" name="readerPhoneNumber" id="readerPhoneNumber">
-                            </p>
-                            <p class="form-row form-row-wide">
-                                <label for="Address">Address </label><span class="required"><b>*</b></span>
-                                <input class="input-text" type="text" name="readerAddress" id="readerAddress">
-                            </p>
-                        </div>
-                        <div class="suggester">
-                            <h2 id="formTitle"> Sponsor Infomation</h2>
-                            <p class="form-row form-row-wide">
-                                <label for="suggesterName">Sponsor Name </label><span class="required"><b>*</b></span>
-                                <input class="input-text" type="text" name="suggesterName" id="suggesterName">
-                            </p>
-                            <p class="form-row form-row-wide">
-                                <label for="suggesterPhoneMail">Sponsor Phone </label><span class="required"><b>*</b></span>
-                                <input class="input-text" type="number" name="suggesterPhoneMail" id="suggestersPhoneMail">
-                            </p>
-                            <p class="form-row form-row-wide">
-                                <label for="suggesterEmail">Sponsor Email</label><span class="required"><b>*</b></span>
-                                <input class="input-text " type="text" name="suggesterEmail" id="suggesterEmail">
-                            </p>
-                            <p class="form-row form-row-wide">
-                                <label for="suggesterRelation">Your Relationship With Sponsor </label><span class="required"><b>*</b></span>
-                                <select name="suggesterRelation" class="orderby" id="suggestersRelation">
-                                    <option value="Friend">Friend</option>
-                                    <option value="Relatives">Relatives</option>
-                                    <option value="Student">Student</option>
-                                    <option value="Teacher">Teacher</option>
-                                </select>
-                                <input id="Relation" class="input-text" type="text" placeholder="Select From List Or Input Here">
-                            </p>
-                            <hr />
-                            <p class="form-row justify-content-center">
-                                <a class="cws_button small" onclick="DangKy()">Register</a>
-                                <a href="/login">Or Login?</a>
-                            </p>
-                        </div>
-                    </form>
+    <div class="row">
+        <form id="frmRegister">
+            <div class="col">
+                <h2 id="titleForm"> Your Infomation</h2>
+                <div class="form-group">
+                    <label for="readerName">Full Name </label><span class="required"><b>*</b></span>
+                    <input class="input-text" type="text" name="readerName" id="readerName">
+                </div>
+                <div class="form-group">
+                    <label for="readerEmail" id="lb-email1">Email</label><span class="required"><b>*</b></span>
+                    <input type="text" class="input-text" name="readerEmail" id="readerEmail">
+                </div>
+                <div class="form-group">
+                    <label for="readerUserName" id="lb-userName1">Username</label><span class="required"><b>*</b></span>
+                    <input type="text" class="input-text" name="readerUserName" id="readerUserName">
+                </div>
+                <div class="form-group">
+                    <label for="readerPassWord">Password </label><span class="required"><b>*</b></span>
+                    <input class="input-text" type="password" name="readerPassWord" id="readerPassWord">
+                </div>
+                <div class="form-group">
+                    <label for="readerRePassWord" id="lb-repass1">Confirm Password </label><span class="required"><b>*</b></span>
+                    <input class="input-text" type="password" name="readerRePassWord" id="readerRePassWord">
+                </div>
+                <div class="form-group">
+                    <label for="readerDOB">Date Of Birth </label>
+                    <input class="input-text" type="date" name="readerDOB" id="readerDOB">
+                </div>
+                <div class="form-group">
+                    <label for="readerPhoneNumber">Phone Number </label>
+                    <input class="input-text" maxlength="10" type="text" name="readerPhoneNumber" id="readerPhoneNumber">
+                </div>
+                <div class="form-group">
+                    <label for="Address">Address </label><span class="required"><b>*</b></span>
+                    <input class="input-text" type="text" name="readerAddress" id="readerAddress">
                 </div>
             </div>
-        </div>
+            <div class="col">
+                <h2 id="titleForm"> Sponsor Infomation</h2>
+                    <div class="form-group">
+                        <label for="suggesterName">Sponsor Name </label><span class="required"><b>*</b></span>
+                        <input class="input-text" type="text" name="suggesterName" id="suggesterName">
+                    </div>
+                    <div class="form-group">
+                        <label for="suggesterPhoneMail">Sponsor Phone </label><span class="required"><b>*</b></span>
+                        <input class="input-text" type="number" name="suggesterPhoneMail" id="suggestersPhoneMail">
+                    </div>
+                    <div class="form-group">
+                        <label for="suggesterEmail">Sponsor Email</label><span class="required"><b>*</b></span>
+                        <input class="input-text " type="text" name="suggesterEmail" id="suggesterEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="suggesterRelation">Your Relationship With Sponsor </label><span class="required"><b>*</b></span>
+                        <select name="suggesterRelation" class="orderby" id="suggestersRelation">
+                            <option value="Friend">Friend</option>
+                            <option value="Relatives">Relatives</option>
+                            <option value="Student">Student</option>
+                            <option value="Teacher">Teacher</option>
+                        </select>
+                        <input id="Relation" class="input-text" type="text" placeholder="Select From List Or Input Here">
+                    </div>
+                    <hr />
+                    <p class="form-row justify-content-center">
+                        <a class="cws_button small" onclick="DangKy()">Register</a>
+                        <a href="/login">Or Login?</a>
+                    </p>
+            </div>
+        </form>
     </div>
 </div>

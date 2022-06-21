@@ -1,33 +1,114 @@
-﻿
-@{
-    ViewBag.Title = "AllBook";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@{
+    var ListRating = ViewBag.ListRating as List<DATA.Models.DanhGia>;
+    var NhomTuoi =  ViewBag.Agegroup as List<DATA.Models.NhomTuoi>;
+    var TheLoai = ViewBag.Category as List<DATA.Models.TheLoai>;
+    var LoaiSach = ViewBag.Type as List<DATA.Models.LoaiSach>;
 }
 
-<div id="main" class="site-main">
-    <div class="page_content">
-        <div class="left-pattern pattern pattern-2" style="width: 154.5px;"></div>
-        <main>
-        </main>
-        <div class="right-pattern pattern pattern-2" style="width: 154.5px;"></div>
-        <div class="footer_image"></div>
-    </div>
-</div>
-<section class="page_title wave">
-    <div class="container">
-        <div class="title">
-            <h1>Books List</h1>
+<style>
+    .hidden {
+        display: none !important;
+    }
+
+    .fancybox-overlay {
+        display: none !important;
+    }
+
+    .fancybox-margin {
+        margin-right: auto !important;
+    }
+
+    .fancybox-lock {
+        overflow: auto !important;
+        width: auto !important;
+    }
+
+    div#book-name {
+        height: 66px !important;
+    }
+</style>
+
+<section class='page_title wave'>
+    <div class='container'>
+        <div class='title'>
+            <h1>
+                Books List
+            </h1>
         </div>
-        <nav class="bread-crumbs"><a href="index.html">Home</a><i class="delimiter fa fa-chevron-right"></i><span class="current">About Us</span></nav>
+        <nav class="bread-crumbs"><a href="@Url.Action("Index", "Home")">Home</a><i class="delimiter fa fa-chevron-right"></i><span class="current">Books List</span></nav>
+        <!-- .breadcrumbs -->
     </div>
-    <canvas class="breadcrumbs" data-bg-color="#f8f2dc" data-line-color="#f9e8b2"></canvas>
+    <canvas class='breadcrumbs' data-bg-color='#f8f2dc' data-line-color='#f9e8b2'></canvas>
 </section>
-<div id="main" class="site-main">
-    <div class="page_content">
-        <div class="left-pattern pattern pattern-2"></div>
-        <main>
-        </main>
+
+<div class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page wide wave-style">
+    <div id="main" class="site-main">
+        <div class="page_content single_sidebar">
+            <!-- pattern container / -->
+            <div class="left-pattern pattern pattern-2" style="width: 69.5px;"></div>
+            <div class="container">
+                <!-- sidebar -->
+                <aside class="sb_right">
+                    <!-- widget search -->
+                    <div class="cws-widget">
+                        <form method="post" class="woocommerce-product-search" action="/Books/BookList" id="search-form">
+                            <label class="screen-reader-text">Search for:</label>
+                            <input type="hidden" name="Agegroup" id="Agegroup" />
+                            <input type="hidden" name="Category" id="Category" />
+                            <input type="hidden" name="Type" id="Type" />
+                            <input type="hidden" name="Status" id="Status" />
+                            <input type="hidden" name="page" id="page" value="1" />
+                            <input type="search" class="search-field" placeholder="Books title or Author name..." value="@ViewBag.keyword" name="keyword" title="Search for:">
+                            <input type="submit" id="submid-btn" value="Search">
+                        </form>
+                    </div>
+                    <!-- / widget search -->
+
+                    @*@Html.Action("_Book_case", "Bookcase")
+
+                    @Html.Action("_TopRate", "Home")
+                    @Html.Action("_TopReader", "Home")*@
+
+
+                </aside>
+                <!-- / sidebar -->
+                <!-- main -->
+                <main>
+                    <div id="list_book">
+                        @Html.Action("_BookListPage", "Book", new { keyword = ViewBag.keyword, nhomTuoi = ViewBag.Agegroup, theLoai = ViewBag.Category, loaiSach = ViewBag.Type, Status = ViewBag.Status })
+                    </div>
+                </main>
+                <!-- / main -->
+            </div>
+            <!-- footer image container  / -->
+            <div class="footer_image"></div>
+            <!-- pattern container / -->
+            <div class="right-pattern pattern pattern-2" style="width: 69.5px;"></div>
+        </div>
+        <!-- svg filter -->
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" style="display:none;">
+            <defs>
+                <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"></feGaussianBlur>
+                    <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
+                    <feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite>
+                </filter>
+            </defs>
+        </svg>
+        <!-- / svg filter -->
     </div>
 </div>
 
+<script>
+    function loadpage(i) {
 
+        var nhomTuoi = '@ViewBag.Agegroup';
+        var theLoai = '@ViewBag.Category';
+        var loaiSach = '@ViewBag.Type';
+        var Status = '@ViewBag.Status';
+        setFilter();
+        jQuery("#page").val(i);
+        jQuery("#submid-btn").click();
+        jQuery("#search-form").submit();
+    }
+</script>

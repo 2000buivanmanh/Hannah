@@ -39,9 +39,9 @@ namespace HANNAH_NEW_VERSION.Controllers
             _sachService = sachService;
         }
 
-        public ActionResult Login()
+        public ActionResult _Login()
         {
-            return View();
+            return PartialView();
         }
         [Authorize]
         public ActionResult _UserInformation()
@@ -49,28 +49,27 @@ namespace HANNAH_NEW_VERSION.Controllers
             return PartialView(_authenticationService.GetAuthenticatedUser());
         }
 
-        public ActionResult Register()
+        public ActionResult _Register()
         {
-            return View();
+            return PartialView();
         }
         public ActionResult _LostPassword()
         {
             return PartialView();
         }
-        public ActionResult ConfirmAccount()
+        public ActionResult _ConfirmAccount()
         {
-            var setting = _caiDatService.LayThongTinWeb();
-            return PartialView(setting);
+            return PartialView();
         }
         public ActionResult WaitAccount()
         {
             return View();
         }
         [Authorize]
-        public ActionResult Profile()
+        public ActionResult _Profile()
         {
             var thongTin = _authenticationService.GetAuthenticatedUser();
-            return View(thongTin);
+            return PartialView(thongTin);
         }
 
         public ActionResult BookLoanHistori()
@@ -170,6 +169,20 @@ namespace HANNAH_NEW_VERSION.Controllers
             {
                 return Json(new { status = KiemTraLogin.DangnhapThatBai, message = Message.SaiTaiKhoan }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [HttpPost]
+        public JsonResult LayLaiMatKhau(string tenDangNhap)
+        {
+            var nguoiDung = _nguoiDungService.KiemTraTenDangNhap(tenDangNhap);
+            if (nguoiDung == null)
+                return Json(new { status = TrangThai.ThatBai, message = Message.Failure }, JsonRequestBehavior.AllowGet);
+            string matkhau = RandomCapcha.RandomString(6);
+            string matKhauMoi = MaHoaMD5.MaHoa(matkhau);
+            nguoiDung.MatKhau = matKhauMoi;
+            _nguoiDungService.CapNhatNguoiDung(nguoiDung);
+            GuiMailMaXacNhan(nguoiDung.HoTen, matkhau, nguoiDung.EmailNguoiDung);
+            return Json(new { status = TrangThai.ThanhCong, message = Message.Success}, JsonRequestBehavior.AllowGet);
         }
 
 

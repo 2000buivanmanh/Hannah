@@ -91,12 +91,10 @@ namespace SERVICE
             }
         }
 
-        public bool KiemTraTonTaiMaNhanDienHangMucSach(string maNhanDienHangMucSach)
+        public HangMucSach KiemTraTonTaiMaNhanDienHangMucSach(string maNhanDienHangMucSach)
         {
-            var data = _baseRepository.GetAll(s => (s.MaNhanDienHangMucSach == maNhanDienHangMucSach )).FirstOrDefault();
-            if (data == null)
-                return true;
-            return false;
+            return _baseRepository.GetAll(s => (s.MaNhanDienHangMucSach == maNhanDienHangMucSach )).FirstOrDefault();
+
         }
     }
 }

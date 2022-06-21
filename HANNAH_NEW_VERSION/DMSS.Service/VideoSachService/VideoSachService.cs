@@ -21,5 +21,9 @@ namespace SERVICE
         {
             return _baseRepository.GetAll();
         }
+        public VideoSach LayMaVideoPreview(int maVideo)
+        {
+            return _baseRepository.GetById(maVideo);
+        }
     }
 }

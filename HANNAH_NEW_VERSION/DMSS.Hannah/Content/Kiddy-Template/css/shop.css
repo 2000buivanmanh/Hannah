@@ -228,7 +228,7 @@ form.woocommerce-ordering .orderby {
 
 
 ul.products {
-    margin: 0 -29px 30px;
+    margin: 0 -40px 30px;
     /*width: calc(100% + 30px);*/
     /*********************/
     display: -webkit-flex;
@@ -1973,7 +1973,7 @@ ul.products .product:hover h3 mark {
 @media screen and (max-width: 1190px) {
     ul.products {
         margin: 15px -10px;
-        width: calc(100% + 20px);
+        width: calc(100% + 28px);
     }
 
         ul.products li {

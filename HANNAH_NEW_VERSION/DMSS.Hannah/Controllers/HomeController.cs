@@ -146,7 +146,7 @@ namespace HANNAH_NEW_VERSION.Controllers
                 dt.AllowAdd = CheckAllowAddToBookCase(book);
                 data.Add(dt);
             }
-            ViewBag.ListBook = _sachService.ThongTinSach().Where(s => s.TrangThai != true).OrderByDescending(s => s.LanCapNhatCuoi).ToPagedList(1, pageSize);
+            ViewBag.ListBook = _sachService.ThongTinSach().Where(s => s.TrangThai != true).OrderByDescending(s => s.LanCapNhatCuoi).ToPagedList(page, pageSize);
             ViewBag.TotalRecord = _sachService.ThongTinSach().Where(s => s.TrangThai != true).Count();
             ViewBag.GioHang = Session["GioHang"];
             return PartialView(data);

@@ -9,11 +9,6 @@
     #contentSlideDetail {
         background-color: black;
     }
-
-    #contentBooking {
-        width: 50% !important;
-        height: 50% !important;
-    }
     /* Position the "next button" to the right */
     #owl-demo .item {
         margin: 1px;
@@ -64,13 +59,15 @@
 </div><!-- /.modal -->
 <!-- \\ Modal Cho Website -->
 <!-- Hình ảnh header-->
-<div class="modal fade " data-keyboard="false" tabindex="-1" data-backdrop="static" role="dialog" id="modal-Booking">
-    <div class="modal-dialog" role="document">
+<div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="modal-Booking">
+    <div class="modal-dialog modal-fullscreen-lg-down" role="document">
         <div class="modal-content" id="contentBooking">
 
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+        </div> 
+    </div> 
 </div>
+
+
 
 
 <div id="main" class="site-main">
@@ -82,6 +79,7 @@
         <div class="footer_image"></div>
     </div>
 </div>
+
 <!-- \\ Hình ảnh header-->
 <div class="single single-product postid-70 woocommerce woocommerce-page wide wave-style">
     <!-- Breadcrumb -->
@@ -217,14 +215,14 @@
                                             }
                                             else
                                             {
-                                                <button type="button" onclick="ShowBooking(@Model.MaSach)" class="single_add_to_cart_button button alt">
+                                                <button type="button" onclick="ShowBooking(@Model.MaSach)" data-toggle="modal" data-target="#modal-Booking"  class="single_add_to_cart_button button alt">
                                                     Book Pre-orders
                                                 </button>
                                             }
                                         }
                                         else
                                         {
-                                            <a class="button wc-forward account" href="/Users/Login"><i class="fa fa-sign-in"></i>  Login to borrow</a>
+                                            <a class="button wc-forward account" onclick="OpenModalUser('/Users/_Login')"><i class="fa fa-sign-in"></i>  Login to borrow</a>
                                         }
                                     </form>
                                 </div>
@@ -462,7 +460,7 @@
             icon: 'error',
             title: 'Oops...',
             text: "You haven't enough erudite point to borrow this book",
-            footer: '<a href="/Home/Preview">How to earn erudite point?</a>'
+            footer: '<a href="/Book/BookPreview">How to earn erudite point?</a>'
         })
     }
 

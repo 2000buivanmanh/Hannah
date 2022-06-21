@@ -58,9 +58,18 @@ namespace DATA.Constant
 
         public class TinhTrangDonHang
         {
-            public const int DangDat = -1;
-            public const int DaHuy = 0;
-            public const int DaDuyet = 2;
+            public const int DangDat = 0;
+            public const int DaDuyet = 1;
+            public const int ChoThayDoi = 2;
+            public const int ChoGuiSach = 3;
+            public const int ChoTraSach = 4;
+            public const int DaTraSach = 5;
+            public const int DaHuy = 6;
+        }
+        public class TinhTrangSach
+        {
+            public const int Avaliable = 1;
+            public const int NotAvaliable = 2;
         }
 
         public class Message

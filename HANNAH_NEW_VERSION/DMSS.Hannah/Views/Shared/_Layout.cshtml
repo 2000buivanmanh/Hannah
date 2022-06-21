@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" href="~/Content/Kiddy-Template/img/cropped-favicon-192x192.png" />
     <title>Hannah - Library</title>
+    <link rel="apple-touch-icon-precomposed" href="~/Content/Kiddy-Template/img/cropped-favicon-180x180.png">
+    <meta name="msapplication-TileImage" content="~/Content/Kiddy-Template/img/cropped-favicon-270x270.png">
+    <link rel="icon" href="~/Content/Kiddy-Template/img/cropped-favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" href="~/Content/Kiddy-Template/img/cropped-favicon-192x192.png" sizes="192x192" />
     <link rel='stylesheet' href='~/Content/Kiddy-Template/revslider/css/settings.css' type='text/css' media='all' />
     <link rel='stylesheet' href='~/Content/Kiddy-Template/css/font-awesome.css' type='text/css' media='all' />
     <link rel='stylesheet' href='~/Content/Kiddy-Template/css/jquery.fancybox.css' type='text/css' media='all' />
@@ -14,54 +18,16 @@
     <link rel='stylesheet' href='~/Content/Kiddy-Template/css/main.css' type='text/css' media='all' />
     <link rel='stylesheet' href='~/Content/Kiddy-Template/css/shop.css' type='text/css' media='all' />
     <link rel='stylesheet' href='~/Content/Kiddy-Template/tuner/style.css' type='text/css' media='all' />
-    <script type='text/javascript' src='~/Content/Kiddy-Template/js/jquery.js'></script>
-    <script type='text/javascript' src='~/Content/Kiddy-Template/js/jquery-migrate.min.js'></script>
     <link href="~/Content/Kiddy-Template/css/bootstrap-rating.css" rel="stylesheet" />
-    <link rel="icon" href="~/Content/Kiddy-Template/img/cropped-favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" href="~/Content/Kiddy-Template/img/cropped-favicon-192x192.png" sizes="192x192" />
-    <link rel="apple-touch-icon-precomposed" href="~/Content/Kiddy-Template/img/cropped-favicon-180x180.png">
-    <meta name="msapplication-TileImage" content="~/Content/Kiddy-Template/img/cropped-favicon-270x270.png">
-    <link href="~/Content/Login-Register/Login-Register.css" rel="stylesheet" />
+    <link href="~/Assets/LayoutUser/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/Kiddy-Template/css/daterangepicker.css" rel="stylesheet" />
-    <link href="~/Content/Modal-User/style.css" rel="stylesheet" />
     <link href="~/Content/Kiddy-Template/css/toast.css" rel="stylesheet" />
     <link href="~/Content/Kiddy-Template/css/bs-pagination.min.css" rel="stylesheet" />
+    <link href="~/Assets/LayoutUser/css/main.css" rel="stylesheet" />
     <style>
         .site_top_panel.slider {
             z-index: 1000000 !important;
         }
-
-       /*    span.glyphicon.glyphicon-star {
-            color: #f5b917 !important;
-            font-size: 2rem !important;
-        }
-
-        .rating-symbol-background.glyphicon.glyphicon-star-empty {
-            color: #f5b917 !important;
-            font-size: 2rem !important;
-        }
-
-        .rating-symbol {
-            display: inline-block;
-            position: relative;
-        }
-*/
-        /*.glyphicon {
-            position: relative;
-            top: 1px;
-            display: inline-block;
-            font-family: 'Glyphicons Halflings';
-            font-style: normal;
-            font-weight: 400;
-            line-height: 1;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .glyphicon-star:before {
-            content: "\e006";
-        }*/
-        /* Thiết Lập Modal Background */
     </style>
 </head>
 <body class="home page wide wave-style">
@@ -93,25 +59,22 @@
             </div>
         </div>
 
-        <div id="ModalUser" class="modal fade " tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="loading" id="loading">
-                <img src="~/Content/Kiddy-Template/img/loading_hannah.gif" />
-            </div>
-            <div class="modal-dialog-register">
-                <div class="container register">
-                    <div id="ModalContent">
 
-                    </div>
+        <!-- Modal Login -->
+        <div class="modal fade" id="modalUser" tabindex="-1" role="dialog" data-toggle="modal" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content" id="modalContent">
+
                 </div>
             </div>
         </div>
-
-
         @RenderBody()
         @Html.Action("_FooterLayOut", "Home")
     </div>
     <div class="scroll_top animated"></div>
     @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+    <script src="~/Content/Kiddy-Template/js/jquery.js"></script>
+    <script src="~/Content/Kiddy-Template/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/js/jquery.tweet.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/js/jquery-migrate.min.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/js/jquery.validate.min.js"></script>
@@ -135,15 +98,13 @@
     <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/extensions/revolution.extension.layeranimation.min.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/extensions/revolution.extension.navigation.min.js"></script>
     <script type="text/javascript" src="~/Content/Kiddy-Template/revslider/js/extensions/revolution.extension.parallax.min.js"></script>
-    <script src="~/Content/Kiddy-Template/js/jquery-ui.min.js"></script>
     <script src="~/Content/Kiddy-Template/js/bootstrap-rating.js"></script>
     <script src="~/Content/Kiddy-Template/js/pagination.js"></script>
-    <script src="~/Content/Login-Register/Login-Register.js"></script>
-
-    <script src="~/Assets/LoginRegister/js/User.js"></script>
+    <script src="~/Assets/LayoutUser/css/bootstrap.min.js"></script>
     <script src="~/Content/FeedBack/Feedback.js"></script>
-    <script src="~/Content/js/main.js"></script>
+    <script src="~/Assets/LayoutUser/js/User.js"></script>
     <script src="~/Content/Kiddy-Template/js/jquery.toast.js"></script>
+    <script src="~/Content/js/main.js"></script>
     <script>
         if (jQuery(window).width() <= 800) {
             jQuery("#topheader").removeClass("active");
@@ -151,7 +112,6 @@
             jQuery("#topheader").addClass("active");
         }
         jQuery('.loading').attr('style', 'display: none;');
-
     </script>
     @RenderSection("scripts", false)
 </body>

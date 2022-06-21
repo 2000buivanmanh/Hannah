@@ -72,7 +72,7 @@ namespace HANNAH_NEW_VERSION.Controllers
                     ncd.Add(item.NgayNhan.Value.Date.ToString("MM-dd-yyyy"));
                     ncd.Add(item.NgayTra.Value.Date.ToString("MM-dd-yyyy"));
                     ngayChuaDuyets.Add(ncd);
-                }
+                } 
 
             }
 

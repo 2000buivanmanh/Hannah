@@ -1,5 +1,7 @@
 ﻿var tempEmail;
-//validate form login
+var success = false;
+
+
 jQuery("#frmLogin").validate({
     rules: {
         usernameEmailLogin: "required",
@@ -16,53 +18,6 @@ jQuery("#frmLogin").validate({
         }
     }
 });
-
-var success = false;
-//username
-//jQuery.validator.addMethod(
-//    "checkUsername",
-//    function (value) {
-//        var user = jQuery("username").val();
-//        jQuery.ajax({
-//            type: "POST",
-//            async: false,
-//            url: '/NguoiDung/KiemTraTonTaiTenNguoiDung',
-//            data: "username=" + value,
-//            dataType: "html",
-//            success: function (data) {
-//                //If username ton tai => false 
-//                if (data == 1)
-//                    success = true;
-//                else
-//                    success = false;
-//            }
-//        });
-//        return success;
-//    },
-//);
-////email
-//jQuery.validator.addMethod(
-//    "checkEmail",
-//    function (value) {
-//        var email = jQuery("email").val();
-//        jQuery.ajax({
-//            type: "POST",
-//            async: false,
-//            url: '/NguoiDung/KiemTraTonTaiEmail',
-//            data: "email=" + value,
-//            dataType: "html",
-//            success: function (data) {
-//                //If username ton tai => false 
-//                if (data == 1)
-//                    success = true;
-//                else
-//                    success = false;
-//            }
-//        });
-//        return success;
-//    },
-//);
-////validate form login | END -- validate form register \\
 jQuery("#formRegister").validate({
     rules: {
         readerName: "required",
@@ -132,7 +87,7 @@ jQuery("#formRegister").validate({
         suggesterRelation: "Please choose your Relationship With Sponsor",
     }
 });
-//validate form register \\
+
 function DangNhap() {
     var tenDangNhap = jQuery('#usernameEmailLogin').val();
     var matKhau = jQuery('#passwordLogin').val();
@@ -250,6 +205,15 @@ function DangKy() {
             },
         }).done(function (data) {
             //hideLoading();
+            if (data.status == 0) {
+                swal({
+                    title: "error",
+                    text: data.message,
+                    icon: "error",
+                    button: false,
+                    timer: 1500
+                });
+            }
             if (data.status == -1) {
                 swal(data.message)
                     .then((value) => {
@@ -350,4 +314,30 @@ function countdownTimer() {
             thoigian--;
         }
     }
+}
+function LayLaiMatKhau() {
+    jQuery.ajax({
+        type: "post",
+        url: "/Users/LayLaiMatKhau",
+        data: {
+            tenDangNhap: jQuery("#Inp-Username").val()
+        },
+        success: function (data) {
+            if (data.status == 0) {
+                hideLoading();
+                swal("", data.message, "warning");
+            }
+            if (data.status == 1) {
+                swal({
+                    title: "success",
+                    text: "sent confirmation code",
+                    icon: "success",
+                    button: false,
+                    timer: 1500
+                });
+            }
+        }, failure: function (response) {
+            alert(response.responseText);
+        },
+    });
 }

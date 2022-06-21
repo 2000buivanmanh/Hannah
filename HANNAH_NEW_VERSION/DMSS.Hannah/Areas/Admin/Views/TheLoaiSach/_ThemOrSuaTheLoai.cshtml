@@ -14,13 +14,12 @@
             <label for="categoryname">
                 @Html.DisplayNameFor(model => model.TenTheLoai)
             </label>
-            <input class="form-control" type="text" value="@Model.TenTheLoai" id="name" name="categoryname" >
+            <input class="form-control" type="text" value="@Model.TenTheLoai" id="name" name="categoryname">
         </div>
 
         <div class="form-group">
             <label for="Categories">@Html.DisplayNameFor(model => model.HangMuc)</label>
-            <input class="form-control" type="text" value="@Model.HangMuc" id="categories" name="categories"
-                  >
+            <input class="form-control" type="text" value="@Model.HangMuc" id="categories" name="categories">
         </div>
 
         <div class="form-group">
@@ -30,16 +29,23 @@
                     <img class="img-icon" id="img-preview" src="@Model.Icon" />
                     <input id="save-img" hidden value="@Model.Icon" />
                     <div class="label-icon" onclick="onCkfider()" for="file-input">Upload Image</div>
-                    <input accept="image/*" type="file" id="file-input"  />
+                    <input accept="image/*" type="file" id="file-input" />
                 </div>
             </div>
 
         </div>
-
+        <div class="form-group">
+            <label for="bookpartition">@Html.DisplayNameFor(model => model.NganSach)</label>
+            <input class="form-control" type="text" value="@Model.NganSach" id="bookpartition" name="bookpartition">
+        </div>
+        <div class="form-group">
+            <label for="bookshelf">@Html.DisplayNameFor(model => model.KeSach)</label>
+            <input class="form-control" type="text" value="@Model.KeSach" id="bookshelf" name="bookshelf">
+        </div>
         <div class="form-group" id="form-name">
             <label for="Describe">@Html.DisplayNameFor(model => model.MoTa)</label>
             <textarea class="ckeditor" name="description"
-                      id="description" >@Model.MoTa</textarea>
+                      id="description">@Model.MoTa</textarea>
         </div>
         <div hidden id="trangthai">
             @Model.TrangThai
@@ -49,18 +55,18 @@
                 @Html.DisplayNameFor(model => model.MaNhanDienHangMucSach)
             </label>
             <select class="form-control" type="text" name="bookitemidentifier"
-                    id="bookitemidentifier" >
+                    id="bookitemidentifier">
 
                 @foreach (var item in ViewBag.HangMucSach)
                 {
-                if (item.MaNhanDienHangMucSach == Model.MaNhanDienHangMucSach)
-                {
-                <option value="@Model.MaNhanDienHangMucSach" selected>@Model.MaNhanDienHangMucSach </option>
-                }
-                else
-                {
-                <option>@item.MaNhanDienHangMucSach </option>
-                }
+                    if (item.MaNhanDienHangMucSach == Model.MaNhanDienHangMucSach)
+                    {
+                        <option value="@Model.MaNhanDienHangMucSach" selected>@Model.MaNhanDienHangMucSach </option>
+                    }
+                    else
+                    {
+                        <option>@item.MaNhanDienHangMucSach </option>
+                    }
                 }
             </select>
 
@@ -71,21 +77,21 @@
                 @Html.DisplayNameFor(model => model.NoiDungSeo)
             </label>
             <textarea class="ckeditor" type="text" name="seocontent"
-                      id="seocontent" >@Model.NoiDungSeo</textarea>
+                      id="seocontent">@Model.NoiDungSeo</textarea>
         </div>
         <div class="form-group">
             <label for="SEOKeyWord">
                 @Html.DisplayNameFor(model => model.TuKhoaSeo)
             </label>
             <input class="form-control" value="@Model.TuKhoaSeo" type="text" name="seokeyword"
-                   id="seokeyword" >
+                   id="seokeyword">
         </div>
         <div class="form-group">
             <label for="SEOTitle">
                 @Html.DisplayNameFor(model => model.TieuDeSeo)
             </label>
             <input class="form-control" type="text"
-                   id="seotitle" value="@Model.TieuDeSeo" name="seotitle" >
+                   id="seotitle" value="@Model.TieuDeSeo" name="seotitle">
 
         </div>
         <div class="form-group">

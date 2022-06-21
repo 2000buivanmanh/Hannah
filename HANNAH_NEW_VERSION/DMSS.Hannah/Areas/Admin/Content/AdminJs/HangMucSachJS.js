@@ -138,6 +138,7 @@ function ModalThemSuaHangMucSach(url,id) {
         output.val(toSlug(input.val()));
 
     });
+
     $.validator.addMethod(
         "checkbookcatalogcode",
         function (value) {
@@ -158,41 +159,43 @@ function ModalThemSuaHangMucSach(url,id) {
             return success;
         },
     );
+    if (id == null) {
+        $("#frmThemOrSua").validate({
+            errorClass: "error fail-alert",
+            validClass: "valid success-alert",
+            rules: {
 
-    $("#frmThemOrSua").validate({
-        errorClass: "error fail-alert",
-        validClass: "valid success-alert",
-        rules: {
+                categoriesname: {
+                    required: true,
+                },
+                bookcatalogcode: {
+                    required: true,
+                    checkbookcatalogcode: true,
+                    maxlength: 10,
+                },
 
-            categoriesname: {
-                required: true,
+                seolink: {
+                    required: true,
+                },
             },
-            bookcatalogcode: {
-                required: true,
-                checkbookcatalogcode: true,
-                maxlength: 10,
-            },
+            messages: {
 
-            seolink: {
-                required: true,
-            },
-        },
-        messages: {
+                categoriesname: {
+                    required: "Please enter your Categories Name",
 
-            categoriesname: {
-                required: "Please enter your Categories Name",
-
+                },
+                bookcatalogcode: {
+                    checkbookcatalogcode: "This Book Catalog Code is taken already",
+                    required: "Please enter your Book Catalog Code",
+                    maxlength: "Book Catalog Code field accept only 10 digits",
+                },
+                seolink: {
+                    required: "Please enter your SEO Link",
+                },
             },
-            bookcatalogcode: {
-                checkbookcatalogcode: "This Book Catalog Code is taken already",
-                required: "Please enter your Book Catalog Code",
-                maxlength: "Book Catalog Code field accept only 10 digits",
-            },
-            seolink: {
-                required: "Please enter your SEO Link",
-            },
-        },
-    })
+        })
+    }
+   
 
 
 }

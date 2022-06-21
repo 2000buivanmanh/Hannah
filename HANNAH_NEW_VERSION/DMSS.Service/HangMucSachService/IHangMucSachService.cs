@@ -17,7 +17,7 @@ namespace SERVICE
         HangMucSach LayHangMucSachTheoMa(int maHangMucSach);
         List<HangMucSach> LayDanhSachMa(int[] data);
 
-        bool KiemTraTonTaiMaNhanDienHangMucSach(string maNhanDienHangMucSach);
+        HangMucSach KiemTraTonTaiMaNhanDienHangMucSach(string maNhanDienHangMucSach);
 
     }
 }

@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<DMSS.ViewModals.HomePage.ListBookViewModal>
+@{ 
+    var phanTrangDSSach = ViewBag.ListBook as PagedList.PagedList<DATA.Models.Sach>;
+}
 @using PagedList.Mvc;
 
 <style>
@@ -146,20 +149,81 @@
         }
     </ul>
     <nav class="woocommerce-pagination">
-        <ul id="example" class="pagination"></ul>
-
-
-        @*<ul class="page-numbers">
-            <li><span class="page-numbers current">1</span></li>
-            @for (int i = 1; i < 6; i++)
-            {
-                <li><a class="page-numbers" onclick="LoadBookListHomePage(@i)">@i</a></li>
+        <ul class="page-numbers">
+            @{ int prew = phanTrangDSSach.PageNumber - 1;
+                int next = phanTrangDSSach.PageNumber + 1;
             }
-            <li><a class="next page-numbers" onclick="NextPage()">►</a></li>
-            <li><a class="nexthome page-numbers" onclick="LoadBookListHomePage(117)">►►</a></li>
-        </ul>*@
+            @if (phanTrangDSSach.PageNumber != 1)
+            {
+                <li><a class="next page-numbers" onclick="LoadBookListHomePage(1)">◄◄</a></li>
+                <li><a class="next page-numbers" onclick="LoadBookListHomePage(@prew)">◄</a></li>
+            }
+            @if (phanTrangDSSach.PageCount >= 3)
+            {
+                for (int i = phanTrangDSSach.PageNumber; i <= phanTrangDSSach.PageNumber + 2; i++)
+                {
+                    if (i == phanTrangDSSach.PageNumber)
+                    {
+                        <li>
+                            <span class="page-numbers current">
+                                @i
+                            </span>
+                        </li>
 
-        <div class='button_section'><a href='/Book/AllBook' class='cws_button xlarge'>View more <div class='button-shadow'></div></a></div>
+                    }
+                    else
+                    {
+                        <li><a class="page-numbers" onclick="LoadBookListHomePage(@i)">@i</a></li>
+                    }
+                }
+            }
+            else
+            {
+                for (int i = phanTrangDSSach.PageNumber; i <= phanTrangDSSach.PageNumber; i++)
+                {
+                    if (i == phanTrangDSSach.PageNumber)
+                    {
+                        <li>
+                            <span class="page-numbers current">
+                                @i
+                            </span>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li><a class="page-numbers" onclick="LoadBookListHomePage(@i)">@i</a></li>
+                    }
+                }
+            }
+            @if (phanTrangDSSach.PageCount - 2 > phanTrangDSSach.PageNumber)
+            {
+                <li><a class="page-numbers">....</a></li>
+
+                for (int i = phanTrangDSSach.PageCount - 2; i <= phanTrangDSSach.PageCount; i++)
+                {
+                    if (i == phanTrangDSSach.PageNumber)
+                    {
+                        <li>
+                            <span class="page-numbers current">
+                                @i
+                            </span>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li><a class="page-numbers" onclick="LoadBookListHomePage(@i)">@i</a></li>
+                    }
+                }
+            }
+
+            @if (phanTrangDSSach.PageNumber != phanTrangDSSach.PageCount)
+            {
+                <li><a class="next page-numbers" onclick="LoadBookListHomePage(@next)">►</a></li>
+                <li><a class="next page-numbers" onclick="LoadBookListHomePage(@phanTrangDSSach.PageCount)">►►</a></li>
+            }
+        </ul>
     </nav>
 </div>
 

@@ -31,6 +31,9 @@ namespace DMSS.ViewModals.DsExcelViewModal
         [StringLength(250)]
         [Display(Name = "Icon")]
         public string Icon { get; set; }
-      
+        [Display(Name = "Book Shelf")]
+        public string KeSach { get; set; }
+        [Display(Name = "Book Partition")]
+        public string NganSach { get; set; }
     }
 }

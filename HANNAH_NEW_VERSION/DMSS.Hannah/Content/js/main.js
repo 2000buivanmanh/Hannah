@@ -2,7 +2,6 @@
 LoadBookListHomePage(startPage);
 LoadBookCaseHeader();
 LoadBookCase();
-
 jQuery("#formDatSach").validate({
     rules: {
         basketPhone: {

@@ -1,0 +1,13 @@
+﻿/* 01. LAYOUT ĐĂNG KÝ NGƯỜI DÙNG */
+#titleModal {
+    font-family: Patrick Hand;
+    color: #26b4d7;
+}
+#userInfo{
+    border: 2px solid dotted; 
+    border-radius: 20px;
+    padding: 5px 10px 5px 10px;
+}
+#footerModalButton{
+    text-align: center;
+}

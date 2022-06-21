@@ -1,0 +1,463 @@
+﻿@model  PagedList.IPagedList<DATA.Models.Sach>
+@using PagedList.Mvc;
+@{
+    var ListRating = ViewBag.ListRating as List<DATA.Models.DanhGia>;
+    var NhomTuoi = ViewBag.ListAge as List<DATA.Models.NhomTuoi>;
+    var TheLoai = ViewBag.ListCategory as List<DATA.Models.TheLoai>;
+    var LoaiSach = ViewBag.ListType as List<DATA.Models.LoaiSach>;
+}
+
+<style>
+    .woo_panel.notshow {
+        background: #fec20b;
+        padding: 0px;
+        text-align: center;
+        padding-bottom: 15px !important;
+    }
+
+    .woo_panel.show {
+        margin-bottom: -10px !important;
+    }
+
+    .woo_panel {
+        border-radius: 0px;
+    }
+</style>
+<style type='text/css'>
+
+    .highlight {
+        background-color: #808080;
+        color: red;
+    }
+
+    @@media screen and (max-width: 980px) {
+        .summary.entry-summary {
+            margin-bottom: auto;
+            margin-left: auto;
+        }
+    }
+</style>
+
+
+<div id="container">
+    <div role="main">
+        <!-- shop panel -->
+        <div class="woo_panel show">
+            <p class="woocommerce-result-count">
+                Showing @Model.Count of @ViewBag.TotalRecord results @ViewBag.keyword
+            </p>
+
+            <nav class="gridlist-toggle">
+                <a href="#a" id="grid" title="Grid view" class="active"><span class="dashicons dashicons-grid-view"></span> <em>Grid view</em></a><a href="#a" id="list" title="List view"><span class="dashicons dashicons-exerpt-view"></span> <em>List view</em></a>
+            </nav>
+        </div>
+        <div class="woo_panel notshow">
+            <form class="woocommerce-ordering" method="get">
+                <select name="Agegroup" class="orderby" id="AgeSelect">
+                    <option value="0" selected='selected'>All Age Group</option>
+                    @foreach (var item in NhomTuoi)
+                    {
+                        if (item.DoTuoiMin == null)
+                        {
+                            if (ViewBag.Agegroup != null && ViewBag.Agegroup == item.MaNhomTuoi)
+                            {
+                                <option value="@item.MaNhomTuoi" selected='selected'>Below @item.DoTuoiMax </option>
+                            }
+                            else
+                            {
+                                <option value="@item.MaNhomTuoi">Below @item.DoTuoiMax </option>
+                            }
+                        }
+                        else if (item.DoTuoiMax == null)
+                        {
+                            if (ViewBag.Agegroup != null && ViewBag.Agegroup == item.MaNhomTuoi)
+                            {
+                                <option value="@item.MaNhomTuoi" selected='selected'>Higher @item.DoTuoiMin </option>
+                            }
+                            else
+                            {
+                                <option value="@item.MaNhomTuoi">Higher @item.DoTuoiMin </option>
+                            }
+                        }
+                        else
+                        {
+                            if (ViewBag.Agegroup != null && ViewBag.Agegroup == item.MaNhomTuoi)
+                            {
+                                <option value="@item.MaNhomTuoi" selected='selected'>@item.DoTuoiMin - @item.DoTuoiMax</option>
+                            }
+                            else
+                            {
+                                <option value="@item.MaNhomTuoi">@item.DoTuoiMin - @item.DoTuoiMax</option>
+                            }
+                        }
+
+                    }
+                </select>
+            </form>
+            <form class="woocommerce-ordering" method="get">
+                <select name="Category" class="orderby" id="CategorySelect">
+                    <option value="0" selected='selected'>All Category</option>
+                    @foreach (var item in TheLoai)
+                    {
+                        if (ViewBag.Category != null && ViewBag.Category == item.MaTheLoai)
+                        {
+                            <option value="@item.MaTheLoai" selected='selected'>@item.TenTheLoai</option>
+                        }
+                        else
+                        {
+                            <option value="@item.MaTheLoai">@item.TenTheLoai</option>
+                        }
+                    }
+                </select>
+            </form>
+            <form class="woocommerce-ordering" method="get">
+                <select name="Type" class="orderby" id="TypeSelect">
+                    <option value="0" selected='selected'>All Book Types</option>
+
+                    @foreach (var item in LoaiSach)
+                    {
+                        if (ViewBag.Type != null && ViewBag.Type == item.MaLoaiSach)
+                        {
+                            <option value="@item.MaLoaiSach" selected='selected'>@item.TenLoaiSach</option>
+                        }
+                        else
+                        {
+                            <option value="@item.MaLoaiSach">@item.TenLoaiSach</option>
+                        }
+                    }
+                </select>
+            </form>
+            <form class="woocommerce-ordering" method="get">
+                <select name="Status" class="orderby" id="StatusSelect">
+                    <option value="0" selected='selected'>All Status</option>
+                    @if (ViewBag.Status != null && ViewBag.Status == DATA.Constant.Constant.TinhTrangSach.Avaliable)
+                    {
+                        <option value="1" selected='selected'>Avaliable</option>
+                    }
+                    else
+                    {
+                        <option value="1">Avaliable</option>
+                    }
+                    @if (ViewBag.Status != null && ViewBag.Status == DATA.Constant.Constant.TinhTrangSach.NotAvaliable)
+                    {
+                        <option value="2" selected='selected'>Not Avaliable</option>
+                    }
+                    else
+                    {
+                        <option value="2">Not Avaliable</option>
+                    }
+
+                </select>
+            </form>
+        </div>
+
+        <!-- / shop panel -->
+        <!-- products -->
+        <div id="listproduct">
+            <ul class="products grid">
+                <!-- product -->
+                @foreach (var item in Model)
+                {
+                    int? RatePoin = 0, RateTimes = 0, LastPoin = 100;
+                    foreach (var RT in ListRating)
+                    {
+                        if (item.MaSach == RT.MaSach)
+                        {
+                            RatePoin = RatePoin + RT.DiemDanhGia;
+                            RateTimes = RateTimes + 1;
+                        }
+                    }
+                    if (RateTimes != 0)
+                    {
+                        LastPoin = RatePoin / RateTimes * 2 * 10;
+                        RatePoin = RatePoin / RateTimes;
+                    }
+                    else
+                    {
+                        RatePoin = 5;
+                    }
+
+                    <li class="first post-70 product type-product status-publish has-post-thumbnail product_cat-posters sale shipping-taxable purchasable product-type-simple product-cat-posters instock">
+                        <div class="sale-wrapper">
+                            @{
+                                DateTime IsNew = item.LanCapNhatCuoi.GetValueOrDefault().AddDays(15);
+                            }
+                            @if (IsNew >= DateTime.Now)
+                            {
+                                <span class="onsale">New!</span>
+                            }
+                        </div>
+                        <div class="media_part">
+
+                            <div class="">
+
+                                <a href="/Book-detail/@item.MaSach">
+                                    <img src="@item.HinhAnhSach" data-at2x="@item.HinhAnhSach" style="width:260px; height:280px;" alt="">
+                                </a>
+                                <div class="pic">
+                                    <div class="links_popup animate">
+                                        <div class="link_cont">
+                                            <div class="link" style="transform: rotate(90deg);">
+                                                <a class="fancy" onclick="ShowDeTail(@item.MaSach)" style="transform: translate3d(0px, 0px, 0px);"><i class="fa fa-eye" style="transform: rotate(-90deg);"></i></a>
+                                                <div class="link-item-bounce" style="transform: translate3d(0px, 0px, 0px); transform-origin: 50% 50% 0px;"></div>
+                                            </div>
+                                            <div class="link" style="transform: rotate(270deg);">
+                                                <a href="/Book-detail/@item.MaSach" style="transform: translate3d(0px, 0px, 0px);"><i class="fa fa-share" style="transform: rotate(-270deg);"></i></a>
+                                                <div class="link-item-bounce" style="transform: translate3d(0px, 0px, 0px); transform-origin: 50% 50% 0px;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="link-toggle-button">
+                                            <i class="fa fa-plus link-toggle-icon" style="transform: translate3d(0px, 0px, 0px);"></i>
+                                        </div>
+                                    </div>
+                                    <div class="hover-effect"></div>
+                                </div>
+
+                            </div>
+                            <div class="rating_cont">
+                                <div class="star-rating" title="Rated @RatePoin out of 5"><span style="width:@LastPoin%"><strong class="rating">@RatePoin</strong> out of 5</span></div>
+                                <div class="button-shadow"></div>
+                            </div>
+                        </div>
+
+                        <div class="summary entry-summary">
+                            <a href="/Book-detail/@item.MaSach">
+                                <div id="book-name" class="book-name">
+                                    <h3>@item.TenSach</h3>
+
+                                </div>
+                            </a>
+
+                            <span class="price">
+
+                                <ins><span class="amount"> @item.Gia <i class="erudite_poin"></i> </span></ins>
+                            </span>
+                            <div class="prop-description">
+                                <i class="fa fa-user"></i> Publisher: @item.NhaXuatBan.TenNhaXuatBan - @item.NgayXuatBan.Value.ToString("dd/MM/yyyy")
+
+                                <div class="book-name">
+                                    <i class="fa fa-user"></i> Author: @item.TacGia.TenTacGia
+                                </div>
+                                <div class="book-name">
+                                    @if (item.TinhTrangMuonSach == true)
+                                    {
+                                        <i class="fa fa-check-square"> Available</i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-ban"> Not Available</i>
+                                    }
+                                </div>
+                                <div class="book-name">
+                                    <h3>Description </h3>
+                                    <a class="button pull-right" id="transtale-@item.MaSach" onclick="Translate(@item.MaSach)" value="EN"> <i id="Langue-tran-@item.MaSach"> Translate description to Vietnamese</i></a>
+                                    <span id="des-en-@item.MaSach">@Html.Raw(item.MoTaSachEn)</span>
+                                    <span id="des-vi-@item.MaSach" class="hidden">
+                                        @Html.Raw(item.MoTaSachVi)
+                                    </span>
+                                </div>
+
+
+                            </div>
+                            @*<div class="gridlist-buttonwrap">
+                                @if (Session["reader"] != null)
+                                {
+                                    if (item.TinhTrangMuonSach == true)
+                                    {
+                                        if (Int32.Parse(Session["currentPoin"].ToString()) >= item.Gia)
+                                        {
+                                            Boolean added = false;
+                                            if (Session["listBookcase"] != null)
+                                            {
+                                                var Bookcase = Session["listBookcase"] as List<Hannah_Library.Controllers.BookCase>;
+                                                foreach (var bk in Bookcase)
+                                                {
+                                                    if (bk.Book_Id == item.MaSach)
+                                                    {
+                                                        added = true;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                            if (added == false)
+                                            {
+                                                <a onclick="AddBookCase(@item.Book_Id)" class="cws_button alt small"><span class="cws_button_inner" data-bg_hover_color="" data-bg_color="" data-text_color="">Add To Bookcase</span></a>
+                                            }
+
+                                        }
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    <a href="/login" class="cws_button alt small"><span class="cws_button_inner" data-bg_hover_color="" data-bg_color="" data-text_color="">Add To Bookcase</span></a>
+                                }
+
+                            </div>*@
+                        </div>
+
+                        <hr>
+                    </li>
+                    @*@Html.Action("_BookPreview", "Books", new { id = item.MaSach })*@
+
+                }
+
+
+                <!-- / product -->
+            </ul>
+        </div>
+
+        <!-- / product -->
+        <!-- pagination -->
+        <nav class="woocommerce-pagination">
+            @*@Html.PagedListPager(Model, page => Url.Action("_Main_Content", new { page}),
+                 PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "list_book"})
+                )*@
+
+            <ul class="page-numbers">
+                @{ int prew = Model.PageNumber - 1;
+                    int next = Model.PageNumber + 1;
+                }
+                @if (Model.PageNumber != 1)
+                {
+                    <li><a class="next page-numbers" onclick="loadpage(1)">◄◄</a></li>
+                    <li><a class="next page-numbers" onclick="loadpage(@prew)">◄</a></li>
+                }
+                @if (Model.PageCount >= 3)
+                {
+                    for (int i = Model.PageNumber; i <= Model.PageNumber + 2; i++)
+                    {
+                        if (i == Model.PageNumber)
+                        {
+                            <li>
+                                <span class="page-numbers current">
+                                    @i
+                                </span>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li><a class="page-numbers" onclick="loadpage(@i)">@i</a></li>
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = Model.PageNumber; i <= Model.PageNumber; i++)
+                    {
+                        if (i == Model.PageNumber)
+                        {
+                            <li>
+                                <span class="page-numbers current">
+                                    @i
+                                </span>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li><a class="page-numbers" onclick="loadpage(@i)">@i</a></li>
+                        }
+                    }
+                }
+                @if (Model.PageCount - 2 > Model.PageNumber)
+                {
+                    <li><a class="page-numbers">....</a></li>
+
+                    for (int i = Model.PageCount - 2; i <= Model.PageCount; i++)
+                    {
+                        if (i == Model.PageNumber)
+                        {
+                            <li>
+                                <span class="page-numbers current">
+                                    @i
+                                </span>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li><a class="page-numbers" onclick="loadpage(@i)">@i</a></li>
+                        }
+                    }
+
+                }
+
+
+                @if (Model.PageNumber != Model.PageCount)
+                {
+                    <li><a class="next page-numbers" onclick="loadpage(@next)">►</a></li>
+                    <li><a class="next page-numbers" onclick="loadpage(@Model.PageCount)">►►</a></li>
+                }
+            </ul>
+        </nav>
+        <!-- / pagination -->
+    </div>
+</div>
+
+<script type='text/javascript'>
+    setFilter();
+    var text = '@ViewBag.keywordhl';
+    var regex = text, result, indices = [];
+    var inputText = document.getElementsByClassName("book-name");
+    for (var j = 0; j < inputText.length; j++) {
+        var item = inputText[j];
+        var innerHTML = item.innerHTML;
+        var indices = getIndicesOf(text, innerHTML);
+        inputText[j].innerHTML = indices;
+        for (var i = 0; i < indices.length; i++) {
+            innerHTML = innerHTML.substring(0, indices[i]) + "<span class='highlight'>" + innerHTML.substring(indices[i], indices[i] + text.length) + "</span>" + innerHTML.substring(indices[i] + text.length);
+        }
+        inputText[j].innerHTML = innerHTML;
+    }
+  //var index = innerHTML.indexOf(text);
+  //if (index >= 0) {
+  // innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+  // inputText.innerHTML = innerHTML;
+  //  }
+    function getIndicesOf(searchStr, str, caseSensitive) {
+        var searchStrLen = searchStr.length;
+        if (searchStrLen == 0) {
+            return [];
+        }
+        var startIndex = 0, index, indices = [];
+        if (!caseSensitive) {
+            str = str.toLowerCase();
+            searchStr = searchStr.toLowerCase();
+        }
+        while ((index = str.indexOf(searchStr, startIndex)) > -1) {
+            indices.push(index);
+            startIndex = index + searchStrLen;
+        }
+        return indices;
+    }
+
+    jQuery('#AgeSelect').change(function () {
+        setFilter();
+        jQuery("#submid-btn").click();
+        jQuery("#search-form").submit();
+    })
+    jQuery('#CategorySelect').change(function () {
+        setFilter();
+        jQuery("#submid-btn").click();
+        jQuery("#search-form").submit();
+    })
+    jQuery('#TypeSelect').change(function () {
+        setFilter();
+        jQuery("#submid-btn").click();
+        jQuery("#search-form").submit();
+    })
+    jQuery('#StatusSelect').change(function () {
+        setFilter();
+        jQuery("#submid-btn").click();
+        jQuery("#search-form").submit();
+    })
+    function setFilter() {
+        jQuery("#Agegroup").val(jQuery('#AgeSelect').val());
+        jQuery("#Category").val(jQuery('#CategorySelect').val());
+        jQuery("#Type").val(jQuery('#TypeSelect').val());
+        jQuery("#Status").val(jQuery('#StatusSelect').val());
+    }
+</script>

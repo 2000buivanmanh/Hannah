@@ -29,145 +29,106 @@
         </div>
         <canvas class='breadcrumbs' data-bg-color='#f8f2dc' data-line-color='#f9e8b2'></canvas>
     </section>
+
+    
+
     <div id="main" class="site-main">
         <div class="page_content single_sidebar">
+
             <div class='left-pattern pattern pattern-2'></div>
             <div class='container'>
                 <aside class='sb_right'>
-                    <div class="cws-widget">
-                        <form method="get" class="search-form" action="#">
-                            <label>
-                                <span class="screen-reader-text">Search for:</span>
-                                <input type="text" class="search-field vova" value="" name="s" title="Search for:" />
-                            </label>
-                            <input type="submit" class="search-submit" value="Search" />
-                            <input type='hidden' name='lang' value='en' />
-                        </form>
-                    </div>
-                    <div class="cws-widget">
-                        <div class="widget-title">Recent Posts</div>
-                        <div class='post_item'>
-                            <div class='post_preview clearfix'>
-                                <div class='post_title'><a href=''>Morbi iaculis</a></div>
-                                <div class='post_content'>Quisque in nulla ut metus cursus commodo <a href=''>...</a></div>
-                            </div>
-                        </div>
-                        <div class='post_item'>
-                            <div class='post_preview clearfix'>
-
-                                <div class='post_title'><a href=''>Praesent sagittis</a></div>
-                                <div class='post_content'>Maecenas vel elit at dui condimentum lob <a href=''>...</a></div>
-                            </div>
-                        </div>
-                        <div class='post_item'>
-
-                        </div>
-                    </div>
-                    <div class="cws-widget">
-                        <div class="widget-title">Twitter feed</div>
-                        <div class='cws_tweets tweets_carousel paginated'>
-                            <div class='twitter-carousel cws_tweet'></div>
-                        </div>
-                    </div>
-                    <div class="cws-widget">
-                        <div class="widget-title">Gallery</div>
-                        <div class='portfolio_item_thumbs clearfix'>
-                            <div class='portfolio_item_thumb'>
-
-                            </div>
-                            <div class='portfolio_item_thumb'>
-                                @*<div class='pic'>
-                                        <a href='http://placehold.it/1000x1000' class='fancy' data-fancybox-group='cws-portfolio-gallery-564eeb3879b54'>
-                                            <img src='http://placehold.it/71x71' data-at2x='http://placehold.it/71x71' alt />
-                                            <div class='hover-effect'></div>
-                                            <div class='links_popup'>
-                                                <div class='link_cont'>
-                                                    <div class='link'>
-                                                        <span><i class='fa fa-camera'></i></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>*@
-                            </div>
-                        </div>
-                    </div>
+                    @Html.Action("_TopRate", "Home")
+                    <!-- \\ Top Rated Products -->
+                    @Html.Action("_TopReader", "Home")
                 </aside>
+
                 <main>
                     <div class="grid_row">
-                        <section class="news news-pinterest">
+
+                        <section class="news news-small">
                             <div class="cws_wrapper">
-                                <div class="grid grid-2 isotope">
-                                    <article class='item small'>
-                                        <div class='post_header_def_post'>
-                                            <div class="date">
-                                                <div class='date-cont'><span class='day'>27</span><span class='month' title='February'><span>Feb</span></span><span class='year'>2015</span><i class='springs'></i></div>
+                                <div class='ce clearfix'>
+                                    <h3 class="ce_title">How to earn erudite point?</h3>
+                                    <p>The way to earn points is super easy and there are many different ways. So if you want to increase your accumulated points, please quickly follow the instructions in the article below.</p>
+                                    <div class='ce clearfix'>
+                                        <div class='cws_ce_content ce_toggle'>
+                                            <div class='accordion_section'>
+                                                <div class='accordion_title'><i class='accordion_icon'></i><span>Defaul Erudite Poin</span></div>
+                                                <div class='accordion_content' style='display:none;'>
+                                                    <p>Each reader who registers an account will get 100 points</p>
+                                                </div>
                                             </div>
-                                            <div class="post_info_header">
-                                                <h3 class="titlePreview"><a href="">Video post</a></h3>
+                                            <div class='accordion_section'>
+                                                <div class='accordion_title'><i class='accordion_icon'></i><span>Erudite Earn Each Review </span></div>
+                                                <div class='accordion_content' style='display:none;'>
+                                                    <p>Readers who read books and rate books will receive an extra 50 points for each book</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class='media_info_wrapper'>
-                                            <div class="media_part video_post">
-                                                <div class='video'>
-                                                    <div class='cws_oembed_wrapper'>
-                                                        <iframe width="348" height="196" src="https://www.youtube.com/embed/KaOEQJGig9c?feature=oembed" allowfullscreen></iframe>
-                                                    </div>
+                                            <div class='accordion_section'>
+                                                <div class='accordion_title'><i class='accordion_icon'></i><span>Borrow and return books according to regulations</span></div>
+                                                <div class='accordion_content' style='display:none;'>
+                                                    <p></p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class='post_content_wrap'>
-                                            <div class='post_content'>
-                                                <p>Mauris sit amet tincidunt purus, id eleifend orci. Maecenas vel elit at dui condimentum lobortis in sed eros. Morbi iaculis euismod felis in pulvinar.<a href="" class="more-link">[&#8230;]</a></p>
-                                            </div>
-                                            <div class='meta_cont_wrapper'>
-                                                <div class='meta_cont'>
-                                                    <div class="post_info">
-                                                        <div class='post_categories'><i class='fa fa-bookmark'></i><a href="#" rel="category tag">.</a><span class="v_sep"></span><a href="#" rel="category tag">Uncategorized</a></div>
-                                                    </div>
-                                                    <div class='button_cont'><a href='' class='cws_button small'>Read More</a></div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="grid">
+                                    @foreach (var item in Model)
+                                    {
+                                        <article class='item small'>
+                                            <div class='post_header_def_post'>
+                                                <div class="date">
+                                                    <div class='date-cont'><span class='day'>@item.NgayGuiDanhGia.Value.Day</span><span class='month' title='March'><span>@item.NgayGuiDanhGia.Value.Month</span></span><span class='year'>@item.NgayGuiDanhGia.Value.Year</span><i class='springs'></i></div>
+                                                </div>
+                                                <div class="post_info_header">
+                                                    <h3 class="ce_title"><a href="/Book/BookPreviewDetail/@item.MaVideo">@item.TieuDeDanhGia</a></h3>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class='separator-box'>
-                                            <canvas class='separator' width='1170' data-line-color='#f9e8b2'></canvas>
-                                        </div>
-                                    </article>
-                                    <article class='item small'>
-                                        <div class='post_header_def_post'>
-                                            <div class="date">
-                                                <div class='date-cont'><span class='day'>27</span><span class='month' title='February'><span>Feb</span></span><span class='year'>2015</span><i class='springs'></i></div>
-                                            </div>
-                                            <div class="post_info_header">
-                                                <h3 class="titlePreview"><a href="">Video post</a></h3>
-                                            </div>
-                                        </div>
-                                        <div class='media_info_wrapper'>
-                                            <div class="media_part video_post">
-                                                <div class='video'>
-                                                    <div class='cws_oembed_wrapper'>
-                                                        <iframe width="348" height="196" src="https://www.youtube.com/embed/KaOEQJGig9c?feature=oembed" allowfullscreen></iframe>
+                                            <div class='media_info_wrapper'>
+                                                <div class="media_part">
+                                                    <div class="">
+                                                        <div class="video">
+                                                            @if (item.TenVideo.Contains("<iframe"))
+                                                            {
+                                                                <div>
+                                                                    @Html.Raw(item.TenVideo.Replace("width=", "").Replace("height=", ""))
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <video class="" loop controls style="width:200px; ">
+                                                                    <source src="@item.TenVideo" type="video/mp4" />
+                                                                </video>
+                                                            }
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class='post_content_wrap'>
-                                            <div class='post_content'>
-                                                <p>Mauris sit amet tincidunt purus, id eleifend orci. Maecenas vel elit at dui condimentum lobortis in sed eros. Morbi iaculis euismod felis in pulvinar.<a href="" class="more-link">[&#8230;]</a></p>
-                                            </div>
-                                            <div class='meta_cont_wrapper'>
-                                                <div class='meta_cont'>
-                                                    <div class="post_info">
-                                                        <div class='post_categories'><i class='fa fa-bookmark'></i><a href="#" rel="category tag">Standart</a><span class="v_sep"></span><a href="#" rel="category tag">Uncategorized</a></div>
+                                            <div class='post_content_wrap'>
+                                                <div class='post_content'>
+                                                    @Html.Raw(item.NoiDungDanhGia)
+                                                </div>
+                                                <div class='meta_cont_wrapper'>
+                                                    <div class="meta_cont">
+                                                        <div class="post_info">
+                                                            <div class="post_categories"><i class="fa fa-bookmark"></i><a href="@Url.Action("ReaderInfo", "Account", new { Email = item.EmailDanhGia})" rel="category tag"> @item.EmailDanhGia</a></div>
+                                                        </div>
+                                                        <div class="button_cont"><a href="/books/preview-detail/@item.MaVideo" class="cws_button small">Read More</a></div>
                                                     </div>
-                                                    <div class='button_cont'><a href='' class='cws_button small'>Read More</a></div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class='separator-box'>
-                                            <canvas class='separator' width='1170' data-line-color='#f9e8b2'></canvas>
-                                        </div>
-                                    </article>
+                                        </article>
+                                    }
+                                </div>
+                                <div class='pagination'>
+                                    <div class='page_links'>
+                                        <span class='page-numbers current'>1</span>
+                                        <a class='page-numbers' href='#'>2</a>
+                                        <a class="next page-numbers" href="#"><i class='fa fa-angle-right'></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -176,4 +137,5 @@
             </div>
         </div>
     </div>
+</div>
 

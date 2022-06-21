@@ -39,13 +39,14 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         [HttpPost, ValidateInput(false)]
         public JsonResult ThemHoacSuaHangMuc(int? Id, HangMucSach hangMucSach)
         {
-            if (_hangMucSachService.KiemTraTonTaiMaNhanDienHangMucSach(hangMucSach.MaNhanDienHangMucSach) == false)
-            {
-                return Json(new { status = KiemTraTonTai.DaTonTai, message = "List of books already exists!" }, JsonRequestBehavior.AllowGet);
-            }
+
             var nguoiDung = _authenticationService.GetAuthenticatedUser();
             if (Id == 0 || Id == null)
             {
+                if (_hangMucSachService.KiemTraTonTaiMaNhanDienHangMucSach(hangMucSach.MaNhanDienHangMucSach) != null)
+                {
+                    return Json(new { status = KiemTraTonTai.DaTonTai, message = "List of books already exists!" }, JsonRequestBehavior.AllowGet);
+                }
                 hangMucSach.NguoiTao = nguoiDung.MaNguoiDung;
                 var result = _hangMucSachService.ThemHangMucSach(hangMucSach);
                 if (result == string.Empty)
@@ -105,7 +106,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         [HttpPost]
         public int KiemTraTonTaiMaNhanDienHangMucSach(string bookcatalogcode)
         {
-            if (_hangMucSachService.KiemTraTonTaiMaNhanDienHangMucSach(bookcatalogcode))
+            if (_hangMucSachService.KiemTraTonTaiMaNhanDienHangMucSach(bookcatalogcode)==null)
                 return 1;
             return 0;
         }
@@ -163,7 +164,7 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                                         DsThatbai.Add(st);
                                     }
                                     else{
-                                        if (KiemTraTonTaiMaNhanDienHangMucSach(st.MaNhanDienHangMucSach) == 0)
+                                        if (KiemTraTonTaiMaNhanDienHangMucSach(st.MaNhanDienHangMucSach) == 1)
                                         {
                                             st.ThongBao = "This Book Catalog Code is taken already !";
                                             DsThatbai.Add(st);

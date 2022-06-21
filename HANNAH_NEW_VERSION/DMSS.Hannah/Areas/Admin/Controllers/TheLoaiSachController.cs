@@ -107,15 +107,12 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
         {
                 var theLoai = _theLoaiSachService.DanhSachTheLoaiSach().Where(s => data.Contains(s.MaTheLoai)).ToList();
                 var result = _theLoaiSachService.XoaTheLoaiSach(theLoai);
-                if (result == string.Empty)
-                {
-                    return Json(new { status = 1 }, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
-                }
+            if (result == string.Empty)
+                return Json(new { status = TrangThai.ThanhCong, message = Message.Success }, JsonRequestBehavior.AllowGet);
+            else
+                return Json(new { status = TrangThai.ThanhCong, message = result }, JsonRequestBehavior.AllowGet);
         }
+
         List<ExcelTheLoaiSach> DsThatbai = new List<ExcelTheLoaiSach>();
         List<ExcelTheLoaiSach> DsThanhCong = new List<ExcelTheLoaiSach>();
         public JsonResult ImportExcel(HttpPostedFileBase myExcelData)
@@ -157,68 +154,79 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                                     st.Stt = i;
                                     st.TenTheLoai = kh.TenTheLoai;
                                     st.HangMuc = kh.HangMuc;
-                                    st.MoTa = kh.MoTa;
+                                    st.NganSach = kh.NganSach;
+                                    st.KeSach = kh.KeSach;
                                     st.MaNhanDienHangMucSach = kh.MaNhanDienHangMucSach;
                                     st.Icon = kh.Icon;
+                                    st.MoTa = kh.MoTa;
                                     st.NoiDungSeo = kh.NoiDungSeo;
                                     st.TuKhoaSeo = kh.TuKhoaSeo;
                                     st.TieuDeSeo = kh.TieuDeSeo;
                                     st.DuongDanSeo = kh.DuongDanSeo;
-                                    if (string.IsNullOrWhiteSpace(st.HangMuc) || string.IsNullOrWhiteSpace(st.TenTheLoai) || string.IsNullOrWhiteSpace(st.MaNhanDienHangMucSach)|| string.IsNullOrWhiteSpace(st.Icon) )
+                                    if (string.IsNullOrWhiteSpace(st.NganSach) || string.IsNullOrWhiteSpace(st.KeSach) || string.IsNullOrWhiteSpace(st.HangMuc) || string.IsNullOrWhiteSpace(st.TenTheLoai) || string.IsNullOrWhiteSpace(st.MaNhanDienHangMucSach) )
                                     {
                                         st.ThongBao = "Information cannot be blank!";
                                         DsThatbai.Add(st);
                                     }
                                     else
                                     {
-
-                                        if (st.HangMuc.Length > 10)
+                                        if (IsNumber(st.NganSach) == false || IsNumber(st.KeSach) == false)
                                         {
-                                            st.ThongBao = "Category field only accepts 10 digits !";
+                                            st.ThongBao = "Book Shelf and Book Partition must enter number !";
                                             DsThatbai.Add(st);
                                         }
                                         else
                                         {
-                                            if (KiemTraTonTaiMaNhanDienHangMucSach(st.MaNhanDienHangMucSach) == 1)
+                                            if (st.HangMuc.Length > 10)
                                             {
-                                                st.ThongBao = "This book catalog code does not exist !";
+                                                st.ThongBao = "Category field only accepts 10 digits !";
                                                 DsThatbai.Add(st);
                                             }
                                             else
                                             {
-                                                if (KiemTraHinhAnh(st.Icon) == 0)
+                                                if (_hangMucSachService.KiemTraTonTaiMaNhanDienHangMucSach(st.MaNhanDienHangMucSach) == null)
                                                 {
-                                                    if (string.IsNullOrWhiteSpace(st.DuongDanSeo))
-                                                    {
-                                                        st.DuongDanSeo = AdminHelper.ToSeoUrl(st.TenTheLoai);
-                                                        st.ThongBao = "Image does not exist in Ckfinder - Please update after adding !";
-                                                        DsThanhCong.Add(st);
-                                                    }else
-                                                    {
-                                                        st.ThongBao = "Image does not exist in Ckfinder - Please update after adding !";
-                                                        DsThanhCong.Add(st);
-                                                    }
-                                                                                                      
+                                                    st.ThongBao = "This book catalog code does not exist !";
+                                                    DsThatbai.Add(st);
                                                 }
                                                 else
                                                 {
-                                                    if (string.IsNullOrWhiteSpace(st.DuongDanSeo))
+                                                    if (KiemTraHinhAnh(st.Icon) == 0)
                                                     {
-                                                        st.DuongDanSeo = AdminHelper.ToSeoUrl(st.TenTheLoai);
-                                                        st.ThongBao = "New data added";
-                                                        DsThanhCong.Add(st);
-                                                    }
+                                                        if (string.IsNullOrWhiteSpace(st.DuongDanSeo))
+                                                        {
+                                                            st.DuongDanSeo = AdminHelper.ToSeoUrl(st.TenTheLoai);
+                                                            st.ThongBao = "Image does not exist in Ckfinder - Please update after adding !";
+                                                            DsThanhCong.Add(st);
+                                                        }
                                                     else
                                                     {
-                                                        st.ThongBao = "New data added";
+                                                        st.ThongBao = "Image does not exist in Ckfinder - Please update after adding !";
                                                         DsThanhCong.Add(st);
                                                     }
+
+                                                }
+                                                    else
+                                                    {
+                                                        if (string.IsNullOrWhiteSpace(st.DuongDanSeo))
+                                                        {
+                                                            st.DuongDanSeo = AdminHelper.ToSeoUrl(st.TenTheLoai);
+                                                            st.ThongBao = "New data added";
+                                                            DsThanhCong.Add(st);
+                                                        }
+                                                        else
+                                                        {
+                                                            st.ThongBao = "New data added";
+                                                            DsThanhCong.Add(st);
+                                                        }
+                                                    }
+
                                                 }
 
+
                                             }
-
-
                                         }
+
                                     }
 
                                     Session["DsThatbai"] = DsThatbai;
@@ -240,12 +248,12 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                             System.IO.File.Delete(pathToExcelFile);
                         }
                     }
-                }
+            }
                 catch (Exception ex)
-                {
-                    return Json(new { status = TrangThai.ThatBai, message = ex.Message }, JsonRequestBehavior.AllowGet);
-                }
-                return Json(new { status = TrangThai.ThanhCong, message = Message.Success }, JsonRequestBehavior.AllowGet);
+            {
+                return Json(new { status = TrangThai.ThatBai, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { status = TrangThai.ThanhCong, message = Message.Success }, JsonRequestBehavior.AllowGet);
             }
 
             else
@@ -283,7 +291,8 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
                         {
                             TheLoaiSach.Icon = item.Icon;
                         }
-                       
+                        TheLoaiSach.NganSach = int.Parse(item.NganSach);
+                        TheLoaiSach.KeSach = int.Parse(item.KeSach) ;
                         TheLoaiSach.NoiDungSeo = item.NoiDungSeo;
                         TheLoaiSach.TuKhoaSeo = item.TuKhoaSeo;
                         TheLoaiSach.TieuDeSeo = item.TieuDeSeo;
@@ -318,11 +327,15 @@ namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
             else
                 return 0;
         }
-        public int KiemTraTonTaiMaNhanDienHangMucSach(string bookcatalogcode)
+
+        public bool IsNumber(string pValue)
         {
-            if (_hangMucSachService.KiemTraTonTaiMaNhanDienHangMucSach(bookcatalogcode))
-                return 1;
-            return 0;
+            foreach (Char c in pValue)
+            {
+                if (!Char.IsDigit(c))
+                    return false;
+            }
+            return true;
         }
     }
 }

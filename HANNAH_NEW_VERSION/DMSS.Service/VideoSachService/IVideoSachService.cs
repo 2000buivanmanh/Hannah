@@ -10,5 +10,6 @@ namespace SERVICE
     public interface IVideoSachService
     {
         List<VideoSach> DanhSachVideoSach();
+        VideoSach LayMaVideoPreview(int maVideo);
     }
 }

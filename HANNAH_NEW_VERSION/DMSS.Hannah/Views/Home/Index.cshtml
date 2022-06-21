@@ -11,9 +11,6 @@
     <div class="page_content">
         <div class='left-pattern pattern pattern-2'></div>
         <main>
-          
-
-
             <!-- Large modal -->
             @Html.Action("_Sort_About", "Home")
             <div class='grid_row clearfix'>
@@ -27,7 +24,6 @@
             </div>
             <!-- / divider -->
             <div id="list_book">
-
                 <div class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page wide wave-style">
                     <div id="main" class="site-main">
                         <div class="page_content single_sidebar">
@@ -37,12 +33,10 @@
                                 <aside class='sb_right'>
                                     <div class="cws-widget">
                                         <!-- search -->
-                                        <form method="get" class="woocommerce-product-search" action="#">
+                                        <form method="post" class="woocommerce-product-search" action="/Book/AllBook">
                                             <label class="screen-reader-text">Search for:</label>
-                                            <input type="search" class="search-field" placeholder="Search Products&hellip;" value=""
-                                                   name="s" title="Search for:" />
-                                            <input type="submit" value="Search" />
-                                            <input type="hidden" name="post_type" value="product" />
+                                            <input type="search" class="search-field" placeholder="Books title or Author name..." value="" name="keyword" title="Search for:">
+                                            <input type="submit" value="Search">
                                         </form>
                                     </div> <!-- \\ search -->
                                     <!-- Filter by price -->
@@ -60,7 +54,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <!-- divider -->
@@ -70,13 +63,13 @@
                         <div class='cws_callout'>
                             <div class='content_section'>
                                 <div class='callout_title'>
-                                    <div class="bees bees-end"><span></span></div>STILL NOT CONVINCED?
+                                    <div class="bees bees-end"><span></span></div>How to get extra points ?
                                 </div>
                                 <div class='separate'></div>
                                 <div class='callout_text'>
                                     <p>
                                         Want to get more information about our learning center or would like to see it inside, feel free to schedule&nbsp;a tour.
-                                        <br /> Come visit us today!
+                                        <br /> Read book us today!
                                     </p>
                                 </div>
                             </div>
@@ -89,9 +82,6 @@
         <div class='right-pattern pattern pattern-2'></div>
         <div class="footer_image"></div>
     </div>
-
-
-
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" style='display:none;'>
         <defs>
             <filter id="goo">
@@ -104,7 +94,4 @@
 </div>
 
 
-<script src="~/Assets/LoginRegister/js/Register.js"></script>
-<script src="~/Assets/LoginRegister/js/Login.js"></script>
-<script src="~/Assets/LoginRegister/js/User.js"></script>
 

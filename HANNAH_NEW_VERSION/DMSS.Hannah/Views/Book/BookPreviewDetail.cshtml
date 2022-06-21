@@ -1,0 +1,110 @@
+﻿@model DATA.Models.VideoSach
+@{
+    ViewBag.Title = "BookPreviewDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .page_content.single_sidebar .grid .item {
+        width: 97% !important;
+    }
+
+    .page_content.single_sidebar main {
+        width: 100% !important;
+        padding: 30px !important;
+    }
+
+    iframe {
+        height: 400px !important;
+    }
+</style>
+<section class="page_title wave">
+    <div class="container">
+        <div class="title">
+            <h1>Previews Detail</h1>
+        </div>
+        <nav class="bread-crumbs">
+            <a href="/">Home</a><i class="delimiter fa fa-chevron-right"></i>
+            <a href="/Books/Preview-lists">Preview List</a><i class="delimiter fa fa-chevron-right"></i><span class="current">Previews Detail</span>
+        </nav>
+    </div>
+    <canvas class="breadcrumbs" data-bg-color="#f8f2dc" data-line-color="#f9e8b2" height="71" width="1366" style="height: 71px; width: 1366px;"></canvas>
+</section>
+
+<div id="main" class="site-main">
+    <div class="page_content single_sidebar">
+        <div class="left-pattern pattern pattern-2" style="width: 69.5px;"></div>
+        <div class="container">
+            <main>
+                <div class="grid_row">
+                    <section class="news news-medium">
+                        <div class="cws_wrapper">
+                            <div class="grid">
+                                <article class="item medium">
+                                    <div class="post_header_def_post">
+                                        <div class="date">
+                                            <div class="date-cont"><span class="day">@Model.NgayGuiDanhGia.Value.Day</span><span class="month" title="@Model.NgayGuiDanhGia.Value.Month"><span>@Model.NgayGuiDanhGia.Value.Month</span></span><span class="year">@Model.NgayGuiDanhGia.Value.Year</span><i class="springs"></i></div>
+                                        </div>
+                                        <div class="post_info_header">
+                                            <h3 class="ce_title">@Model.TieuDeDanhGia</h3>
+                                        </div>
+                                    </div>
+                                    <div class="media_info_wrapper">
+                                        <div class="media_part video_post" style="max-width:100% !important">
+                                            <div class="video">
+
+                                                @if (Model.TenVideo.Contains("<iframe"))
+                                                {
+                                                    <div style="height:auto">
+                                                        @Html.Raw(Model.TenVideo.Replace("width=", "").Replace("height=", ""))
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <video loop controls style="width:300px;">
+                                                        <source src="@Model.TenVideo" type="video/mp4" />
+                                                    </video>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="post_content_wrap">
+                                        <div class="post_content">
+                                            <p>@Html.Raw(Model.NoiDungDanhGia)</p>
+                                        </div>
+                                        <div class="meta_cont_wrapper">
+                                            <div class="meta_cont">
+                                                <div class="post_info">
+                                                    <div class="post_categories"><i class="fa fa-bookmark"></i><a href="@Url.Action("ReaderInfo", "Account", new { Email = Model.EmailDanhGia})" rel="category tag">@Model.EmailDanhGia</a></div>
+                                                </div>
+                                                <div class="button_cont"><a href="/Book-detail/@Model.MaSach" class="cws_button small">View Book: @Model.Sach.TenSach</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="separator-box">
+                                        <canvas class="separator" width="1366" data-line-color="#f9e8b2" height="22" style="height: 22px; width: 1366px;"></canvas>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+            <!-- / main container -->
+        </div>
+        <!-- pattern // -->
+        <div class="right-pattern pattern pattern-2" style="width: 69.5px;"></div>
+        <!-- footer image // -->
+        <div class="footer_image"></div>
+    </div>
+    <!-- svg filter -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" style="display:none;">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"></feGaussianBlur>
+                <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
+                <feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite>
+            </filter>
+        </defs>
+    </svg>
+    <!-- / svg filter -->
+</div>

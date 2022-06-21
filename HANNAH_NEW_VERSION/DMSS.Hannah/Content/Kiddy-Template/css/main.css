@@ -1230,130 +1230,6 @@ mark {
 }
 
 
-/*
-- HEADINGS
-*/
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    line-height: 1.2;
-}
-
-.widget-title {
-    word-wrap: break-word;
-}
-
-h1 {
-    font-size: 2em;
-    font-weight: 300;
-}
-
-h1:not(:last-child) {
-    margin-bottom: 0.67em;
-}
-
-h1:not(:first-child) {
-    margin-top: 0.67em;
-}
-
-h2 {
-    font-size: 1.5em;
-}
-
-h2:not(:last-child) {
-    margin-bottom: 0.83em;
-}
-
-h2:not(:first-child) {
-    margin-top: 0.83em;
-}
-
-h3 {
-    font-size: 1.17em;
-}
-
-h3:not(:last-child) {
-    margin-bottom: 1em;
-}
-
-h3:not(:first-child) {
-    margin-top: 1em;
-}
-
-h4:not(:last-child) {
-    margin-bottom: 1.33em;
-}
-
-h4:not(:first-child) {
-    margin-top: 1.33em;
-}
-
-h5 {
-    font-size: 0.83em;
-}
-
-h5:not(:last-child) {
-    margin-bottom: 1.67em;
-}
-
-h5:not(:first-child) {
-    margin-top: 1.67em;
-}
-
-h6 {
-    font-size: 0.67em;
-}
-
-h6:not(:last-child) {
-    margin-bottom: 2.33em;
-}
-
-h6:not(:first-child) {
-    margin-top: 2.33em;
-}
-
-.ce_title:not(:last-child) {
-    margin-bottom: 0.5em;
-}
-
-h1.ce_title.heading {
-    font-size: 2em;
-    line-height: 1.2;
-}
-
-h2.ce_title.heading {
-    font-size: 1.5em;
-    line-height: 1.2;
-}
-
-h3.ce_title.heading {
-    font-size: 1.17em;
-    line-height: 1.2;
-}
-
-h4.ce_title.heading {
-    font-size: 1em;
-    line-height: 1.2;
-}
-
-h5.ce_title.heading {
-    font-size: 0.83em;
-    line-height: 1.2;
-}
-
-h6.ce_title.heading {
-    font-size: 0.67em;
-    line-height: 1.2;
-}
-
-
-/*
-- \HEADINGS
-*/
 
 
 /*
@@ -6891,6 +6767,7 @@ a:hover>.cws_fa_wrapper> .cws_fa:after {
 .cws_callout .callout_title {
     font-size: 1.473em;
     line-height: 1;
+    color: white;
 }
 
 .cws_callout .callout_title .bees {
@@ -10261,37 +10138,6 @@ only screen and (min-device-pixel-ratio: 1.5) {
         top: 0;
         opacity: 1
     }
-}
-
-/* The Close Button */
-.close {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-    .close:hover,
-    .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-.modal-header {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-}
-
-.modal-body {
-    padding: 2px 16px;
-}
-
-.modal-footer {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
 }
 #loadding {
     position: fixed;

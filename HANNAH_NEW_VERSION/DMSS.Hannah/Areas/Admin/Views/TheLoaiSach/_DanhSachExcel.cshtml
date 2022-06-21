@@ -22,11 +22,15 @@
                             <th>@Html.DisplayNameFor(model => model.Stt)</th>
                             <th>@Html.DisplayNameFor(model => model.TenTheLoai)</th>
                             <th>@Html.DisplayNameFor(model => model.HangMuc)</th>
+                            <th>@Html.DisplayNameFor(model => model.NganSach)</th>
+                            <th>@Html.DisplayNameFor(model => model.KeSach)</th>
                             <th>@Html.DisplayNameFor(model => model.Icon)</th>
                             <th>@Html.DisplayNameFor(model => model.MaNhanDienHangMucSach)</th>
                             <th>@Html.DisplayNameFor(model => model.MoTa)</th>
-                            <th>@Html.DisplayNameFor(model => model.DuongDanSeo)</th>
-                            <th>@Html.DisplayNameFor(model => model.TieuDeSeo)</th>
+                            <th> @Html.DisplayNameFor(model => model.NoiDungSeo)</th>
+                            <th> @Html.DisplayNameFor(model => model.TuKhoaSeo)</th>
+                            <th> @Html.DisplayNameFor(model => model.TieuDeSeo)</th>
+                            <th> @Html.DisplayNameFor(model => model.DuongDanSeo)</th>
                             <th>@Html.DisplayNameFor(model => model.ThongBao)</th>
                         </tr>
                     </thead>
@@ -43,6 +47,12 @@
                             </td>
                             <td>
                                 @item.HangMuc
+                            </td>
+                            <td>
+                                @item.NganSach
+                            </td>
+                            <td>
+                                @item.KeSach
                             </td>
                             <td>
                                 @item.Icon
@@ -63,7 +73,6 @@
                             <td>
                                 @item.TieuDeSeo
                             </td>
-
                             <td>
                                 @item.DuongDanSeo
                             </td>
@@ -87,11 +96,15 @@
                             <th>@Html.DisplayNameFor(model => model.Stt)</th>
                             <th>@Html.DisplayNameFor(model => model.TenTheLoai)</th>
                             <th>@Html.DisplayNameFor(model => model.HangMuc)</th>
+                            <th>@Html.DisplayNameFor(model => model.NganSach)</th>
+                            <th>@Html.DisplayNameFor(model => model.KeSach)</th>
                             <th>@Html.DisplayNameFor(model => model.Icon)</th>
                             <th>@Html.DisplayNameFor(model => model.MaNhanDienHangMucSach)</th>
                             <th>@Html.DisplayNameFor(model => model.MoTa)</th>
-                            <th>@Html.DisplayNameFor(model => model.DuongDanSeo)</th>
-                            <th>@Html.DisplayNameFor(model => model.TieuDeSeo)</th>
+                            <th> @Html.DisplayNameFor(model => model.NoiDungSeo)</th>
+                            <th> @Html.DisplayNameFor(model => model.TuKhoaSeo)</th>
+                            <th> @Html.DisplayNameFor(model => model.TieuDeSeo)</th>
+                            <th> @Html.DisplayNameFor(model => model.DuongDanSeo)</th>
                             <th>@Html.DisplayNameFor(model => model.ThongBao)</th>
                         </tr>
                     </thead>
@@ -108,6 +121,12 @@
                             </td>
                             <td>
                                 @item.HangMuc
+                            </td>
+                            <td>
+                                @item.NganSach
+                            </td>
+                            <td>
+                                @item.KeSach
                             </td>
                             <td>
                                 @item.Icon
@@ -128,7 +147,6 @@
                             <td>
                                 @item.TieuDeSeo
                             </td>
-
                             <td>
                                 @item.DuongDanSeo
                             </td>
@@ -143,7 +161,7 @@
         </div>
 
         <div class="form-group text-center">
-            <div class="btn btn-primary" id="btnsumit" onclick="ImportExcel('/Admin/TheLoaiSach/AddListExcel','/Admin/TheLoaiSach/DanhSachTheLoaiSach')">
+            <div class="btn btn-primary" id="btnsumit" onclick="ImportExcel('/Admin/TheLoaiSach/AddListExcel','/Admin/TheLoaiSach/_DanhSachTheLoaiSach')">
                 Import Excel
             </div>
         </div>

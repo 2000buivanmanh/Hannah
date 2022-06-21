@@ -1,83 +1,79 @@
-﻿<style>
-    #sao {
-        color: red;
-    }
-</style>
-<div class="col-md-3 register-left">
-    <img src="~/Content/Images/Top-header/register.png" />
-    <h3 style="font-family:Patrick Hand; font-size:35px">Welcome to <br> Hannah Libary </h3>
-    <p>We bring you pleasure in reading and discovering knowledge </p>
-    <input type="submit" onclick="OpenModalUser('NguoiDung/_Login')" name="" value="Login" /><br />
+﻿<div class="modal-header">
+    <h3 class="text-center text-info" id="titleModal">Register</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
-<button type="button" class="close" data-dismiss="modal"
-        aria-hidden="true">
-    ×
-</button>
-<div class="col-md-9 register-right">
-    <div class="tab-content-register" id="myTabContent">
-        <div class="row register-form frm">
-            <form id="frmRegister" action="" method="post">
-                <div class="col-md-6">
-                    <p class="tilte-name-form">Your Infomation</p>
-                    <p>
-                        <label for="fullname">FullName <span id="sao"> *</span></label>
-                        <input type="text" class="form-control" id="fullname" name="fullname">
-                    </p>
-                    <p>
-                        <label for="username">UserName<span id="sao"> *</span></label>
-                        <input type="text" class="form-control" id="username" name="username">
-                    </p>
-                    <p>
-                        <label for="email">Email<span id="sao"> *</span></label>
-                        <input type="email" class="form-control" id="email" name="email">
-                    </p>
-                    <p>
-                        <label for="phone">Phone Number</label>
-                        <input type="number" class="form-control" maxlength="10" id="phone" name="phone">
-                    </p>
-                    <p>
-                        <label for="password">Password<span id="sao"> *</span></label>
-                        <input type="password" class="form-control" id="password" name="password">
-                    </p>
-                    <p>
-                        <label for="confirmpassword">Confirm Password<span id="sao"> *</span></label>
-                        <input type="password" class="form-control" id="confirmpassword" name="confirmpassword">
-                    </p>
-                    <p>
-                        <label for="dob">Date Of Birth</label>
-                        <input class="form-control" type="date" id="dob" name="dob">
-                    </p>
-                    <p>
-                        <label for="address">Address<span id="sao"> *</span></label>
-                        <input type="text" class="form-control" id="address" name="address">
-                    </p>
+<div class="modal-body">
+    <form id="formRegister">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2 id="titleForm"> Your Infomation</h2>
+                    <div class="form-group">
+                        <label>Full Name <span class="required"><b>*</b></span></label>
+                        <input class="form-control" type="text" name="readerName" id="readerName">
+                    </div>
+                    <div class="form-group">
+                        <label>Email <span class="required"><b>*</b></span></label>
+                        <input type="text" class="form-control" name="readerEmail" id="readerEmail">
+                    </div>
+                    <div class="form-group">
+                        <label>Username <span class="required"><b>*</b></span></label>
+                        <input type="text" class="form-control" name="readerUserName" id="readerUserName">
+                    </div>
+                    <div class="form-group">
+                        <label>Password <span class="required"><b>*</b></span></label>
+                        <input class="form-control" type="password" name="readerPassWord" id="readerPassWord">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password <span class="required"><b>*</b></span></label>
+                        <input class="form-control" type="password" name="readerRePassWord" id="readerRePassWord">
+                    </div>
+                    <div class="form-group">
+                        <label>Date Of Birth </label>
+                        <input class="form-control" type="date" name="readerDOB" id="readerDOB">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number </label>
+                        <input class="form-control" type="number" name="readerPhoneNumber" id="readerPhoneNumber">
+                    </div>
+                    <div class="form-group">
+                        <label>Address <span class="required"><b>*</b></span></label>
+                        <input class="form-control" type="text" name="readerAddress" id="readerAddress">
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <p class="tilte-name-form">Sponsor Infomation</p>
-                    <p>
-                        <label for="sname">Sponsor Name<span id="sao"> *</span></label>
-                        <input type="text" class="form-control" id="sname" name="sname">
-                    </p>
-                    <p>
-                        <label for="sphone">Sponsor Phone<span id="sao"> *</span></label>
-                        <input type="number" class="form-control" maxlength="10" id="sphone" name="sphone">
-                    </p>
-                    <p>
-                        <label for="smail">Sponsor Email<span id="sao"> *</span></label>
-                        <input type="email" class="form-control" id="smail" name="smail">
-                    </p>
-                    <p>
-                        <label for="srelationship">Your Relationship With Sponsor<span id="sao"> *</span></label>
-                        <select id="srelationship" class="form-control" name="srelationship">
+                <div class="col">
+                    <h2 id="titleForm"> Sponsor Infomation</h2>
+                    <div class="form-group">
+                        <label>Sponsor Name <span class="required"><b>*</b></span></label>
+                        <input class="form-control" type="text" name="suggesterName" id="suggesterName">
+                    </div>
+                    <div class="form-group">
+                        <label>Sponsor Phone <span class="required"><b>*</b></span></label>
+                        <input class="form-control" type="number" name="suggesterPhoneMail" id="suggesterPhoneMail">
+                    </div>
+                    <div class="form-group">
+                        <label>Sponsor Email <span class="required"><b>*</b></span></label>
+                        <input class="form-control" type="text" name="suggesterEmail" id="suggesterEmail">
+                    </div>
+                    <div class="form-group">
+                        <label>Your Relationship With Sponsor <span class="required"><b>*</b></span></label>
+                        <select name="n_suggestersRelation" id="suggestersRelation" class="custom-select">
                             <option value="Friend">Friend</option>
                             <option value="Relatives">Relatives</option>
                             <option value="Student">Student</option>
                             <option value="Teacher">Teacher</option>
                         </select>
-                    </p>
-                    <a class="btn btnSubmit" onclick="CheckForm()">Submit</a>
+                        <input id="Relation" class="form-control" type="text" placeholder="Select From List Or Input Here">
+                    </div>
+                    <hr />
+                    <div id="footerModalButton">
+                        <a class="cws_button small" onclick="DangKy()">Register</a> <br />
+                        <span>Do you already have an account <a onclick="OpenModalUser('/Users/_Login')">Login now ?</a></span>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
 </div>

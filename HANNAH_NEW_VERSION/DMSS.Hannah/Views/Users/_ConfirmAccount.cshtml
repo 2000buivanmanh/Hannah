@@ -1,48 +1,34 @@
-﻿@model  DATA.Models.CaiDat
-<!-- The Modal -->
-<div id="ModalUser" class="modal">
-    <div id="ModalContent">
-        <form class="login" id="frmLogin">
-            <p class="form-row form-row-wide">
-                <label for="username">Username or email <span class="required">*</span></label>
-                <input type="text" class="input-text" name="usernameEmailLogin" id="usernameEmailLogin">
-            </p>
-            <p class="form-row form-row-wide">
-                <label for="password">Password <span class="required">*</span></label>
-                <input class="input-text" type="password" name="passwordLogin" id="passwordLogin">
-            </p>
-            <p class="form-row">
-                <a class="cws_button small" onclick="DangNhap()">Login</a>
-                <a href="/register" id="lostPassword">Or Lost password ?</a>
-                <a class="pull-right" id="btnCreateAccount">Create an acount</a>
-            </p>
-        </form>
-    </div>
+﻿<div class="modal-header">
+    <h3 class="text-center text-info" id="titleModal">Login</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form id="formLogin">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <img src="~/Assets/LayoutUser/img/imgModalLogin.jpg" />
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="usernameEmailLogin" class="text-info">Username <span class="required"><b>*</b></span></label><br>
+                        <input type="text" name="usernameEmailLogin" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordLogin" class="text-info">Password <span class="required"><b>*</b></span></label><br>
+                        <input type="password" name="passwordLogin" class="form-control">
+                    </div>
+                    <div id="footerModalButton">
+                        <a class="cws_button small" onclick="DangNhap()">Login</a>
+                        <a onclick="OpenModalUser('/Users/_LostPassword')">Or Lost password ?</a>
+                        <hr />
+                        <a onclick="OpenModalUser('/Users/_Register')">Create an acount</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
-<script>
-    var modal = document.getElementById('ModalUser');
-
-    // Lấy phần button mở Modal
-    var btn = document.getElementById("myBtn");
-
-    // Lấy phần span đóng Modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // Khi button được click thi mở Modal
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
-
-    // Khi span được click thì đóng Modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-
-    // Khi click ngoài Modal thì đóng Modal
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>

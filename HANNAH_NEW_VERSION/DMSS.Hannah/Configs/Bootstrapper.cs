@@ -36,6 +36,7 @@ namespace HANNAH_NEW_VERSION.Configs
             container.RegisterType<IDatSachService, DatSachService>();
             container.RegisterType<IDiaChiXuatBanService, DiaChiXuatBanService>();
             container.RegisterType<IBaiVietService, BaiVietService>();
+            container.RegisterType<IVideoSachService, VideoSachService>();
             container.RegisterType<IThongBaoService, ThongBaoService>();
             container.RegisterType<INhomTuoiService, NhomTuoiService>();
             container.RegisterType<IHinhAnhSachService, HinhAnhSachService>();

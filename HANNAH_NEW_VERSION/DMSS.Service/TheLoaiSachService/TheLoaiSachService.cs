@@ -40,6 +40,8 @@ namespace SERVICE
                 suaTheLoai.HangMuc = theLoai.HangMuc;
                 suaTheLoai.Icon = theLoai.Icon;
                 suaTheLoai.TrangThai = theLoai.TrangThai;
+                suaTheLoai.KeSach = theLoai.KeSach;
+                suaTheLoai.NganSach = theLoai.NganSach;
                 suaTheLoai.MoTa = theLoai.MoTa;
                 suaTheLoai.MaNhanDienHangMucSach = theLoai.MaNhanDienHangMucSach;
                 suaTheLoai.NoiDungSeo = theLoai.NoiDungSeo;

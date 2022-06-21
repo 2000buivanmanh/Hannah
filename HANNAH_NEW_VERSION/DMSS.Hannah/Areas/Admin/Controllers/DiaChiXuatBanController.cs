@@ -1,5 +1,6 @@
 ﻿using DATA.Models;
 using DATA.Repository;
+using HANNAH_NEW_VERSION.Configs;
 using SERVICE;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using static DATA.Constant.Constant;
 
 namespace HANNAH_NEW_VERSION.Areas.Admin.Controllers
 {
+    [AuthorizeUser(PhanQuyen.Admin)]
     public class DiaChiXuatBanController : Controller
     {
         private readonly IBaseRepository<DiaChiXuatBan> _baseRepository;

@@ -45,26 +45,61 @@
                 @item.DiaChiTra
             </td>
             <td>
-                @if (item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.DaHuy)
-                {
-                <p>
-                    <i class="text-danger fa fa-circle"></i>
-                    Canceled
-                </p>
-                }
                 @if (item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.DangDat)
                 {
                     <p>
-                        <i class="text-warning fa fa-circle">
-                        </i>
-                        Waiting for approval <br />
+                        <i class="text-danger fa fa-circle"></i>
+                        Waiting for progress
                     </p>
                 }
                 @if (item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.DaDuyet)
                 {
                     <p>
+                        <i class="text-warning fa fa-circle">
+                        </i>
+                        Progressing <br />
+                    </p>
+                }
+                @if (item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.ChoThayDoi)
+                {
+                    <p>
                         <i class="text-success fa fa-circle"></i>
-                         Approved
+                        Wait for User Comfirm
+                    </p>
+                } @if (item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.ChoGuiSach)
+                {
+                    <p>
+                        <i class="text-danger fa fa-circle"></i>
+                        Wait for send book
+                    </p>
+                } @if (item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.ChoTraSach)
+                {
+                    if (item.NgayTra < DateTime.Now)
+                    {
+                        <p>
+                            <i class="text-danger fa fa-circle"></i>
+                            Over time return
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <i class="text-danger fa fa-circle"></i>
+                            Wait for return book
+                        </p>
+                    }
+
+                } @if (item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.DaTraSach)
+                {
+            <p>
+                <i class="text-danger fa fa-circle"></i>
+                Returned
+            </p>
+                } @if (item.TinhTrangDonHang == DATA.Constant.Constant.TinhTrangDonHang.DaHuy)
+                {
+                    <p>
+                        <i class="text-danger fa fa-circle"></i>
+                        Canceled
                     </p>
                 }
 
@@ -73,7 +108,7 @@
                 @item.GhiChu
             </td>
             <td>
-                <div class="" id='@item.MaDonSach' type="submit" data-toggle="modal" onclick="ModalThemSua('/Admin/DatSach/_ChiTietDatSach',@item.MaDonSach)">
+                <div class="" id='@item.MaDonSach' type="submit" data-toggle="modal" onclick="LoadSach('/Admin/DatSach/_ChiTietDatSach',@item.MaDonSach)">
                     <i class="fas fa-edit text-center"></i>
                 </div>
             </td>
